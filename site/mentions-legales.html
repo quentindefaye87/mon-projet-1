@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales — SCAL</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .legal-page { padding-block: 8rem 5rem; }
+  .legal-page h1 { margin-bottom: 2rem; }
+  .legal-page h2 { font-size: 1.2rem; margin-top: 2.2rem; margin-bottom: 0.8rem; }
+  .legal-page p, .legal-page li { color: var(--c-grey-600); }
+  .legal-page ul { list-style: disc; padding-left: 1.4rem; display: block; }
+  .legal-page li { margin-bottom: 0.4rem; }
+  .legal-page .todo { border: 1px dashed var(--c-grey-200); border-radius: var(--radius-sm); padding: 0.9rem 1.1rem; font-size: 0.88rem; margin-top: 0.6rem; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Aller au contenu principal</a>
+<header class="site-header is-scrolled">
+  <div class="container">
+    <a href="/#accueil" class="logo"><span class="logo-mark">S</span><span>SCAL</span></a>
+    <a href="/" class="btn btn-ghost">← Retour au site</a>
+  </div>
+</header>
+
+<main id="main" class="container legal-page">
+  <h1>Mentions légales</h1>
+
+  <h2>Éditeur du site</h2>
+  <p>
+    SCAL — Société de Constructions en Alliages Légers (SAS)<br>
+    Route de Cognac, 87700 Aixe-sur-Vienne<br>
+    Téléphone : <a href="tel:+33555702480">05 55 70 24 80</a><br>
+    SIREN : 521 196 329
+  </p>
+  <div class="todo">À compléter avec SCAL : capital social, SIRET de l'établissement, numéro RCS complet, numéro de TVA intracommunautaire et nom du représentant légal / directeur de la publication.</div>
+
+  <h2>Hébergement</h2>
+  <div class="todo">Emplacement à compléter avec les coordonnées de l'hébergeur retenu pour la mise en ligne du site (raison sociale, adresse, téléphone).</div>
+
+  <h2>Conception du site</h2>
+  <p>Site conçu comme support de présentation de l'entreprise SCAL.</p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>L'ensemble des contenus présents sur ce site (textes, photographies, logo) est la propriété de SCAL, sauf mention contraire, et ne peut être reproduit sans autorisation préalable.</p>
+
+  <h2>Limitation de responsabilité</h2>
+  <p>SCAL s'efforce d'assurer l'exactitude des informations diffusées sur ce site, sans garantie d'exhaustivité. Les photographies de réalisations sont présentées à titre illustratif.</p>
+
+  <h2>Données personnelles</h2>
+  <p>Le traitement des données transmises via le formulaire de contact est détaillé dans notre <a href="/politique-confidentialite.html" style="text-decoration:underline;">politique de confidentialité</a>.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> SCAL — Tous droits réservés.</span>
+    <div class="footer-legal">
+      <a href="/mentions-legales.html">Mentions légales</a>
+      <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
