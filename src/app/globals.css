@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-cream-100 font-sans text-charcoal-900;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-forest-500 text-cream-50;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-sapphire-500 ring-offset-2 ring-offset-cream-100;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/15 bg-white/10 shadow-inner-glass backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  .glass-light {
+    @apply border border-white/60 bg-white/55 shadow-soft backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  .glass-dark {
+    @apply border border-white/10 bg-charcoal-900/40 shadow-inner-glass backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.2em];
+  }
+
+  .section {
+    @apply py-20 sm:py-28 lg:py-32;
+  }
+
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .bg-dark-section {
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 0%, rgba(63, 102, 144, 0.18), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(171, 127, 79, 0.14), transparent 60%),
+      linear-gradient(180deg, #121315 0%, #0b0c0d 100%);
+  }
+
+  .bg-light-section {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 255, 255, 0.9), transparent 70%),
+      linear-gradient(180deg, #faf8f4 0%, #f3efe6 100%);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-cream-200 to-bronze-300 bg-clip-text text-transparent;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
