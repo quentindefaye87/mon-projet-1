@@ -20,12 +20,13 @@ const config: Config = {
     },
     extend: {
       colors: {
+        // Anthracite SCAL (#2b2b2b / #4d4d4d), volontairement éclairci
         charcoal: {
-          950: "#0e0e0f",
-          900: "#161617",
-          800: "#1f1f21",
-          700: "#2b2b2b",
-          600: "#3a3a3c",
+          950: "#1f1f21",
+          900: "#27272a",
+          800: "#313134",
+          700: "#3c3c3f",
+          600: "#4d4d4d",
         },
         slate: {
           50: "#f7f7f7",

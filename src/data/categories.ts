@@ -52,7 +52,13 @@ export const categories: WindowCategory[] = [
     shortDescription: "Isolation, facilité d'entretien et excellent rapport qualité-prix.",
     description:
       "Fenêtres et portes-fenêtres PVC multi-chambres, en blanc, en teinte ou en plaxé bois. Une isolation thermique et phonique de haut niveau, un entretien réduit au minimum et une pose adaptée à la rénovation comme au neuf.",
-    visual: { variant: "grid", tone: "stone", alt: "Façade claire équipée de fenêtres PVC blanches" },
+    visual: {
+      variant: "grid",
+      tone: "stone",
+      alt: "Maison en pierre équipée de fenêtres et portes-fenêtres blanches à petits-bois",
+      src: "/images/maison-pierre-volets-battants.jpg",
+      position: "0% 40%",
+    },
     bestFor: ["Rénovation", "Maisons individuelles", "Budget maîtrisé"],
   },
   {
@@ -61,7 +67,13 @@ export const categories: WindowCategory[] = [
     shortDescription: "Volets roulants, battants, stores : maîtrisez lumière et chaleur.",
     description:
       "Volets roulants motorisés ou solaires, volets battants aluminium, stores bannes et protections solaires. Ils renforcent l'isolation, la sécurité et le confort d'été de votre maison, avec une commande manuelle, filaire ou connectée.",
-    visual: { variant: "facade", tone: "dusk", alt: "Façade de maison équipée de volets roulants au crépuscule" },
+    visual: {
+      variant: "facade",
+      tone: "dusk",
+      alt: "Volets battants blancs à barres et écharpe sur une façade en pierre",
+      src: "/images/maison-pierre-volets-battants.jpg",
+      position: "100% 75%",
+    },
     bestFor: ["Confort d'été", "Sécurité", "Motorisation"],
   },
   {
@@ -70,7 +82,13 @@ export const categories: WindowCategory[] = [
     shortDescription: "Des accès assortis à vos menuiseries, motorisables.",
     description:
       "Portails battants ou coulissants, portillons, clôtures et portes de garage sectionnelles ou enroulables. Coordonnés à vos menuiseries et à votre porte d'entrée, ils se motorisent pour un confort d'usage au quotidien.",
-    visual: { variant: "slider", tone: "ember", alt: "Portail aluminium coulissant devant une maison" },
+    visual: {
+      variant: "slider",
+      tone: "ember",
+      alt: "Portail aluminium battant plein à lames verticales, teinte brun, entre deux piliers",
+      src: "/images/portail-aluminium-battant.jpg",
+      position: "50% 45%",
+    },
     bestFor: ["Motorisation", "Harmonie de façade", "Sécurité"],
   },
 ];

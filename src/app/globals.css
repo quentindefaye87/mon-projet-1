@@ -89,9 +89,9 @@
 
   .bg-dark-section {
     background:
-      radial-gradient(ellipse 70% 50% at 15% 0%, rgba(185, 53, 56, 0.16), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 95% 100%, rgba(140, 26, 28, 0.14), transparent 60%),
-      linear-gradient(180deg, #19191a 0%, #0e0e0f 100%);
+      radial-gradient(ellipse 70% 50% at 15% 0%, rgba(185, 53, 56, 0.22), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 95% 100%, rgba(185, 53, 56, 0.14), transparent 60%),
+      linear-gradient(180deg, #3d3d40 0%, #2e2e31 100%);
   }
 
   .bg-light-section {

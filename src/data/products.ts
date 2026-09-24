@@ -304,6 +304,13 @@ export const products: Product[] = [
     description:
       "Sérénité offre une excellente isolation thermique grâce à son panneau PVC multi-couches et son dormant renforcé. Sobre et lumineuse avec son vitrage décoratif, elle convient aussi bien à la rénovation qu'à la construction neuve.",
     visuals: [
+      {
+        variant: "picture",
+        tone: "stone",
+        alt: "Porte d'entrée blanche vitrée sous un auvent, sur une façade en pierre",
+        src: "/images/maison-pierre-volets-battants.jpg",
+        position: "58% 70%",
+      },
       { variant: "picture", tone: "stone", alt: "Porte d'entrée PVC blanche avec vitrage décoratif" },
       { variant: "frame", tone: "stone", alt: "Détail du dormant d'une porte PVC" },
     ],
@@ -341,7 +348,13 @@ export const products: Product[] = [
     description:
       "Clarté associe un profil PVC multi-chambres à un double vitrage à isolation renforcée. Blanche, teintée ou plaxée effet bois, elle s'adapte à tous les styles et réduit durablement vos besoins de chauffage.",
     visuals: [
-      { variant: "grid", tone: "stone", alt: "Façade claire avec fenêtres PVC blanches" },
+      {
+        variant: "grid",
+        tone: "stone",
+        alt: "Fenêtres blanches à petits-bois sur une maison en pierre",
+        src: "/images/maison-pierre-volets-battants.jpg",
+        position: "15% 45%",
+      },
       { variant: "interior", tone: "stone", alt: "Chambre lumineuse avec fenêtre PVC" },
       { variant: "frame", tone: "stone", alt: "Coupe d'un profil PVC multi-chambres" },
     ],
@@ -377,6 +390,13 @@ export const products: Product[] = [
     description:
       "Harmonie décline la performance du PVC en portes-fenêtres battantes et en coulissants. Seuil abaissé, soubassement plein ou vitré, volet roulant intégré : chaque ouverture se compose selon vos usages.",
     visuals: [
+      {
+        variant: "slider",
+        tone: "stone",
+        alt: "Portes-fenêtres blanches à petits-bois ouvrant sur une terrasse en pierre",
+        src: "/images/maison-pierre-volets-battants.jpg",
+        position: "85% 70%",
+      },
       { variant: "slider", tone: "stone", alt: "Porte-fenêtre PVC ouverte sur une terrasse" },
       { variant: "interior", tone: "stone", alt: "Salle à manger ouverte par une porte-fenêtre PVC" },
     ],
@@ -450,6 +470,13 @@ export const products: Product[] = [
     description:
       "Nos volets battants aluminium reprennent les codes du volet limousin, à barres et écharpe, persienné ou plein, tout en supprimant les lasures et peintures. Ils se motorisent pour s'ouvrir et se fermer d'un simple geste.",
     visuals: [
+      {
+        variant: "arch",
+        tone: "stone",
+        alt: "Volets battants blancs à barres et écharpe sur une maison en pierre",
+        src: "/images/maison-pierre-volets-battants.jpg",
+        position: "50% 40%",
+      },
       { variant: "arch", tone: "stone", alt: "Fenêtre encadrée de volets battants sur une façade en pierre" },
       { variant: "facade", tone: "ember", alt: "Maison au crépuscule avec volets battants" },
     ],
@@ -484,6 +511,13 @@ export const products: Product[] = [
     description:
       "Portails et portillons aluminium sur mesure, pleins, ajourés ou semi-ajourés. Ils se coordonnent à votre porte d'entrée et à vos clôtures, et se motorisent pour entrer chez vous sans descendre de voiture.",
     visuals: [
+      {
+        variant: "slider",
+        tone: "ember",
+        alt: "Portail aluminium battant plein à lames verticales, teinte brun, entre deux piliers enduits",
+        src: "/images/portail-aluminium-battant.jpg",
+        position: "50% 45%",
+      },
       { variant: "slider", tone: "ember", alt: "Portail aluminium coulissant devant une maison" },
       { variant: "facade", tone: "stone", alt: "Entrée de propriété avec portail et portillon assortis" },
     ],
@@ -492,7 +526,7 @@ export const products: Product[] = [
       { id: "battant", label: "Portail battant", priceDelta: 0 },
       { id: "coulissant", label: "Portail coulissant", priceDelta: 450 },
     ],
-    finishes: colors.filter((c) => c.id !== "chene"),
+    finishes: [...colors.filter((c) => c.id !== "chene"), { id: "brun", label: "Brun RAL 8011", swatch: "#5a3a29", priceDelta: 40 }],
     glazing: [
       { id: "plein", label: "Plein", priceDelta: 0 },
       { id: "semi", label: "Semi-ajouré", priceDelta: 120 },

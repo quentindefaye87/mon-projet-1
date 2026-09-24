@@ -110,7 +110,7 @@ export function ProductGallery({ visuals, name }: { visuals: Visual[]; name: str
               aria-current={i === active && !mode3d ? "true" : undefined}
               className={cn(
                 "grain relative block aspect-[4/3] w-full overflow-hidden rounded-md bg-charcoal-900 transition-all duration-300",
-                i === active && !mode3d ? "ring-2 ring-brand-400 ring-offset-2 ring-offset-charcoal-950" : "opacity-60 hover:opacity-100",
+                i === active && !mode3d ? "ring-2 ring-brand-500 ring-offset-2 ring-offset-cream-100" : "opacity-70 hover:opacity-100",
               )}
             >
               <VisualImage visual={v} decorative sizes="160px" />

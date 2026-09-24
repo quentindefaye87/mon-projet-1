@@ -46,8 +46,8 @@ export function PortfolioGrid() {
   return (
     <div>
       <div className="space-y-4 border-b border-charcoal-900/10 pb-8">
-        <FilterGroup label="Type de bien" options={propertyTypes} value={type} onChange={setType} />
-        <FilterGroup label="Menuiserie" options={windowTypes} value={windowType} onChange={setWindowType} />
+        <FilterGroup label="Type de chantier" options={propertyTypes} value={type} onChange={setType} />
+        <FilterGroup label="Solution" options={windowTypes} value={windowType} onChange={setWindowType} />
       </div>
       <p className="sr-only" role="status">
         {filtered.length} réalisation{filtered.length > 1 ? "s" : ""} affichée{filtered.length > 1 ? "s" : ""}

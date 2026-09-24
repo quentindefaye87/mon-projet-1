@@ -6,7 +6,12 @@ import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { projects } from "@/data/projects";
 
 export function ProjectsShowcase() {
-  const [first, second, third] = projects;
+  const pick = (slug: string) => projects.find((p) => p.slug === slug);
+  const [first, second, third] = [
+    pick("porte-fenetre-aluminium-grange-pierre"),
+    pick("maison-pierre-volets-battants-blancs"),
+    pick("portail-aluminium-battant-brun"),
+  ];
   return (
     <section aria-labelledby="projects-title" className="section bg-cream-100">
       <div className="container">
@@ -19,7 +24,7 @@ export function ProjectsShowcase() {
                 Nos chantiers <span className="accent text-brand-600">parlent pour nous.</span>
               </>
             }
-            description="Granges en pierre, maisons limousines, extensions : quelques réalisations de nos équipes en Haute-Vienne."
+            description="Granges et maisons en pierre, vérandas, portails : quelques réalisations de nos équipes en Haute-Vienne."
           />
           <Reveal>
             <ButtonLink href="/realisations" variant="ghost" className="shrink-0">

@@ -50,10 +50,10 @@ export default function ProductPage({ params }: Props) {
       <JsonLd data={productSchema(product)} />
       <JsonLd data={faqSchema(product.faqs)} />
 
-      <section className="bg-dark-section grain relative overflow-hidden">
+      <section className="bg-light-section relative overflow-hidden">
+        <div aria-hidden className="absolute -right-32 top-0 h-[420px] w-[420px] rounded-full bg-brand-300/15 blur-[120px]" />
         <div className="container relative z-10 pb-20 pt-32 sm:pt-36">
           <Breadcrumbs
-            light
             items={[
               { label: "Nos solutions", href: "/solutions" },
               ...(category ? [{ label: category.name, href: `/solutions/${category.slug}` }] : []),
@@ -65,19 +65,19 @@ export default function ProductPage({ params }: Props) {
               <ProductGallery visuals={product.visuals} name={product.name} />
             </div>
             <div className="lg:col-span-5">
-              {category && <Eyebrow light>{category.name}</Eyebrow>}
-              <h1 className="mt-5 text-display-md font-semibold text-cream-50 sm:text-display-lg">{product.name}</h1>
-              <p className="mt-3 font-display text-xl text-brand-300">{product.tagline}</p>
-              <p className="mt-6 leading-relaxed text-slate-300">{product.description}</p>
-              <p className="mt-8 text-sm text-slate-400">
-                À partir de <span className="font-display text-2xl font-semibold text-cream-50">{formatPrice(product.basePrice)}</span>{" "}
+              {category && <Eyebrow>{category.name}</Eyebrow>}
+              <h1 className="mt-5 text-display-md font-semibold text-charcoal-900 sm:text-display-lg">{product.name}</h1>
+              <p className="mt-3 font-serif text-2xl italic text-brand-600">{product.tagline}</p>
+              <p className="mt-6 leading-relaxed text-slate-600">{product.description}</p>
+              <p className="mt-8 text-sm text-slate-500">
+                À partir de <span className="font-display text-2xl font-semibold text-charcoal-900">{formatPrice(product.basePrice)}</span>{" "}
                 TTC, pose comprise*
               </p>
-              <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10">
+              <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-charcoal-900/[0.08] bg-charcoal-900/[0.08] shadow-soft">
                 {highlights.map((s) => (
-                  <div key={s.label} className="bg-charcoal-950/70 p-4">
-                    <dt className="text-xs uppercase tracking-wider text-slate-400">{s.label}</dt>
-                    <dd className="mt-1.5 font-medium text-cream-50">{s.value}</dd>
+                  <div key={s.label} className="bg-white p-4">
+                    <dt className="text-xs uppercase tracking-wider text-slate-500">{s.label}</dt>
+                    <dd className="mt-1.5 font-medium text-charcoal-900">{s.value}</dd>
                   </div>
                 ))}
               </dl>
@@ -86,16 +86,16 @@ export default function ProductPage({ params }: Props) {
                   Configurer & ajouter au devis
                   <ArrowDown className="h-4 w-4" aria-hidden />
                 </ButtonLink>
-                <ButtonLink href={`/contact?sujet=rendez-vous&produit=${product.slug}`} size="lg" variant="ghost-light" className="flex-auto">
+                <ButtonLink href={`/contact?sujet=rendez-vous&produit=${product.slug}`} size="lg" variant="ghost" className="flex-auto">
                   <CalendarDays className="h-4 w-4" aria-hidden />
                   Consultation
                 </ButtonLink>
               </div>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-                <Link href={`/contact?sujet=documentation&produit=${product.slug}`} className="inline-flex items-center gap-2 text-slate-300 hover:text-cream-50">
+                <Link href={`/contact?sujet=documentation&produit=${product.slug}`} className="inline-flex items-center gap-2 text-slate-600 hover:text-brand-600">
                   <Download className="h-4 w-4" aria-hidden /> Brochure technique
                 </Link>
-                <Link href="/guide-mesure" className="inline-flex items-center gap-2 text-slate-300 hover:text-cream-50">
+                <Link href="/guide-mesure" className="inline-flex items-center gap-2 text-slate-600 hover:text-brand-600">
                   <Ruler className="h-4 w-4" aria-hidden /> Comment mesurer
                 </Link>
               </div>

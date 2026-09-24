@@ -20,7 +20,7 @@ export function HeroMedia() {
         initial={reduce ? false : { clipPath: "inset(100% 0 0 0)" }}
         animate={{ clipPath: "inset(0% 0 0 0)" }}
         transition={{ duration: 1.4, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
-        className="relative aspect-[4/5] overflow-hidden rounded-lg shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]"
+        className="relative aspect-[4/5] overflow-hidden rounded-lg shadow-[0_40px_100px_-30px_rgba(43,43,43,0.45)]"
       >
         <motion.div style={{ scale }} className="absolute inset-0">
           <Image
@@ -33,7 +33,7 @@ export function HeroMedia() {
             style={{ objectPosition: "50% 55%" }}
           />
         </motion.div>
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-charcoal-950/70 via-transparent to-transparent" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-charcoal-950/45 via-transparent to-transparent" />
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export function HeroMedia() {
         </motion.p>
       </motion.div>
 
-      <FrameDraw light delay={1} className="pointer-events-none absolute -right-6 -top-8 hidden w-28 sm:block lg:-right-10 lg:w-36" />
+      <FrameDraw delay={1} className="pointer-events-none absolute -right-6 -top-8 hidden w-28 sm:block lg:-right-10 lg:w-36" />
 
       <motion.div
         style={{ y: ySmall }}
@@ -54,7 +54,7 @@ export function HeroMedia() {
         className="absolute -bottom-10 -left-3 w-[42%] sm:-left-12"
       >
         <div className="animate-float motion-reduce:animate-none">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-md border-4 border-charcoal-900 shadow-lift">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-md border-4 border-white shadow-lift">
             <Image
               src="/images/porte-entree-rouge.jpg"
               alt="Porte d'entrée aluminium rouge à hublots posée par SCAL"

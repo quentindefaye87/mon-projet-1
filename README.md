@@ -15,7 +15,7 @@ npm run lint
 
 ## Identité visuelle
 
-- **Couleurs** reprises du logo et du site historique SCAL : rouge `#b93538` / `#a52e32` / `#8c1a1c` (`brand-*` dans `tailwind.config.ts`) et gris anthracite `#4d4d4d` / `#2b2b2b`, sur fonds anthracite profonds et blancs cassés pour l'effet haut de gamme.
+- **Couleurs** reprises du logo et du site historique SCAL : rouge `#b93538` / `#a52e32` / `#8c1a1c` (`brand-*` dans `tailwind.config.ts`) et gris anthracite `#4d4d4d` / `#2b2b2b`, sur fonds clairs (blancs cassés) ponctués de sections anthracite et d'un bandeau rouge SCAL.
 - **Typographies** : Manrope (titres), Inter (texte), Instrument Serif italique pour les mots-clés (classe `.accent`), en écho à l'italique du logo.
 - **Logo** redessiné en SVG (`components/atoms/Logo.tsx`) ; le PNG d'origine est dans `public/images/logo-scal.png`.
 - **Photos** de chantier dans `public/images/`. Les produits sans photo utilisent des illustrations vectorielles (`WindowArt`) ; il suffit d'ajouter un champ `src` au visuel dans `src/data/*` pour passer à une vraie photo.

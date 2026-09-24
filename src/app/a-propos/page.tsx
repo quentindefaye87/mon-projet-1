@@ -42,6 +42,8 @@ const gallery = [
   { src: "/images/veranda-alu-anthracite.jpg", alt: "Véranda aluminium anthracite à toit pans", position: "50% 55%" },
   { src: "/images/porte-fenetre-alu-grange.jpg", alt: "Porte-fenêtre aluminium dans une grange en pierre", position: "50% 40%" },
   { src: "/images/porte-entree-rouge.jpg", alt: "Porte d'entrée rouge à hublots avec fixe latéral", position: "50% 45%" },
+  { src: "/images/maison-pierre-volets-battants.jpg", alt: "Maison en pierre avec menuiseries et volets battants blancs", position: "50% 50%" },
+  { src: "/images/portail-aluminium-battant.jpg", alt: "Portail aluminium battant brun entre deux piliers", position: "50% 45%" },
 ];
 
 export default function AboutPage() {
@@ -139,11 +141,15 @@ export default function AboutPage() {
       <section aria-labelledby="gallery-title" className="section bg-cream-100">
         <div className="container">
           <SectionHeading id="gallery-title" eyebrow="En images" title="Notre travail parle pour nous." />
-          <ul className="mt-14 grid gap-6 md:grid-cols-3">
+          <ul className="mt-14 grid gap-6 md:grid-cols-6">
             {gallery.map((g, i) => (
-              <li key={g.src}>
-                <ImageReveal delay={i * 0.12} from={i === 1 ? "bottom" : "left"} className="aspect-[3/4] rounded-lg shadow-soft">
-                  <Image src={g.src} alt={g.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" style={{ objectPosition: g.position }} />
+              <li key={g.src} className={i < 3 ? "md:col-span-2" : "md:col-span-3"}>
+                <ImageReveal
+                  delay={(i % 3) * 0.12}
+                  from={i === 1 ? "bottom" : i >= 3 ? "right" : "left"}
+                  className={i < 3 ? "aspect-[3/4] rounded-lg shadow-soft" : "aspect-[16/10] rounded-lg shadow-soft"}
+                >
+                  <Image src={g.src} alt={g.alt} fill sizes={i < 3 ? "(min-width: 768px) 33vw, 100vw" : "(min-width: 768px) 50vw, 100vw"} className="object-cover" style={{ objectPosition: g.position }} />
                 </ImageReveal>
               </li>
             ))}

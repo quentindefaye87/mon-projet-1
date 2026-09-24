@@ -72,6 +72,52 @@ export const projects: Project[] = [
       "Le contraste du rouge et de l'anthracite sur la pierre grise donne à la maison une entrée affirmée et chaleureuse.",
     ],
   },
+  {
+    slug: "maison-pierre-volets-battants-blancs",
+    title: "Une maison en pierre habillée de blanc",
+    location: "Haute-Vienne",
+    propertyType: "Rénovation",
+    style: "Maison en pierre",
+    windowType: "Volets & protections solaires",
+    cover: {
+      variant: "facade",
+      tone: "stone",
+      alt: "Maison en pierre équipée de fenêtres, portes-fenêtres et d'une porte d'entrée blanches, avec volets battants blancs à barres et écharpe",
+      src: "/images/maison-pierre-volets-battants.jpg",
+      position: "50% 50%",
+    },
+    gallery: [],
+    summary:
+      "Fenêtres et portes-fenêtres à petits-bois, porte d'entrée vitrée et volets battants à barres et écharpe : une façade en pierre entièrement rhabillée de blanc.",
+    description: [
+      "Sur cette maison en pierre, l'enjeu était de remplacer l'ensemble des ouvertures sans perdre le charme de la façade : petits-bois, volets traditionnels, proportions d'origine.",
+      "Nous avons posé des fenêtres et portes-fenêtres blanches à petits-bois, une porte d'entrée vitrée sous l'auvent existant et des volets battants à barres et écharpe, dans l'esprit des volets limousins.",
+      "Le blanc des menuiseries et des volets fait ressortir la pierre et le granit, pour une façade lumineuse et cohérente.",
+    ],
+  },
+  {
+    slug: "portail-aluminium-battant-brun",
+    title: "Un portail qui se fond dans le jardin",
+    location: "Haute-Vienne",
+    propertyType: "Aménagement extérieur",
+    style: "Traditionnel",
+    windowType: "Portails & portes de garage",
+    cover: {
+      variant: "slider",
+      tone: "ember",
+      alt: "Portail aluminium battant plein à lames verticales, teinte brun, posé entre deux piliers enduits blancs",
+      src: "/images/portail-aluminium-battant.jpg",
+      position: "50% 45%",
+    },
+    gallery: [],
+    summary:
+      "Un portail aluminium battant à deux vantaux, plein à lames verticales, dans une teinte brune qui s'accorde aux haies et au jardin.",
+    description: [
+      "Les propriétaires cherchaient un portail sans entretien, qui préserve l'intimité de la cour tout en restant discret au milieu de la végétation.",
+      "Nous avons posé un portail aluminium à deux vantaux, plein à lames verticales, entre les piliers existants. Sa teinte brune rappelle le bois sans ses contraintes de lasure.",
+      "L'aluminium ne rouille pas et ne se déforme pas : le portail garde son aspect d'origine, saison après saison.",
+    ],
+  },
 ];
 
 export function getProject(slug: string) {

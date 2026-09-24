@@ -44,6 +44,9 @@ export function Header() {
   }, [open]);
 
   const solid = scrolled && !open;
+  // L'accueil et les fiches produit commencent sur un fond clair : textes sombres tant que l'en-tête est transparent.
+  const lightTop = pathname === "/" || pathname.startsWith("/produits/");
+  const dark = solid || (lightTop && !open);
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
@@ -56,7 +59,7 @@ export function Header() {
       )}
     >
       <div className="container flex items-center justify-between gap-6">
-        <Logo light={!solid || open} className="relative z-50" />
+        <Logo light={!dark} className="relative z-50" />
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
           <ul className="flex items-center gap-1">
@@ -67,8 +70,8 @@ export function Header() {
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
                     "group/nav relative rounded px-3.5 py-2 text-sm font-medium transition-colors duration-300",
-                    solid ? "text-slate-600 hover:text-charcoal-900" : "text-cream-100/80 hover:text-cream-50",
-                    isActive(item.href) && (solid ? "text-charcoal-900" : "text-cream-50"),
+                    dark ? "text-slate-600 hover:text-charcoal-900" : "text-cream-100/80 hover:text-cream-50",
+                    isActive(item.href) && (dark ? "text-charcoal-900" : "text-cream-50"),
                   )}
                 >
                   {item.label}
@@ -90,13 +93,13 @@ export function Header() {
             href={`tel:${site.phone.replace(/\s/g, "")}`}
             className={cn(
               "hidden items-center gap-2 px-3 text-sm font-medium transition-colors xl:inline-flex",
-              solid ? "text-slate-600 hover:text-charcoal-900" : "text-cream-100/80 hover:text-cream-50",
+              dark ? "text-slate-600 hover:text-charcoal-900" : "text-cream-100/80 hover:text-cream-50",
             )}
           >
             <Phone className="h-4 w-4" strokeWidth={1.5} aria-hidden />
             {site.phoneDisplay}
           </a>
-          <ButtonLink href="/devis" size="sm" variant={solid ? "primary" : "light"} className="hidden sm:inline-flex">
+          <ButtonLink href="/devis" size="sm" variant={dark ? "primary" : "light"} className="hidden sm:inline-flex">
             Devis gratuit
           </ButtonLink>
           <button
@@ -108,7 +111,7 @@ export function Header() {
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             className={cn(
               "relative z-50 inline-flex h-10 w-10 items-center justify-center rounded transition-colors lg:hidden",
-              solid ? "text-charcoal-900 hover:bg-charcoal-900/5" : "text-cream-50 hover:bg-white/10",
+              dark ? "text-charcoal-900 hover:bg-charcoal-900/5" : "text-cream-50 hover:bg-white/10",
             )}
           >
             {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}

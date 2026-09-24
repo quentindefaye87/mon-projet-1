@@ -65,7 +65,7 @@ export default function MeasureGuidePage() {
         title="Comment mesurer vos fenêtres."
         description="Quelques minutes et un mètre ruban suffisent pour une première estimation. Notre technicien reprendra ensuite toutes les cotes sur place, au millimètre."
         breadcrumbs={[{ label: "Guide de mesure", href: "/guide-mesure" }]}
-        visual={{ variant: "frame", tone: "stone", alt: "" }}
+        visual={{ variant: "frame", tone: "stone", alt: "", src: "/images/maison-pierre-volets-battants.jpg", position: "20% 40%" }}
       />
       <section aria-labelledby="steps-title" className="section bg-cream-50">
         <div className="container grid items-start gap-16 lg:grid-cols-2">

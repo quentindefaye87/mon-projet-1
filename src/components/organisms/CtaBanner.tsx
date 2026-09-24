@@ -19,8 +19,8 @@ export function CtaBanner({
     <section aria-labelledby="cta-title" className="bg-cream-100 py-20 sm:py-24">
       <div className="container">
         <Reveal>
-          <div className="grain relative overflow-hidden rounded-xl bg-charcoal-950 shadow-lift">
-            <div className="absolute inset-y-0 right-0 w-full opacity-50 md:w-3/5 md:opacity-100">
+          <div className="grain relative overflow-hidden rounded-xl bg-charcoal-900 shadow-lift">
+            <div className="absolute inset-y-0 right-0 w-full opacity-60 md:w-3/5 md:opacity-100">
               <Image
                 src="/images/porte-fenetre-alu-grange.jpg"
                 alt=""
@@ -30,7 +30,7 @@ export function CtaBanner({
                 style={{ objectPosition: "50% 30%" }}
               />
             </div>
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-charcoal-950 via-charcoal-950/90 to-charcoal-950/10" />
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-charcoal-900 via-charcoal-900/85 to-transparent" />
             <div aria-hidden className="absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-brand-600/25 blur-[100px]" />
             <FrameDraw light className="absolute bottom-10 right-10 hidden w-24 md:block" />
             <div className="relative z-10 max-w-2xl px-8 py-16 sm:px-14 sm:py-20">

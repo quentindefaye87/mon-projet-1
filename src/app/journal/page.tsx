@@ -28,7 +28,7 @@ export default function JournalPage() {
         }
         description="L'expérience de nos techniciens, pour vous aider à faire les bons choix pour votre maison."
         breadcrumbs={[{ label: "Conseils", href: "/journal" }]}
-        visual={{ variant: "grid", tone: "dusk", alt: "" }}
+        visual={{ variant: "grid", tone: "dusk", alt: "", src: "/images/maison-pierre-volets-battants.jpg", position: "50% 45%" }}
       />
       <section aria-label="Articles" className="section bg-cream-50">
         <div className="container">
