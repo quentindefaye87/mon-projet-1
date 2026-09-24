@@ -12,7 +12,7 @@ export default function LegalNoticePage() {
       sections={[
         {
           heading: "Éditeur du site",
-          body: `${site.legalName}, société par actions simplifiée, dont le siège social est situé ${site.address.street}, ${site.address.postalCode} ${site.address.city}. Téléphone : ${site.phoneDisplay}. E-mail : ${site.email}. [SIREN, capital social et numéro de TVA intracommunautaire à compléter.]`,
+          body: `${site.legalName}, [forme juridique à compléter], dont le siège social est situé ${site.address.street}, ${site.address.postalCode} ${site.address.city}. Téléphone : ${site.phoneDisplay}. E-mail : ${site.email}. [SIREN, capital social et numéro de TVA intracommunautaire à compléter.]`,
         },
         { heading: "Directeur de la publication", body: "[Nom du directeur de la publication à compléter.]" },
         { heading: "Hébergement", body: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis. [À adapter selon l'hébergeur retenu.]" },

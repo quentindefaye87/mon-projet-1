@@ -6,8 +6,8 @@ import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contact & showroom",
-  description: `Contactez ${site.name} : téléphone, e-mail, showroom à Lyon. Prenez rendez-vous avec un conseiller pour votre projet de fenêtres sur mesure.`,
+  title: "Contact",
+  description: `Contactez ${site.name} à Aixe-sur-Vienne : ${site.phoneDisplay}, ${site.email}. Devis gratuit pour vos menuiseries, vérandas et fermetures à Limoges et en Haute-Vienne.`,
   path: "/contact",
 });
 
@@ -19,10 +19,14 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Parlons de vos ouvertures."
-        description="Une question, un projet, une demande de documentation ? Notre équipe vous répond sous 24 heures ouvrées."
+        title={
+          <>
+            Parlons de <span className="accent text-brand-400">vos ouvertures.</span>
+          </>
+        }
+        description="Une question, un projet, un besoin de service après-vente ? Appelez-nous ou écrivez-nous, notre équipe vous répond rapidement."
         breadcrumbs={[{ label: "Contact", href: "/contact" }]}
-        visual={{ variant: "picture", tone: "forest", alt: "" }}
+        visual={{ variant: "bay", tone: "stone", alt: "", src: "/images/veranda-alu-anthracite.jpg", position: "50% 50%" }}
       />
 
       <section aria-label="Formulaire et coordonnées" className="section bg-cream-50">
@@ -38,35 +42,35 @@ export default function ContactPage() {
 
           <aside className="lg:col-span-5">
             <div className="bg-dark-section grain relative overflow-hidden rounded-lg p-8 sm:p-10">
-              <h2 className="relative z-10 font-display text-xl font-semibold text-cream-50">Showroom & atelier de Lyon</h2>
+              <h2 className="relative z-10 font-display text-xl font-semibold text-cream-50">SCAL · Aixe-sur-Vienne</h2>
               <ul className="relative z-10 mt-8 space-y-6 text-slate-300">
                 <li className="flex gap-4">
-                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-brand-300" strokeWidth={1.5} aria-hidden />
                   <div>
                     <p className="text-sm text-slate-400">Téléphone</p>
-                    <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-medium text-cream-50 hover:text-bronze-300">
+                    <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-medium text-cream-50 hover:text-brand-300">
                       {site.phoneDisplay}
                     </a>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <Mail className="mt-0.5 h-5 w-5 shrink-0 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                  <Mail className="mt-0.5 h-5 w-5 shrink-0 text-brand-300" strokeWidth={1.5} aria-hidden />
                   <div>
                     <p className="text-sm text-slate-400">E-mail</p>
-                    <a href={`mailto:${site.email}`} className="font-medium text-cream-50 hover:text-bronze-300">
+                    <a href={`mailto:${site.email}`} className="font-medium text-cream-50 hover:text-brand-300">
                       {site.email}
                     </a>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-300" strokeWidth={1.5} aria-hidden />
                   <div>
                     <p className="text-sm text-slate-400">Adresse</p>
                     <address className="font-medium not-italic text-cream-50">{addressLine}</address>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <Clock className="mt-0.5 h-5 w-5 shrink-0 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                  <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand-300" strokeWidth={1.5} aria-hidden />
                   <div>
                     <p className="text-sm text-slate-400">Horaires</p>
                     <dl className="mt-1 space-y-1 text-sm">

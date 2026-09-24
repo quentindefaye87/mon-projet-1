@@ -2,7 +2,7 @@ import { forwardRef, type InputHTMLAttributes, type SelectHTMLAttributes, type T
 import { cn } from "@/lib/utils";
 
 const control =
-  "w-full rounded border border-charcoal-900/12 bg-white/70 px-4 text-[0.9375rem] text-charcoal-900 placeholder:text-slate-400 shadow-[0_1px_2px_rgba(15,18,20,0.04)] transition-colors duration-200 hover:border-charcoal-900/25 focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/20 aria-[invalid=true]:border-red-700/60";
+  "w-full rounded border border-charcoal-900/12 bg-white/70 px-4 text-[0.9375rem] text-charcoal-900 placeholder:text-slate-400 shadow-[0_1px_2px_rgba(15,18,20,0.04)] transition-colors duration-200 hover:border-charcoal-900/25 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 aria-[invalid=true]:border-red-700/60";
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input(
   { className, ...props },
@@ -42,7 +42,7 @@ export function Label({ htmlFor, children, required }: { htmlFor: string; childr
     <label htmlFor={htmlFor} className="mb-2 block text-sm font-medium text-charcoal-800">
       {children}
       {required && (
-        <span className="ml-0.5 text-bronze-600" aria-hidden>
+        <span className="ml-0.5 text-brand-600" aria-hidden>
           *
         </span>
       )}

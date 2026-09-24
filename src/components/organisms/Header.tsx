@@ -56,7 +56,7 @@ export function Header() {
       )}
     >
       <div className="container flex items-center justify-between gap-6">
-        <Logo light={!solid} className="relative z-50" />
+        <Logo light={!solid || open} className="relative z-50" />
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
           <ul className="flex items-center gap-1">
@@ -66,15 +66,19 @@ export function Header() {
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
-                    "relative rounded px-3.5 py-2 text-sm font-medium transition-colors duration-300",
+                    "group/nav relative rounded px-3.5 py-2 text-sm font-medium transition-colors duration-300",
                     solid ? "text-slate-600 hover:text-charcoal-900" : "text-cream-100/80 hover:text-cream-50",
                     isActive(item.href) && (solid ? "text-charcoal-900" : "text-cream-50"),
                   )}
                 >
                   {item.label}
-                  {isActive(item.href) && (
-                    <span aria-hidden className="absolute inset-x-3.5 -bottom-0.5 h-px bg-bronze-400" />
-                  )}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "absolute inset-x-3.5 -bottom-0.5 h-[2px] origin-left bg-brand-500 transition-transform duration-500 ease-premium",
+                      isActive(item.href) ? "scale-x-100" : "scale-x-0 group-hover/nav:scale-x-100",
+                    )}
+                  />
                 </Link>
               </li>
             ))}

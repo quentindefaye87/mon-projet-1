@@ -1,50 +1,67 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/atoms/Button";
 import { Reveal } from "@/components/atoms/Reveal";
-import { ArtFrame } from "@/components/molecules/ArtFrame";
+import { CountUp } from "@/components/motion/CountUp";
+import { ImageReveal } from "@/components/motion/ImageReveal";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { stats } from "@/data/content";
+import { site } from "@/lib/site";
 
 export function AboutTeaser() {
   return (
-    <section aria-labelledby="about-title" className="section bg-light-section">
-      <div className="container grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
-        <div className="relative">
-          <Reveal>
-            <ArtFrame
-              visual={{ variant: "frame", tone: "bronze", alt: "Détail d'assemblage d'un profil bois-aluminium dans notre atelier" }}
-              className="aspect-[4/5] shadow-lift"
+    <section aria-labelledby="about-title" className="section bg-light-section overflow-hidden">
+      <div className="container grid items-center gap-20 lg:grid-cols-2 lg:gap-24">
+        <div className="relative pb-10 pr-6 sm:pr-10">
+          <ImageReveal className="aspect-[4/5] rounded-lg shadow-lift">
+            <Image
+              src="/images/porte-fenetre-alu-grange.jpg"
+              alt="Porte-fenêtre aluminium anthracite posée par SCAL dans une grange en pierre"
+              fill
+              sizes="(min-width: 1024px) 45vw, 90vw"
+              className="object-cover"
+              style={{ objectPosition: "50% 40%" }}
             />
-          </Reveal>
-          <Reveal delay={0.2} className="absolute -bottom-8 right-4 w-56 sm:-right-8 sm:w-64">
-            <ArtFrame
-              visual={{ variant: "interior", tone: "stone", alt: "Séjour lumineux équipé de nos menuiseries" }}
-              className="aspect-square border-4 border-cream-100 shadow-lift"
-            />
+          </ImageReveal>
+          <Reveal delay={0.5} className="absolute -bottom-2 right-0 w-48 sm:w-60">
+            <div className="rounded-lg border border-charcoal-900/5 bg-cream-50 p-6 shadow-lift">
+              <p className="font-display text-5xl font-semibold tracking-tight text-brand-600">
+                <CountUp value={site.foundedYear} plain />
+              </p>
+              <p className="mt-2 text-sm leading-snug text-slate-600">Une entreprise familiale, installée à Aixe-sur-Vienne.</p>
+            </div>
           </Reveal>
         </div>
 
         <div>
           <SectionHeading
             id="about-title"
-            eyebrow="Notre maison"
-            title="Trois décennies à dessiner la lumière."
-            description="Fondé en 1994 par un compagnon menuisier, notre atelier lyonnais conçoit chaque fenêtre comme une pièce d'architecture. Nos 140 artisans, ingénieurs et poseurs partagent une même exigence : la justesse du détail, la durabilité des matériaux et la sincérité du conseil."
+            eyebrow="L'entreprise"
+            title={
+              <>
+                Le savoir-faire d&apos;une famille, <span className="accent text-brand-600">au service de votre maison.</span>
+              </>
+            }
+            description="SCAL est une entreprise familiale spécialisée dans les menuiseries PVC et aluminium, les vérandas et toutes les fermetures de l'habitat. Nos techniciens maîtrisent la fabrication comme la pose : c'est ce qui nous permet de répondre précisément à vos besoins et à vos attentes."
           />
           <Reveal delay={0.1}>
             <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10">
-              {stats.map((s) => (
-                <div key={s.label} className="flex flex-col-reverse border-l border-bronze-400/50 pl-5">
+              {stats.slice(1).map((s) => (
+                <div key={s.label} className="flex flex-col-reverse border-l-2 border-brand-500/70 pl-5">
                   <dt className="mt-2 text-sm leading-snug text-slate-600">{s.label}</dt>
                   <dd className="font-display text-3xl font-semibold tracking-tight text-charcoal-900 sm:text-4xl">
-                    {s.value}
-                    <span className="text-bronze-500">{s.suffix}</span>
+                    <CountUp value={s.value} />
+                    <span className="text-brand-600">{s.suffix}</span>
                   </dd>
                 </div>
               ))}
+              <div className="flex flex-col-reverse border-l-2 border-brand-500/70 pl-5">
+                <dt className="mt-2 text-sm leading-snug text-slate-600">Qualification pour la rénovation énergétique</dt>
+                <dd className="font-display text-3xl font-semibold tracking-tight text-charcoal-900 sm:text-4xl">RGE</dd>
+              </div>
             </dl>
             <ButtonLink href="/a-propos" variant="ghost" className="mt-12">
-              Découvrir notre histoire
+              Découvrir l&apos;entreprise
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
             </ButtonLink>
           </Reveal>

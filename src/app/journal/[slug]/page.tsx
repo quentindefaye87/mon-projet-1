@@ -39,7 +39,7 @@ export default function PostPage({ params }: Props) {
         title={post.title}
         description={post.excerpt}
         breadcrumbs={[
-          { label: "Journal", href: "/journal" },
+          { label: "Conseils", href: "/journal" },
           { label: post.title, href: `/journal/${post.slug}` },
         ]}
       >
@@ -64,7 +64,7 @@ export default function PostPage({ params }: Props) {
 
       <section aria-labelledby="more-posts" className="section bg-cream-100">
         <div className="container">
-          <SectionHeading id="more-posts" eyebrow="Journal" title="À lire aussi." />
+          <SectionHeading id="more-posts" eyebrow="Conseils" title="À lire aussi." />
           <ul className="mt-14 grid gap-14 md:grid-cols-3 md:gap-8">
             {more.map((p) => (
               <li key={p.slug}>

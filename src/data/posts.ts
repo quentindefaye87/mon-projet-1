@@ -2,115 +2,131 @@ import type { BlogPost } from "@/types";
 
 export const posts: BlogPost[] = [
   {
-    slug: "choisir-double-ou-triple-vitrage",
-    title: "Double ou triple vitrage : comment choisir ?",
+    slug: "pvc-ou-aluminium-choisir-ses-fenetres",
+    title: "PVC ou aluminium : quel matériau pour vos fenêtres ?",
     excerpt:
-      "Le triple vitrage n'est pas toujours le meilleur choix. Orientation, climat et poids des vantaux : nos conseils pour arbitrer.",
-    cover: { variant: "frame", tone: "sapphire", alt: "Coupe d'un triple vitrage" },
-    category: "Performance",
-    date: "2026-09-02",
-    readTime: "6 min",
-    author: "Julie Ferrand, ingénieure thermicienne",
-    content: [
-      {
-        body: "Le triple vitrage est souvent présenté comme la solution ultime. Il isole mieux, c'est indéniable : un Ug de 0,6 contre 1,1 pour un double vitrage performant. Mais il laisse aussi passer moins de chaleur solaire gratuite, et pèse près de 50 % de plus.",
-      },
-      {
-        heading: "Tenir compte de l'orientation",
-        body: "Sur une façade sud, les apports solaires d'hiver sont précieux : un double vitrage à facteur solaire élevé peut afficher un bilan énergétique supérieur à un triple vitrage. Au nord, en revanche, le triple vitrage s'impose.",
-      },
-      {
-        heading: "Le climat et l'altitude",
-        body: "Au-delà de 800 mètres d'altitude ou dans les régions aux hivers rigoureux, le triple vitrage devient rapidement rentable. Sur la façade atlantique, un double vitrage performant suffit souvent.",
-      },
-      {
-        heading: "Notre recommandation",
-        body: "Nous réalisons une simulation thermique pour chaque projet, façade par façade. Il n'est pas rare de combiner les deux solutions dans une même maison pour optimiser confort et budget.",
-      },
-    ],
-  },
-  {
-    slug: "entretenir-menuiseries-aluminium",
-    title: "Entretenir ses menuiseries aluminium en 4 gestes",
-    excerpt: "Quelques minutes par an suffisent à préserver l'éclat et l'étanchéité de vos fenêtres pendant des décennies.",
-    cover: { variant: "slider", tone: "stone", alt: "Baie coulissante en aluminium clair" },
-    category: "Entretien",
-    date: "2026-08-18",
-    readTime: "4 min",
-    author: "Marc Delorme, responsable SAV",
-    content: [
-      {
-        body: "L'aluminium thermolaqué est un matériau remarquablement durable. Un entretien simple, deux fois par an, garantit son aspect et le bon fonctionnement des ouvrants.",
-      },
-      {
-        heading: "1. Nettoyer les profils",
-        body: "Une eau tiède additionnée de savon au pH neutre et une éponge douce suffisent. Proscrivez les produits abrasifs, solvants et nettoyeurs haute pression.",
-      },
-      {
-        heading: "2. Dégager les rails et les drainages",
-        body: "Aspirez les rails des coulissants et vérifiez que les orifices de drainage ne sont pas obstrués : c'est la clé d'une étanchéité durable.",
-      },
-      {
-        heading: "3. Lubrifier la quincaillerie",
-        body: "Une goutte d'huile sans acide sur les points de fermeture et les paumelles, une fois par an, préserve la souplesse de manœuvre.",
-      },
-      {
-        heading: "4. Contrôler les joints",
-        body: "Un joint qui durcit ou se fissure doit être remplacé. Nos équipes peuvent intervenir dans le cadre du contrat d'entretien.",
-      },
-    ],
-  },
-  {
-    slug: "tendances-menuiseries-2026",
-    title: "Tendances 2026 : la fenêtre comme élément d'architecture",
-    excerpt: "Profils affinés, teintes minérales et angles vitrés : ce que les architectes dessinent cette année.",
-    cover: { variant: "facade", tone: "bronze", alt: "Façade contemporaine aux menuiseries bronze" },
-    category: "Design",
-    date: "2026-07-29",
+      "Isolation, esthétique, entretien, budget : les vraies différences entre PVC et aluminium, et comment choisir selon votre maison.",
+    cover: {
+      variant: "frame",
+      tone: "stone",
+      alt: "Porte-fenêtre aluminium anthracite dans une grange en pierre",
+      src: "/images/porte-fenetre-alu-grange.jpg",
+      position: "50% 35%",
+    },
+    category: "Conseils",
+    date: "2026-09-08",
     readTime: "5 min",
-    author: "Élise Moreau, directrice artistique",
+    author: "L'équipe SCAL",
     content: [
       {
-        body: "La fenêtre n'est plus un simple composant technique : elle devient une signature architecturale. Trois tendances se dessinent nettement cette année.",
+        body: "C'est la question que l'on nous pose le plus souvent. Les deux matériaux isolent aujourd'hui très bien : le choix se fait surtout sur l'esthétique, les dimensions de vos ouvertures et votre budget.",
       },
       {
-        heading: "Des profils toujours plus fins",
-        body: "La recherche du clair de vitrage maximal pousse les profils sous la barre des 70 mm. Les montants centraux de 25 mm transforment les baies en véritables tableaux.",
+        heading: "Le PVC : l'isolation au meilleur prix",
+        body: "Grâce à ses profils multi-chambres, le PVC offre une excellente isolation thermique et phonique pour un budget maîtrisé. Il ne demande aucun entretien hormis un nettoyage, et se décline désormais en teintes et en plaxés effet bois. Il est idéal pour les fenêtres de taille courante.",
       },
       {
-        heading: "Le retour des teintes minérales",
-        body: "Après l'omniprésence du gris anthracite, les bronzes anodisés, verts profonds et beiges sablés font leur retour, en écho aux matériaux naturels.",
+        heading: "L'aluminium : la finesse et les grandes dimensions",
+        body: "Plus rigide, l'aluminium permet des profils plus fins et donc davantage de vitrage, ainsi que de très grandes ouvertures : baies coulissantes, portes-fenêtres avec impostes, vérandas. Avec la rupture de pont thermique, ses performances n'ont plus rien à envier au PVC. Ses teintes texturées sont inaltérables.",
       },
       {
-        heading: "L'angle vitré",
-        body: "Supprimer le poteau d'angle pour ouvrir deux façades à la fois : une prouesse technique désormais accessible aux projets résidentiels.",
+        heading: "Notre conseil",
+        body: "Il n'est pas rare de combiner les deux dans une même maison : PVC pour les chambres et les pièces d'eau, aluminium pour la grande baie du séjour. Lors de la visite technique, nous vous présentons des échantillons pour choisir en connaissance de cause.",
       },
     ],
   },
   {
-    slug: "aides-renovation-fenetres",
-    title: "Aides à la rénovation : ce qui change pour vos fenêtres",
-    excerpt: "MaPrimeRénov', CEE, TVA à 5,5 % : le point complet sur les dispositifs mobilisables pour changer vos menuiseries.",
-    cover: { variant: "grid", tone: "forest", alt: "Façade rénovée avec des fenêtres performantes" },
-    category: "Guides",
-    date: "2026-06-12",
-    readTime: "7 min",
-    author: "Thomas Girard, conseiller énergie",
+    slug: "veranda-questions-avant-de-se-lancer",
+    title: "Véranda : 5 questions à se poser avant de se lancer",
+    excerpt: "Orientation, usage, toiture, urbanisme, chauffage : les bons réflexes pour une véranda agréable en toute saison.",
+    cover: {
+      variant: "bay",
+      tone: "stone",
+      alt: "Véranda aluminium anthracite à toit quatre pans",
+      src: "/images/veranda-alu-anthracite.jpg",
+      position: "50% 55%",
+    },
+    category: "Vérandas",
+    date: "2026-08-21",
+    readTime: "6 min",
+    author: "L'équipe SCAL",
     content: [
       {
-        body: "Le remplacement des fenêtres reste éligible à plusieurs dispositifs d'aide, à condition de respecter des seuils de performance précis et de faire appel à un professionnel RGE.",
+        body: "Une véranda réussie est une pièce que l'on utilise toute l'année. Pour y parvenir, quelques questions méritent d'être posées dès le départ.",
       },
       {
-        heading: "Les critères techniques",
-        body: "Les fenêtres doivent présenter un Uw ≤ 1,3 W/m².K et un Sw ≥ 0,3, ou un Uw ≤ 1,7 et un Sw ≥ 0,36. Toutes nos gammes respectent ces seuils.",
+        heading: "1. Quel usage ?",
+        body: "Salon, salle à manger, cuisine agrandie ou jardin d'hiver : l'usage détermine la surface, l'isolation et les équipements (éclairage, chauffage, stores).",
       },
       {
-        heading: "Les dispositifs cumulables",
-        body: "La TVA à taux réduit de 5,5 %, les primes CEE et, dans le cadre d'une rénovation d'ampleur, MaPrimeRénov' peuvent se combiner selon vos revenus.",
+        heading: "2. Quelle orientation ?",
+        body: "Plein sud, la véranda profite des apports solaires en hiver mais doit être protégée en été : toiture isolante, vitrages à contrôle solaire, stores. Au nord, on privilégie la lumière et l'isolation.",
       },
       {
-        heading: "Notre accompagnement",
-        body: "Nos conseillers vérifient votre éligibilité lors de la visite technique et préparent les justificatifs nécessaires à votre dossier.",
+        heading: "3. Quelle toiture ?",
+        body: "Panneaux isolants, toiture vitrée ou mixte : chaque solution a ses atouts. Les panneaux limitent la surchauffe, le vitrage maximise la lumière. Le toit plat donne un aspect d'extension contemporaine.",
+      },
+      {
+        heading: "4. Quelles démarches ?",
+        body: "Selon la surface créée et les règles d'urbanisme de votre commune, une déclaration préalable ou un permis de construire est nécessaire. Nous vous accompagnons dans le dossier.",
+      },
+      {
+        heading: "5. Qui pour la concevoir et la poser ?",
+        body: "Une véranda est un ouvrage sur mesure : étude, fabrication et pose doivent être coordonnées. Chez SCAL, la même équipe s'en charge du premier rendez-vous à la livraison.",
+      },
+    ],
+  },
+  {
+    slug: "volets-roulants-quelle-motorisation",
+    title: "Volets roulants : manuel, filaire, radio ou solaire ?",
+    excerpt: "Chaque type de manœuvre a ses avantages. Voici comment choisir selon votre logement et vos habitudes.",
+    cover: { variant: "facade", tone: "dusk", alt: "Façade équipée de volets roulants au crépuscule" },
+    category: "Fermetures",
+    date: "2026-07-30",
+    readTime: "4 min",
+    author: "L'équipe SCAL",
+    content: [
+      {
+        body: "Le volet roulant améliore l'isolation, la sécurité et le confort d'été. Reste à choisir comment le manœuvrer.",
+      },
+      {
+        heading: "Manuel : simple et économique",
+        body: "Treuil ou sangle, sans électricité. Une solution fiable pour les petites fenêtres ou les pièces peu utilisées.",
+      },
+      {
+        heading: "Filaire ou radio : le confort au quotidien",
+        body: "La motorisation filaire se commande par un interrupteur mural. La version radio ajoute la télécommande, la centralisation et la programmation horaire.",
+      },
+      {
+        heading: "Solaire : sans travaux électriques",
+        body: "Un petit panneau photovoltaïque alimente une batterie : aucun câble à tirer, idéal en rénovation. Les volets fonctionnent même après plusieurs jours sans soleil.",
+      },
+    ],
+  },
+  {
+    slug: "pourquoi-choisir-artisan-rge",
+    title: "Rénovation : pourquoi choisir un artisan RGE ?",
+    excerpt: "La qualification RGE est un gage de compétence et conditionne l'accès à de nombreuses aides. Explications.",
+    cover: { variant: "grid", tone: "stone", alt: "Façade rénovée avec des fenêtres performantes" },
+    category: "Aides & rénovation",
+    date: "2026-06-18",
+    readTime: "5 min",
+    author: "L'équipe SCAL",
+    content: [
+      {
+        body: "RGE signifie « Reconnu Garant de l'Environnement ». Cette qualification est délivrée par des organismes comme Qualibat aux entreprises qui justifient de leurs compétences en rénovation énergétique.",
+      },
+      {
+        heading: "Un gage de sérieux",
+        body: "Pour être qualifiée, l'entreprise est contrôlée sur ses références, ses assurances et la formation de ses équipes. Des audits de chantier ont lieu régulièrement.",
+      },
+      {
+        heading: "La condition de nombreuses aides",
+        body: "La plupart des aides publiques à la rénovation énergétique, comme MaPrimeRénov' ou les primes CEE, ne sont accordées que si les travaux sont réalisés par une entreprise RGE. Les conditions évoluent régulièrement : renseignez-vous auprès de France Rénov' et demandez-nous conseil lors du devis.",
+      },
+      {
+        heading: "SCAL, qualifiée RGE Qualibat",
+        body: "Nous vous indiquons, pour chaque projet, les dispositifs auxquels vos travaux peuvent prétendre, et vous remettons les documents nécessaires à vos démarches.",
       },
     ],
   },

@@ -25,7 +25,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const category = getCategory(params.slug);
   if (!category) return {};
-  return pageMetadata({ title: `${category.name} sur mesure`, description: category.description, path: `/collections/${category.slug}` });
+  return pageMetadata({ title: `${category.name} sur mesure`, description: category.description, path: `/solutions/${category.slug}` });
 }
 
 export default function CategoryPage({ params }: Props) {
@@ -38,13 +38,13 @@ export default function CategoryPage({ params }: Props) {
   return (
     <>
       <PageHero
-        eyebrow="Collection"
+        eyebrow="Nos solutions"
         title={category.name}
         description={category.description}
         visual={category.visual}
         breadcrumbs={[
-          { label: "Collections", href: "/collections" },
-          { label: category.name, href: `/collections/${category.slug}` },
+          { label: "Nos solutions", href: "/solutions" },
+          { label: category.name, href: `/solutions/${category.slug}` },
         ]}
       >
         <ul className="flex flex-wrap gap-2" aria-label="Idéal pour">
@@ -62,7 +62,7 @@ export default function CategoryPage({ params }: Props) {
             id="models-title"
             eyebrow={`${items.length} modèle${items.length > 1 ? "s" : ""}`}
             title="Choisissez votre modèle."
-            description="Chaque modèle est entièrement configurable : matériau, teinte, vitrage, quincaillerie et dimensions."
+            description="Chaque modèle se configure en ligne : matériau, teinte, options et dimensions, avec une première estimation."
           />
           <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((p, i) => (
@@ -78,7 +78,7 @@ export default function CategoryPage({ params }: Props) {
         <section aria-labelledby="related-projects" className="section bg-cream-100">
           <div className="container">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <SectionHeading id="related-projects" eyebrow="En situation" title="Réalisations avec cette collection." />
+              <SectionHeading id="related-projects" eyebrow="En situation" title="Nos réalisations dans cette gamme." />
               <Reveal>
                 <ButtonLink href="/realisations" variant="ghost">
                   Toutes les réalisations <ArrowRight className="h-4 w-4" aria-hidden />
@@ -98,7 +98,7 @@ export default function CategoryPage({ params }: Props) {
 
       <section aria-labelledby="other-collections" className="section bg-light-section">
         <div className="container">
-          <SectionHeading id="other-collections" eyebrow="Explorer" title="Autres collections" />
+          <SectionHeading id="other-collections" eyebrow="Explorer" title="Nos autres solutions" />
           <ul className="mt-14 grid gap-5 md:grid-cols-3">
             {others.map((c) => (
               <li key={c.slug}>

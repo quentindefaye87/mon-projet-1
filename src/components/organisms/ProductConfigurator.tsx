@@ -59,7 +59,7 @@ function OptionGroup({
                 <label
                   htmlFor={id}
                   title={o.label}
-                  className="relative flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-charcoal-900/15 shadow-soft transition-all duration-300 hover:scale-105 peer-checked:ring-2 peer-checked:ring-forest-500 peer-checked:ring-offset-2 peer-checked:ring-offset-cream-50 peer-focus-visible:ring-2 peer-focus-visible:ring-sapphire-500 peer-focus-visible:ring-offset-2"
+                  className="relative flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-charcoal-900/15 shadow-soft transition-all duration-300 hover:scale-105 peer-checked:ring-2 peer-checked:ring-brand-500 peer-checked:ring-offset-2 peer-checked:ring-offset-cream-50 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500 peer-focus-visible:ring-offset-2"
                   style={{ backgroundColor: o.swatch }}
                 >
                   <span className="sr-only">{o.label}</span>
@@ -68,7 +68,7 @@ function OptionGroup({
               ) : (
                 <label
                   htmlFor={id}
-                  className="flex h-full cursor-pointer items-start justify-between gap-3 rounded border border-charcoal-900/10 bg-white/60 px-4 py-3 text-sm text-slate-700 transition-all duration-300 hover:border-charcoal-900/30 peer-checked:border-forest-500 peer-checked:bg-forest-500/[0.06] peer-checked:text-charcoal-900 peer-focus-visible:ring-2 peer-focus-visible:ring-sapphire-500"
+                  className="flex h-full cursor-pointer items-start justify-between gap-3 rounded border border-charcoal-900/10 bg-white/60 px-4 py-3 text-sm text-slate-700 transition-all duration-300 hover:border-charcoal-900/30 peer-checked:border-brand-500 peer-checked:bg-brand-500/[0.06] peer-checked:text-charcoal-900 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500"
                 >
                   <span>{o.label}</span>
                   {o.priceDelta ? (
@@ -120,7 +120,7 @@ function Dimension({
         step={10}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-3 w-full accent-forest-600"
+        className="mt-3 w-full accent-brand-600"
       />
     </div>
   );
@@ -133,8 +133,10 @@ export function ProductConfigurator({ product }: { product: Product }) {
     glazing: product.glazing[0]?.id ?? "",
     hardware: product.hardware[0]?.id ?? "",
   });
-  const [width, setWidth] = useState(1200);
-  const [height, setHeight] = useState(1400);
+  const dims = product.dimensions ?? { width: [400, 3000, 1200], height: [400, 3000, 1400] };
+  const [widthLabel, heightLabel] = product.dimensions?.labels ?? ["Largeur", "Hauteur"];
+  const [width, setWidth] = useState(dims.width[2]);
+  const [height, setHeight] = useState(dims.height[2]);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const { add } = useQuoteList();
@@ -151,11 +153,13 @@ export function ProductConfigurator({ product }: { product: Product }) {
     basePrice: product.basePrice,
     width,
     height,
+    reference: { width: dims.width[2], height: dims.height[2] },
     quantity,
     deltas: groups.map(({ key }) => picked[key]?.priceDelta ?? 0),
   });
 
-  const previewVisual = product.visuals[0];
+  // L'aperçu dynamique utilise l'illustration (recolorable) plutôt que la photo.
+  const previewVisual = product.visuals.find((v) => !v.src) ?? { variant: "frame" as const, tone: "stone" as const, alt: "" };
   const summary = groups.map(({ key }) => picked[key]?.label).filter(Boolean).join(" · ");
 
   const addToQuote = () => {
@@ -179,11 +183,11 @@ export function ProductConfigurator({ product }: { product: Product }) {
               />
             )}
             <div className="glass absolute inset-x-4 bottom-4 z-10 rounded-md px-4 py-3 text-xs leading-relaxed text-cream-50">
-              <span className="font-semibold">Aperçu en direct</span> — {picked.finishes?.label}, {picked.glazing?.label.split("—")[0]}
+              <span className="font-semibold">Aperçu en direct</span> — {picked.finishes?.label}
             </div>
           </div>
           <p className="mt-4 text-sm text-slate-500">
-            Rendu indicatif. Des échantillons de teintes et de profils sont disponibles en showroom ou envoyés gratuitement.
+            Rendu indicatif. Nous vous présentons les échantillons de teintes et de profils lors de la visite technique.
           </p>
         </div>
       </div>
@@ -194,7 +198,7 @@ export function ProductConfigurator({ product }: { product: Product }) {
             <OptionGroup
               key={key}
               name={key}
-              label={label}
+              label={product.optionLabels?.[key] ?? label}
               options={product[key]}
               value={selection[key]}
               onChange={(id) => setSelection((s) => ({ ...s, [key]: id }))}
@@ -202,12 +206,12 @@ export function ProductConfigurator({ product }: { product: Product }) {
           ))}
 
           <fieldset className="space-y-6">
-            <legend className="text-sm font-medium text-charcoal-900">Dimensions (tableau)</legend>
-            <Dimension id="cfg-width" label="Largeur" value={width} min={400} max={3000} onChange={setWidth} />
-            <Dimension id="cfg-height" label="Hauteur" value={height} min={400} max={3000} onChange={setHeight} />
+            <legend className="text-sm font-medium text-charcoal-900">Dimensions</legend>
+            <Dimension id="cfg-width" label={widthLabel} value={width} min={dims.width[0]} max={dims.width[1]} onChange={setWidth} />
+            <Dimension id="cfg-height" label={heightLabel} value={height} min={dims.height[0]} max={dims.height[1]} onChange={setHeight} />
             <p className="text-sm text-slate-500">
               Pas encore vos cotes ?{" "}
-              <Link href="/guide-mesure" className="font-medium text-forest-600 underline-offset-4 hover:underline">
+              <Link href="/guide-mesure" className="font-medium text-brand-600 underline-offset-4 hover:underline">
                 Consultez notre guide de mesure
               </Link>
               .
@@ -247,7 +251,7 @@ export function ProductConfigurator({ product }: { product: Product }) {
               {formatPrice(estimate.low)} – {formatPrice(estimate.high)}
             </p>
             <p className="mt-2 text-xs leading-relaxed text-slate-500">
-              Le prix définitif est établi après visite technique gratuite. Éligible TVA 5,5 % et aides à la rénovation selon conditions.
+              Le prix définitif est établi après visite technique gratuite. TVA réduite et aides à la rénovation possibles selon les travaux et votre situation.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button onClick={addToQuote} className="flex-1">
@@ -266,7 +270,7 @@ export function ProductConfigurator({ product }: { product: Product }) {
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="mt-4 text-sm text-forest-600"
+                  className="mt-4 text-sm text-brand-600"
                 >
                   Configuration enregistrée.{" "}
                   <Link href="/devis" className="font-medium underline underline-offset-4">

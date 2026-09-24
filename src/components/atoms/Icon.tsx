@@ -4,6 +4,7 @@ import {
   Ruler,
   ShieldCheck,
   Thermometer,
+  Users,
   Volume1,
   type LucideProps,
 } from "lucide-react";
@@ -15,6 +16,7 @@ const map = {
   leaf: Leaf,
   ruler: Ruler,
   award: Award,
+  users: Users,
 } as const;
 
 export type IconName = keyof typeof map;

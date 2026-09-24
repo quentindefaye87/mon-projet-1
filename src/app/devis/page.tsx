@@ -13,13 +13,13 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Devis gratuit",
   description:
-    "Demandez votre devis gratuit et sans engagement pour vos fenêtres et baies vitrées sur mesure. Visite technique et métré laser offerts, réponse sous 48 h.",
+    "Demandez votre devis gratuit et sans engagement pour vos menuiseries, véranda, porte d'entrée, volets ou portail. Déplacement et prise de cotes offerts en Haute-Vienne.",
   path: "/devis",
 });
 
 const reassurance = [
-  { icon: Home, text: "Visite technique et métré laser offerts" },
-  { icon: Clock, text: "Réponse sous 48 heures ouvrées" },
+  { icon: Home, text: "Déplacement et prise de cotes offerts" },
+  { icon: Clock, text: "Un technicien vous recontacte rapidement" },
   { icon: BadgeCheck, text: "Devis détaillé, sans engagement" },
 ];
 
@@ -28,10 +28,14 @@ export default function QuotePage() {
     <>
       <PageHero
         eyebrow="Devis gratuit"
-        title="Votre projet, chiffré avec précision."
-        description="Chaque menuiserie est fabriquée sur mesure : nos prix le sont aussi. Décrivez votre projet, un conseiller vous recontacte pour une visite technique gratuite."
+        title={
+          <>
+            Votre projet, <span className="accent text-brand-400">chiffré avec précision.</span>
+          </>
+        }
+        description="Chaque ouverture est fabriquée sur mesure : nos prix le sont aussi. Décrivez votre projet, nous vous recontactons pour une visite technique gratuite."
         breadcrumbs={[{ label: "Devis gratuit", href: "/devis" }]}
-        visual={{ variant: "slider", tone: "bronze", alt: "" }}
+        visual={{ variant: "picture", tone: "ember", alt: "", src: "/images/porte-entree-rouge.jpg", position: "50% 40%" }}
       />
 
       <section aria-label="Formulaire de demande de devis" className="section bg-cream-50">
@@ -47,14 +51,14 @@ export default function QuotePage() {
                 <ul className="relative z-10 space-y-4">
                   {reassurance.map(({ icon: IconCmp, text }) => (
                     <li key={text} className="flex items-center gap-4 text-cream-100">
-                      <IconCmp className="h-5 w-5 shrink-0 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                      <IconCmp className="h-5 w-5 shrink-0 text-brand-300" strokeWidth={1.5} aria-hidden />
                       {text}
                     </li>
                   ))}
                 </ul>
                 <div className="relative z-10 mt-8 border-t border-white/10 pt-6">
                   <p className="text-sm text-slate-400">Vous préférez en parler ?</p>
-                  <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="mt-2 inline-flex items-center gap-2 font-display text-xl font-semibold text-cream-50 hover:text-bronze-300">
+                  <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="mt-2 inline-flex items-center gap-2 font-display text-xl font-semibold text-cream-50 hover:text-brand-300">
                     <Phone className="h-5 w-5" aria-hidden />
                     {site.phoneDisplay}
                   </a>
@@ -65,7 +69,7 @@ export default function QuotePage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Configurez un modèle pour obtenir une fourchette de prix, puis ajoutez-le à cette demande en un clic.
                 </p>
-                <Link href="/collections" className="mt-4 inline-block text-sm font-medium text-forest-600 hover:underline">
+                <Link href="/solutions" className="mt-4 inline-block text-sm font-medium text-brand-600 hover:underline">
                   Ouvrir le configurateur →
                 </Link>
               </div>
@@ -85,7 +89,7 @@ export default function QuotePage() {
           <ol className="mt-14 grid gap-px overflow-hidden rounded-lg border border-charcoal-900/10 bg-charcoal-900/10 sm:grid-cols-2 lg:grid-cols-5">
             {priceFactors.map((f, i) => (
               <Reveal as="li" key={f.title} delay={i * 0.06} className="bg-cream-50 p-7">
-                <span className="font-display text-sm font-semibold text-bronze-500">0{i + 1}</span>
+                <span className="font-display text-sm font-semibold text-brand-500">0{i + 1}</span>
                 <h3 className="mt-4 font-display text-lg font-semibold text-charcoal-900">{f.title}</h3>
                 <p className="mt-2 text-[0.9375rem] leading-relaxed text-slate-600">{f.description}</p>
               </Reveal>

@@ -63,6 +63,18 @@ const palettes: Record<ArtTone, Palette> = {
     interior: "#fbe8c8",
     ground: "#140f0b",
   },
+  ember: {
+    skyTop: "#150d0d",
+    skyBottom: "#8c1a1c",
+    sun: "#f2c7b8",
+    wall: "#1d1515",
+    wallLight: "#2a1d1d",
+    frame: "#0f0a0a",
+    glassTop: "#4a2a2a",
+    glassBottom: "#dc6a6d",
+    interior: "#fbe3d6",
+    ground: "#110b0b",
+  },
   stone: {
     skyTop: "#dfe5ea",
     skyBottom: "#efe7d8",

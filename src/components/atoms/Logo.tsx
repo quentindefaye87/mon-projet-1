@@ -2,21 +2,68 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { site } from "@/lib/site";
 
-export function Logo({ light, className }: { light?: boolean; className?: string }) {
+interface LogoMarkProps {
+  light?: boolean;
+  tagline?: boolean;
+  className?: string;
+}
+
+/**
+ * Logo SCAL redessiné en SVG : lettrage italique rouge et vantail ouvert devant le dormant gris.
+ * Au survol du lien parent (.group), le vantail s'ouvre un peu plus.
+ */
+export function LogoMark({ light, tagline, className }: LogoMarkProps) {
+  const grey = light ? "#c2c2c2" : "#4d4d4d";
   return (
-    <Link
-      href="/"
-      className={cn("group inline-flex items-center gap-3", light ? "text-cream-50" : "text-charcoal-900", className)}
-      aria-label={`${site.name} — accueil`}
+    <svg
+      viewBox={tagline ? "0 0 440 250" : "0 0 440 200"}
+      className={cn("h-auto", className)}
+      aria-hidden
+      focusable="false"
     >
-      <svg viewBox="0 0 32 32" className="h-8 w-8" aria-hidden>
-        <rect x="3" y="3" width="26" height="26" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M16 3v26M3 13h26" stroke="currentColor" strokeWidth="1.6" />
-        <rect x="17.5" y="4.5" width="10" height="7" fill="#c79a68" opacity="0.9" className="transition-opacity duration-500 group-hover:opacity-100" />
-      </svg>
-      <span className="font-display text-[1.05rem] font-semibold tracking-tight">
-        Lumen <span className="font-normal text-bronze-500">&amp;</span> Cadre
-      </span>
+      <text
+        x="18"
+        y="152"
+        fill="#b93538"
+        fontFamily="var(--font-display), 'Arial Black', Arial, sans-serif"
+        fontSize="124"
+        fontWeight="800"
+        letterSpacing="-3"
+        transform="skewX(-14) translate(36 0)"
+      >
+        SCAL
+      </text>
+      {/* Dormant gris */}
+      <path d="M362 40 H410 V176 H336" fill="none" stroke={grey} strokeWidth="6" strokeLinejoin="miter" />
+      {/* Vantail rouge ouvert */}
+      <g className="origin-[362px_110px] transition-transform duration-700 ease-premium group-hover:[transform:perspective(400px)_rotateY(-18deg)]">
+        <path d="M300 46 L362 20" stroke="#b93538" strokeWidth="6" strokeLinecap="square" />
+        <path d="M362 20 V200" stroke="#b93538" strokeWidth="9" strokeLinecap="square" />
+        <path d="M310 176 L362 200" stroke="#b93538" strokeWidth="6" strokeLinecap="square" />
+      </g>
+      {tagline && (
+        <text
+          x="220"
+          y="240"
+          textAnchor="middle"
+          fill={light ? "#efefef" : "#2b2b2b"}
+          fontFamily="var(--font-display), Arial, sans-serif"
+          fontSize="24"
+          fontWeight="700"
+          textLength="404"
+          lengthAdjust="spacingAndGlyphs"
+        >
+          DES OUVERTURES À VOS MESURES
+        </text>
+      )}
+    </svg>
+  );
+}
+
+export function Logo({ light, className, tagline }: { light?: boolean; className?: string; tagline?: boolean }) {
+  return (
+    <Link href="/" className={cn("group inline-flex items-center", className)} aria-label={`${site.name} — accueil`}>
+      <LogoMark light={light} tagline={tagline} className={tagline ? "w-44" : "w-[92px] sm:w-[104px]"} />
     </Link>
   );
 }

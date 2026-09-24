@@ -40,15 +40,18 @@ export function estimatePrice({
   height,
   deltas,
   quantity,
+  reference = { width: 1200, height: 1400 },
 }: {
   basePrice: number;
   width: number;
   height: number;
   deltas: number[];
   quantity: number;
+  /** Dimensions (mm) auxquelles correspond le prix « à partir de ». */
+  reference?: { width: number; height: number };
 }) {
   const area = (width / 1000) * (height / 1000);
-  const referenceArea = 1.2 * 1.4;
+  const referenceArea = (reference.width / 1000) * (reference.height / 1000);
   const sizeFactor = Math.max(0.7, Math.pow(area / referenceArea, 0.85));
   const unit = basePrice * sizeFactor + deltas.reduce((a, b) => a + b, 0);
   const total = unit * quantity;

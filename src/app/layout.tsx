@@ -1,30 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Inter, Instrument_Serif, Manrope } from "next/font/google";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { JsonLd, organizationSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display", display: "swap" });
+const display = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-display", display: "swap" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-serif", display: "swap" });
 const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Fenêtres et baies vitrées sur mesure haut de gamme`,
+    default: `${site.name} — Menuiseries PVC & alu, vérandas et fermetures à Limoges (87)`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
-    "fenêtres sur mesure",
-    "baie coulissante",
-    "menuiserie aluminium",
-    "fenêtre bois-alu",
-    "fenêtre oscillo-battante",
-    "rénovation fenêtres",
-    "menuisier Lyon",
+    "menuiserie Limoges",
+    "fenêtre PVC Haute-Vienne",
+    "menuiserie aluminium Limoges",
+    "véranda Limoges",
+    "porte d'entrée Haute-Vienne",
+    "volet roulant Limoges",
+    "portail aluminium",
+    "Aixe-sur-Vienne",
+    "artisan RGE Qualibat",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -41,14 +45,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0c0d",
+  themeColor: "#0e0e0f",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${display.variable} ${body.variable}`}>
+    <html lang="fr" className={`${display.variable} ${body.variable} ${serif.variable}`}>
       <body>
         <a
           href="#contenu"
@@ -56,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Aller au contenu
         </a>
+        <ScrollProgress />
         <JsonLd data={organizationSchema()} />
         <Header />
         <main id="contenu" tabIndex={-1} className="outline-none">

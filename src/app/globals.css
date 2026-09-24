@@ -29,11 +29,11 @@
   }
 
   ::selection {
-    @apply bg-forest-500 text-cream-50;
+    @apply bg-brand-500 text-cream-50;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-sapphire-500 ring-offset-2 ring-offset-cream-100;
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-cream-100;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -89,19 +89,48 @@
 
   .bg-dark-section {
     background:
-      radial-gradient(ellipse 70% 50% at 20% 0%, rgba(63, 102, 144, 0.18), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(171, 127, 79, 0.14), transparent 60%),
-      linear-gradient(180deg, #121315 0%, #0b0c0d 100%);
+      radial-gradient(ellipse 70% 50% at 15% 0%, rgba(185, 53, 56, 0.16), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 95% 100%, rgba(140, 26, 28, 0.14), transparent 60%),
+      linear-gradient(180deg, #19191a 0%, #0e0e0f 100%);
   }
 
   .bg-light-section {
     background:
       radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 255, 255, 0.9), transparent 70%),
-      linear-gradient(180deg, #faf8f4 0%, #f3efe6 100%);
+      linear-gradient(180deg, #f7f5f2 0%, #efebe6 100%);
   }
 
   .text-gradient {
-    @apply bg-gradient-to-br from-white via-cream-200 to-bronze-300 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-white via-cream-200 to-brand-300 bg-clip-text text-transparent;
+  }
+
+  /* Accent éditorial : mots-clés en serif italique, clin d'œil à l'italique du logo SCAL */
+  .accent {
+    @apply font-serif font-normal italic tracking-normal;
+  }
+
+  /* Filet rouge qui s'ouvre comme un vantail au survol */
+  .frame-hover {
+    position: relative;
+  }
+  .frame-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid theme("colors.brand.500");
+    border-radius: inherit;
+    opacity: 0;
+    transform: scale(0.97);
+    transition:
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .frame-hover:hover::before,
+  .frame-hover:focus-visible::before {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .link-underline {

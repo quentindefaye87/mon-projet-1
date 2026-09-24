@@ -9,9 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Journal — conseils et inspirations",
+  title: "Conseils — menuiseries, vérandas, fermetures",
   description:
-    "Entretien, performance énergétique, aides à la rénovation, tendances : les conseils de nos experts pour bien choisir et entretenir vos fenêtres.",
+    "PVC ou aluminium, véranda, volets roulants, aides à la rénovation et artisans RGE : les conseils de l'équipe SCAL pour bien choisir.",
   path: "/journal",
 });
 
@@ -20,11 +20,15 @@ export default function JournalPage() {
   return (
     <>
       <PageHero
-        eyebrow="Journal"
-        title="Conseils & inspirations."
-        description="L'expertise de nos ingénieurs, designers et techniciens, pour vous aider à faire les bons choix."
-        breadcrumbs={[{ label: "Journal", href: "/journal" }]}
-        visual={{ variant: "picture", tone: "stone", alt: "" }}
+        eyebrow="Conseils"
+        title={
+          <>
+            Bien choisir, <span className="accent text-brand-400">bien rénover.</span>
+          </>
+        }
+        description="L'expérience de nos techniciens, pour vous aider à faire les bons choix pour votre maison."
+        breadcrumbs={[{ label: "Conseils", href: "/journal" }]}
+        visual={{ variant: "grid", tone: "dusk", alt: "" }}
       />
       <section aria-label="Articles" className="section bg-cream-50">
         <div className="container">
@@ -33,7 +37,7 @@ export default function JournalPage() {
               <article className="group relative grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                 <ArtFrame visual={featured.cover} hoverZoom decorative className="aspect-[16/10] shadow-lift" />
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wider text-bronze-600">
+                  <p className="text-xs font-medium uppercase tracking-wider text-brand-600">
                     À la une · {featured.category} · <time dateTime={featured.date}>{formatDate(featured.date)}</time>
                   </p>
                   <h2 className="mt-4 font-display text-display-md font-semibold text-charcoal-900">

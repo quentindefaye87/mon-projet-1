@@ -1,13 +1,13 @@
 import { PageHero } from "@/components/templates/PageHero";
 import { PortfolioGrid } from "@/components/organisms/PortfolioGrid";
-import { TestimonialsSection } from "@/components/organisms/TestimonialsSection";
+import { CommitmentsSection } from "@/components/organisms/CommitmentsSection";
 import { CtaBanner } from "@/components/organisms/CtaBanner";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Réalisations",
   description:
-    "Villas contemporaines, immeubles haussmanniens, sièges sociaux, hôtels : découvrez une sélection de nos chantiers de menuiseries sur mesure.",
+    "Menuiseries aluminium, vérandas, portes d'entrée : découvrez des chantiers réalisés par SCAL à Limoges et en Haute-Vienne.",
   path: "/realisations",
 });
 
@@ -16,17 +16,21 @@ export default function RealisationsPage() {
     <>
       <PageHero
         eyebrow="Réalisations"
-        title="Chaque projet raconte une lumière."
-        description="Une sélection de chantiers récents, du résidentiel au tertiaire, du patrimoine à l'architecture contemporaine."
+        title={
+          <>
+            Chaque chantier, <span className="accent text-brand-400">une signature.</span>
+          </>
+        }
+        description="Granges en pierre, maisons en granit, extensions : quelques réalisations de nos équipes, en Haute-Vienne."
         breadcrumbs={[{ label: "Réalisations", href: "/realisations" }]}
-        visual={{ variant: "facade", tone: "forest", alt: "" }}
+        visual={{ variant: "frame", tone: "stone", alt: "", src: "/images/porte-fenetre-alu-grange.jpg", position: "50% 35%" }}
       />
       <section aria-label="Galerie des réalisations" className="section bg-cream-50">
         <div className="container">
           <PortfolioGrid />
         </div>
       </section>
-      <TestimonialsSection />
+      <CommitmentsSection />
       <CtaBanner title="Votre projet sera le prochain." />
     </>
   );

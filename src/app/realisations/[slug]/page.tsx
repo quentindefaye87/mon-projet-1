@@ -12,6 +12,8 @@ import { categories } from "@/data/categories";
 import { getProject, projects } from "@/data/projects";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
+import { VisualImage } from "@/components/atoms/VisualImage";
+import { ImageReveal } from "@/components/motion/ImageReveal";
 
 interface Props {
   params: { slug: string };
@@ -34,17 +36,17 @@ export default function ProjectPage({ params }: Props) {
   const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
 
   const facts = [
-    ["Lieu", project.location],
+    ["Secteur", project.location],
     ["Année", project.year],
-    ["Type de bien", project.propertyType],
+    ["Type de chantier", project.propertyType],
     ["Style", project.style],
-    ["Menuiseries", project.windowType],
-  ];
+    ["Solution", project.windowType],
+  ].filter((f): f is [string, string] => Boolean(f[1]));
 
   return (
     <>
       <PageHero
-        eyebrow={`${project.propertyType} · ${project.year}`}
+        eyebrow={[project.propertyType, project.year].filter(Boolean).join(" · ")}
         title={project.title}
         description={project.summary}
         visual={project.cover}
@@ -62,8 +64,8 @@ export default function ProjectPage({ params }: Props) {
                 <div key={k} className="flex justify-between gap-4 py-4 text-sm">
                   <dt className="text-slate-500">{k}</dt>
                   <dd className="text-right font-medium text-charcoal-900">
-                    {k === "Menuiseries" && category ? (
-                      <Link href={`/collections/${category.slug}`} className="underline underline-offset-4 hover:text-forest-600">
+                    {k === "Solution" && category ? (
+                      <Link href={`/solutions/${category.slug}`} className="underline underline-offset-4 hover:text-brand-600">
                         {v}
                       </Link>
                     ) : (
@@ -75,9 +77,15 @@ export default function ProjectPage({ params }: Props) {
             </dl>
           </aside>
           <div className="space-y-16 lg:col-span-8">
-            <Reveal>
-              <BeforeAfter before={project.before} after={project.after} />
-            </Reveal>
+            {project.before && project.after ? (
+              <Reveal>
+                <BeforeAfter before={project.before} after={project.after} />
+              </Reveal>
+            ) : (
+              <ImageReveal className="aspect-[4/5] rounded-lg shadow-lift sm:aspect-[4/3]">
+                <VisualImage visual={project.cover} sizes="(min-width: 1024px) 60vw, 100vw" />
+              </ImageReveal>
+            )}
             <div>
               <h2 id="project-story" className="font-display text-display-md font-semibold text-charcoal-900">
                 Le projet
@@ -91,7 +99,7 @@ export default function ProjectPage({ params }: Props) {
             {project.testimonial && (
               <Reveal>
                 <figure className="bg-dark-section grain relative overflow-hidden rounded-lg p-10 sm:p-12">
-                  <Quote className="relative z-10 h-8 w-8 text-bronze-300" strokeWidth={1.2} aria-hidden />
+                  <Quote className="relative z-10 h-8 w-8 text-brand-300" strokeWidth={1.2} aria-hidden />
                   <blockquote className="relative z-10 mt-6 font-display text-2xl font-medium leading-snug text-cream-50">
                     « {project.testimonial.quote} »
                   </blockquote>
@@ -99,6 +107,7 @@ export default function ProjectPage({ params }: Props) {
                 </figure>
               </Reveal>
             )}
+            {project.gallery.length > 0 && (
             <div>
               <h2 className="font-display text-2xl font-semibold text-charcoal-900">Galerie</h2>
               <ul className="mt-6 grid gap-5 sm:grid-cols-2">
@@ -109,6 +118,7 @@ export default function ProjectPage({ params }: Props) {
                 ))}
               </ul>
             </div>
+            )}
           </div>
         </div>
       </section>

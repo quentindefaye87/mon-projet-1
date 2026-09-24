@@ -6,16 +6,16 @@ import { site } from "@/lib/site";
 
 const columns = [
   {
-    title: "Collections",
-    links: categories.map((c) => ({ label: c.name, href: `/collections/${c.slug}` })),
+    title: "Nos solutions",
+    links: categories.map((c) => ({ label: c.name, href: `/solutions/${c.slug}` })),
   },
   {
-    title: "Maison",
+    title: "L'entreprise",
     links: [
-      { label: "Notre histoire", href: "/a-propos" },
-      { label: "Notre démarche", href: "/processus" },
+      { label: "Qui sommes-nous", href: "/a-propos" },
+      { label: "Notre méthode", href: "/processus" },
       { label: "Réalisations", href: "/realisations" },
-      { label: "Journal", href: "/journal" },
+      { label: "Conseils", href: "/journal" },
       { label: "Guide de mesure", href: "/guide-mesure" },
     ],
   },
@@ -23,9 +23,9 @@ const columns = [
     title: "Services",
     links: [
       { label: "Demander un devis", href: "/devis" },
-      { label: "Prendre rendez-vous", href: "/contact" },
-      { label: "Espace professionnels", href: "/devis?profil=professionnel" },
-      { label: "Documentation", href: "/contact?sujet=documentation" },
+      { label: "Prendre rendez-vous", href: "/contact?sujet=rendez-vous" },
+      { label: "Professionnels", href: "/devis?profil=professionnel" },
+      { label: "Service après-vente", href: "/contact?sujet=sav" },
     ],
   },
 ];
@@ -37,23 +37,27 @@ export function Footer() {
       <div className="container relative z-10 pb-10 pt-20 lg:pt-28">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo light />
+            <Logo light tagline />
             <p className="mt-6 max-w-sm leading-relaxed text-slate-400">{site.description}</p>
+            <p className="mt-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-cream-100">
+              <span className="rounded bg-[#1d9ad6] px-1.5 py-0.5 text-[0.65rem] font-bold uppercase text-white">RGE</span>
+              Qualifié Qualibat
+            </p>
             <ul className="mt-8 space-y-3 text-sm">
               <li>
                 <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-3 hover:text-cream-50">
-                  <Phone className="h-4 w-4 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                  <Phone className="h-4 w-4 text-brand-300" strokeWidth={1.5} aria-hidden />
                   {site.phoneDisplay}
                 </a>
               </li>
               <li>
                 <a href={`mailto:${site.email}`} className="inline-flex items-center gap-3 hover:text-cream-50">
-                  <Mail className="h-4 w-4 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                  <Mail className="h-4 w-4 text-brand-300" strokeWidth={1.5} aria-hidden />
                   {site.email}
                 </a>
               </li>
               <li className="inline-flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 text-bronze-300" strokeWidth={1.5} aria-hidden />
+                <MapPin className="mt-0.5 h-4 w-4 text-brand-300" strokeWidth={1.5} aria-hidden />
                 <address className="not-italic">
                   {site.address.street}, {site.address.postalCode} {site.address.city}
                 </address>
@@ -81,7 +85,7 @@ export function Footer() {
 
         <div className="mt-20 flex flex-col gap-6 border-t border-white/10 pt-8 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
           <p>
-            © {year} {site.legalName}. Fabriqué avec soin à Lyon.
+            © {year} {site.legalName} · Entreprise familiale à {site.address.city} depuis {site.foundedYear}.
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             <li>

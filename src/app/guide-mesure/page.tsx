@@ -33,13 +33,13 @@ function MeasureDiagram() {
   return (
     <svg viewBox="0 0 400 320" className="h-auto w-full" role="img" aria-labelledby="diagram-title">
       <title id="diagram-title">Schéma : largeur (L) et hauteur (H) à mesurer en trois points, diagonales D1 et D2</title>
-      <rect x="80" y="40" width="240" height="220" fill="#eef0f1" stroke="#34383d" strokeWidth="3" />
-      <rect x="92" y="52" width="216" height="196" fill="#dde1e3" stroke="#565f66" strokeWidth="1.5" />
-      <line x1="80" y1="40" x2="320" y2="260" stroke="#c79a68" strokeDasharray="6 5" strokeWidth="1.5" />
-      <line x1="320" y1="40" x2="80" y2="260" stroke="#c79a68" strokeDasharray="6 5" strokeWidth="1.5" />
+      <rect x="80" y="40" width="240" height="220" fill="#efefef" stroke="#2b2b2b" strokeWidth="3" />
+      <rect x="92" y="52" width="216" height="196" fill="#dededf" stroke="#59595b" strokeWidth="1.5" />
+      <line x1="80" y1="40" x2="320" y2="260" stroke="#dc6a6d" strokeDasharray="6 5" strokeWidth="1.5" />
+      <line x1="320" y1="40" x2="80" y2="260" stroke="#dc6a6d" strokeDasharray="6 5" strokeWidth="1.5" />
       {[60, 150, 240].map((y) => (
         <g key={y}>
-          <line x1="84" y1={y} x2="316" y2={y} stroke="#2f4d41" strokeWidth="1.5" markerEnd="url(#arr)" markerStart="url(#arr)" />
+          <line x1="84" y1={y} x2="316" y2={y} stroke="#a52e32" strokeWidth="1.5" markerEnd="url(#arr)" markerStart="url(#arr)" />
         </g>
       ))}
       {[100, 200, 300].map((x) => (
@@ -47,10 +47,10 @@ function MeasureDiagram() {
       ))}
       <defs>
         <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-          <path d="M0 0 L10 5 L0 10 z" fill="#565f66" />
+          <path d="M0 0 L10 5 L0 10 z" fill="#59595b" />
         </marker>
       </defs>
-      <text x="200" y="26" textAnchor="middle" fontSize="14" fill="#2f4d41" fontWeight="600">L — largeur ×3</text>
+      <text x="200" y="26" textAnchor="middle" fontSize="14" fill="#a52e32" fontWeight="600">L — largeur ×3</text>
       <text x="340" y="155" fontSize="14" fill="#3f6690" fontWeight="600">H ×3</text>
       <text x="200" y="295" textAnchor="middle" fontSize="13" fill="#8a663f">D1 / D2 — diagonales</text>
     </svg>
@@ -63,7 +63,7 @@ export default function MeasureGuidePage() {
       <PageHero
         eyebrow="Guide pratique"
         title="Comment mesurer vos fenêtres."
-        description="Quelques minutes et un mètre ruban suffisent pour une première estimation. Notre technicien réalisera ensuite un métré laser au millimètre."
+        description="Quelques minutes et un mètre ruban suffisent pour une première estimation. Notre technicien reprendra ensuite toutes les cotes sur place, au millimètre."
         breadcrumbs={[{ label: "Guide de mesure", href: "/guide-mesure" }]}
         visual={{ variant: "frame", tone: "stone", alt: "" }}
       />
@@ -74,7 +74,7 @@ export default function MeasureGuidePage() {
             <ol className="mt-12 space-y-10">
               {steps.map((s, i) => (
                 <Reveal as="li" key={s.title} delay={i * 0.06} className="flex gap-6">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-bronze-400/50 font-display text-sm font-semibold text-bronze-600">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand-400/50 font-display text-sm font-semibold text-brand-600">
                     {i + 1}
                   </span>
                   <div>
@@ -94,7 +94,7 @@ export default function MeasureGuidePage() {
           </Reveal>
         </div>
       </section>
-      <CtaBanner title="Laissez-nous mesurer pour vous." description="La visite technique et le métré laser sont gratuits et sans engagement." />
+      <CtaBanner title="Laissez-nous mesurer pour vous." description="Le déplacement et la prise de cotes sont gratuits et sans engagement, partout en Haute-Vienne." />
     </>
   );
 }

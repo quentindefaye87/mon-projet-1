@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
 import { ButtonLink } from "@/components/atoms/Button";
 import { Reveal } from "@/components/atoms/Reveal";
-import { WindowArt } from "@/components/atoms/WindowArt";
+import { FrameDraw } from "@/components/motion/FrameDraw";
+import { Magnetic } from "@/components/motion/Magnetic";
 import { site } from "@/lib/site";
 
 interface CtaBannerProps {
@@ -11,27 +13,38 @@ interface CtaBannerProps {
 
 export function CtaBanner({
   title = "Parlons de votre projet.",
-  description = "Visite technique, métré laser et devis détaillé : gratuits et sans engagement. Réponse sous 48 heures ouvrées.",
+  description = "Déplacement, prise de cotes et devis détaillé : gratuits et sans engagement, partout à Limoges et en Haute-Vienne.",
 }: CtaBannerProps) {
   return (
     <section aria-labelledby="cta-title" className="bg-cream-100 py-20 sm:py-24">
       <div className="container">
         <Reveal>
           <div className="grain relative overflow-hidden rounded-xl bg-charcoal-950 shadow-lift">
-            <div className="absolute inset-0 opacity-60">
-              <WindowArt variant="interior" tone="forest" alt="" decorative />
+            <div className="absolute inset-y-0 right-0 w-full opacity-50 md:w-3/5 md:opacity-100">
+              <Image
+                src="/images/porte-fenetre-alu-grange.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 768px) 60vw, 100vw"
+                className="object-cover"
+                style={{ objectPosition: "50% 30%" }}
+              />
             </div>
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-charcoal-950 via-charcoal-950/85 to-charcoal-950/20" />
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-charcoal-950 via-charcoal-950/90 to-charcoal-950/10" />
+            <div aria-hidden className="absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-brand-600/25 blur-[100px]" />
+            <FrameDraw light className="absolute bottom-10 right-10 hidden w-24 md:block" />
             <div className="relative z-10 max-w-2xl px-8 py-16 sm:px-14 sm:py-20">
               <h2 id="cta-title" className="text-display-md font-semibold text-cream-50 sm:text-display-lg">
                 {title}
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-slate-300">{description}</p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink href="/devis" size="lg">
-                  Demander un devis gratuit
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
-                </ButtonLink>
+                <Magnetic>
+                  <ButtonLink href="/devis" size="lg">
+                    Demander un devis gratuit
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                  </ButtonLink>
+                </Magnetic>
                 <ButtonLink href={`tel:${site.phone.replace(/\s/g, "")}`} external size="lg" variant="glass">
                   <Phone className="h-4 w-4" aria-hidden />
                   {site.phoneDisplay}

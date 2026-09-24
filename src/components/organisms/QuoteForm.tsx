@@ -82,12 +82,12 @@ export function QuoteForm() {
   if (status === "success") {
     return (
       <div role="status" className="glass-light rounded-lg p-10 text-center sm:p-14">
-        <CheckCircle2 className="mx-auto h-12 w-12 text-forest-500" strokeWidth={1.3} aria-hidden />
+        <CheckCircle2 className="mx-auto h-12 w-12 text-brand-500" strokeWidth={1.3} aria-hidden />
         <h2 className="mt-6 font-display text-2xl font-semibold text-charcoal-900">Merci, votre demande est bien reçue.</h2>
         <p className="mx-auto mt-4 max-w-md leading-relaxed text-slate-600">
-          Un conseiller vous recontacte sous 48 heures ouvrées pour organiser la visite technique gratuite.
+          Nous vous recontactons rapidement pour organiser la visite technique gratuite.
         </p>
-        <Link href="/realisations" className="mt-8 inline-flex items-center gap-2 font-medium text-forest-600 hover:underline">
+        <Link href="/realisations" className="mt-8 inline-flex items-center gap-2 font-medium text-brand-600 hover:underline">
           En attendant, découvrez nos réalisations <ArrowRight className="h-4 w-4" aria-hidden />
         </Link>
       </div>
@@ -114,7 +114,7 @@ export function QuoteForm() {
                     {i.quantity}× {i.productName} · {i.width} × {i.height} mm
                   </p>
                   <p className="mt-1 text-sm text-slate-500">{i.summary}</p>
-                  <p className="mt-1 text-sm text-forest-600">
+                  <p className="mt-1 text-sm text-brand-600">
                     Estimation : {formatPrice(i.estimate.low)} – {formatPrice(i.estimate.high)}
                   </p>
                 </div>
@@ -139,7 +139,7 @@ export function QuoteForm() {
             <label
               key={p}
               className={cn(
-                "cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-sapphire-500",
+                "cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-500",
                 profile === p ? "bg-charcoal-900 text-cream-50 shadow-soft" : "text-slate-600 hover:text-charcoal-900",
               )}
             >
@@ -204,12 +204,12 @@ export function QuoteForm() {
               <option value="renovation">Rénovation</option>
               <option value="construction">Construction neuve</option>
               <option value="extension">Extension / surélévation</option>
-              <option value="tertiaire">Tertiaire / programme immobilier</option>
+              <option value="tertiaire">Local professionnel</option>
             </Select>
           </div>
           <div>
             <Label htmlFor="category" required>
-              Menuiserie envisagée
+              Produit envisagé
             </Label>
             <Select id="category" {...register("category")} {...err("category")}>
               <option value="">Sélectionnez…</option>
@@ -261,7 +261,7 @@ export function QuoteForm() {
         <label className="flex items-start gap-3 text-sm leading-relaxed text-slate-600">
           <input
             type="checkbox"
-            className="mt-1 h-4 w-4 rounded border-charcoal-900/20 accent-forest-600"
+            className="mt-1 h-4 w-4 rounded border-charcoal-900/20 accent-brand-600"
             {...register("consent")}
             {...err("consent")}
           />

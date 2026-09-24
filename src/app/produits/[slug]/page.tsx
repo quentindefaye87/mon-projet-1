@@ -39,7 +39,10 @@ export default function ProductPage({ params }: Props) {
   const product = getProduct(params.slug);
   if (!product) notFound();
   const category = getCategory(product.categorySlug);
-  const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
+  const related = [
+    ...products.filter((p) => p.slug !== product.slug && p.categorySlug === product.categorySlug),
+    ...products.filter((p) => p.categorySlug !== product.categorySlug),
+  ].slice(0, 3);
   const highlights = product.specs.slice(0, 4);
 
   return (
@@ -52,8 +55,8 @@ export default function ProductPage({ params }: Props) {
           <Breadcrumbs
             light
             items={[
-              { label: "Collections", href: "/collections" },
-              ...(category ? [{ label: category.name, href: `/collections/${category.slug}` }] : []),
+              { label: "Nos solutions", href: "/solutions" },
+              ...(category ? [{ label: category.name, href: `/solutions/${category.slug}` }] : []),
               { label: product.name, href: `/produits/${product.slug}` },
             ]}
           />
@@ -64,7 +67,7 @@ export default function ProductPage({ params }: Props) {
             <div className="lg:col-span-5">
               {category && <Eyebrow light>{category.name}</Eyebrow>}
               <h1 className="mt-5 text-display-md font-semibold text-cream-50 sm:text-display-lg">{product.name}</h1>
-              <p className="mt-3 font-display text-xl text-bronze-300">{product.tagline}</p>
+              <p className="mt-3 font-display text-xl text-brand-300">{product.tagline}</p>
               <p className="mt-6 leading-relaxed text-slate-300">{product.description}</p>
               <p className="mt-8 text-sm text-slate-400">
                 À partir de <span className="font-display text-2xl font-semibold text-cream-50">{formatPrice(product.basePrice)}</span>{" "}
@@ -96,7 +99,10 @@ export default function ProductPage({ params }: Props) {
                   <Ruler className="h-4 w-4" aria-hidden /> Comment mesurer
                 </Link>
               </div>
-              <p className="mt-6 text-xs text-slate-500">*Prix indicatif pour une menuiserie de 1 200 × 1 400 mm, hors aides.</p>
+              <p className="mt-6 text-xs text-slate-500">
+                *Prix indicatif pour {product.dimensions?.labels ? "un ouvrage" : "une ouverture"} de{" "}
+                {(product.dimensions?.width[2] ?? 1200).toLocaleString("fr-FR")} × {(product.dimensions?.height[2] ?? 1400).toLocaleString("fr-FR")} mm, hors aides.
+              </p>
             </div>
           </div>
         </div>
@@ -142,7 +148,7 @@ export default function ProductPage({ params }: Props) {
               <ul className="mt-10 space-y-5">
                 {product.benefits.map((b) => (
                   <li key={b} className="flex gap-4">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-forest-500/10 text-forest-600">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-500/10 text-brand-600">
                       <Check className="h-3.5 w-3.5" aria-hidden />
                     </span>
                     <span className="leading-relaxed text-charcoal-800">{b}</span>
@@ -150,13 +156,13 @@ export default function ProductPage({ params }: Props) {
                 ))}
               </ul>
               <div className="glass-light mt-12 flex items-start gap-5 rounded-lg p-6">
-                <Ruler className="mt-1 h-6 w-6 shrink-0 text-bronze-500" strokeWidth={1.4} aria-hidden />
+                <Ruler className="mt-1 h-6 w-6 shrink-0 text-brand-500" strokeWidth={1.4} aria-hidden />
                 <div>
                   <h3 className="font-display font-semibold text-charcoal-900">Comment mesurer vos ouvertures ?</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    Trois mesures suffisent pour une première estimation. Notre technicien réalise ensuite un métré laser précis.
+                    Trois mesures suffisent pour une première estimation. Notre technicien reprend ensuite toutes les cotes sur place.
                   </p>
-                  <Link href="/guide-mesure" className="mt-3 inline-block text-sm font-medium text-forest-600 hover:underline">
+                  <Link href="/guide-mesure" className="mt-3 inline-block text-sm font-medium text-brand-600 hover:underline">
                     Lire le guide de mesure →
                   </Link>
                 </div>

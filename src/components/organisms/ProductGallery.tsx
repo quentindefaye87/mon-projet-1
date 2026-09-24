@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Rotate3d } from "lucide-react";
 import { WindowArt } from "@/components/atoms/WindowArt";
+import { VisualImage } from "@/components/atoms/VisualImage";
 import { cn } from "@/lib/utils";
 import type { Visual } from "@/types";
 
@@ -82,7 +83,7 @@ export function ProductGallery({ visuals, name }: { visuals: Visual[]; name: str
           </div>
         ) : (
           <div key={active} className="absolute inset-0 animate-fade-in">
-            <WindowArt variant={current.variant} tone={current.tone} alt={current.alt} />
+            <VisualImage visual={current} priority={active === 0} sizes="(min-width: 1024px) 58vw, 100vw" />
           </div>
         )}
         <button
@@ -109,10 +110,10 @@ export function ProductGallery({ visuals, name }: { visuals: Visual[]; name: str
               aria-current={i === active && !mode3d ? "true" : undefined}
               className={cn(
                 "grain relative block aspect-[4/3] w-full overflow-hidden rounded-md bg-charcoal-900 transition-all duration-300",
-                i === active && !mode3d ? "ring-2 ring-bronze-400 ring-offset-2 ring-offset-charcoal-950" : "opacity-60 hover:opacity-100",
+                i === active && !mode3d ? "ring-2 ring-brand-400 ring-offset-2 ring-offset-charcoal-950" : "opacity-60 hover:opacity-100",
               )}
             >
-              <WindowArt variant={v.variant} tone={v.tone} alt="" decorative />
+              <VisualImage visual={v} decorative sizes="160px" />
             </button>
           </li>
         ))}

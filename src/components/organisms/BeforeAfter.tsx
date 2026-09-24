@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { MoveHorizontal } from "lucide-react";
-import { WindowArt } from "@/components/atoms/WindowArt";
+import { VisualImage } from "@/components/atoms/VisualImage";
 import type { Visual } from "@/types";
 
 export function BeforeAfter({ before, after }: { before: Visual; after: Visual }) {
@@ -11,11 +11,11 @@ export function BeforeAfter({ before, after }: { before: Visual; after: Visual }
     <figure>
       <div className="grain relative aspect-[16/10] overflow-hidden rounded-lg bg-charcoal-900 shadow-lift">
         <div className="absolute inset-0">
-          <WindowArt variant={after.variant} tone={after.tone} alt={after.alt} />
+          <VisualImage visual={after} sizes="(min-width: 1024px) 60vw, 100vw" />
         </div>
         <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
           <div className="absolute inset-0 grayscale-[60%]">
-            <WindowArt variant={before.variant} tone={before.tone} alt={before.alt} />
+            <VisualImage visual={before} sizes="(min-width: 1024px) 60vw, 100vw" />
           </div>
         </div>
         <div aria-hidden className="absolute inset-y-0 z-10 w-px bg-cream-50/90" style={{ left: `${pos}%` }}>

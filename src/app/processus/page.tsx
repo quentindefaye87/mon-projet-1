@@ -9,17 +9,17 @@ import { generalFaqs } from "@/data/content";
 import { JsonLd, faqSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Notre démarche",
+  title: "Notre méthode",
   description:
-    "Consultation, conception, fabrication, installation et accompagnement : découvrez comment nous menons votre projet de menuiseries de A à Z.",
+    "Rencontre, métré et devis gratuit, fabrication sur mesure, pose par nos techniciens et suivi : comment SCAL mène votre projet de A à Z.",
   path: "/processus",
 });
 
 const commitments = [
-  { icon: UserRound, title: "Un interlocuteur unique", text: "Un chef de projet dédié, du premier rendez-vous à la réception du chantier." },
-  { icon: Clock, title: "Des délais tenus", text: "Planning contractuel et suivi de fabrication en temps réel. 97 % de nos chantiers livrés à la date prévue." },
-  { icon: Wrench, title: "Des poseurs salariés", text: "Aucune sous-traitance : nos 48 poseurs sont formés dans notre centre et certifiés RGE." },
-  { icon: ShieldCheck, title: "Un chantier protégé", text: "Bâches, protections de sol, évacuation des anciennes menuiseries et nettoyage final inclus." },
+  { icon: UserRound, title: "Un interlocuteur unique", text: "La même équipe vous suit du premier rendez-vous au réglage final." },
+  { icon: Clock, title: "Un planning clair", text: "Vous connaissez les étapes et les délais dès la signature du devis, et nous vous prévenons avant chaque intervention." },
+  { icon: Wrench, title: "Nos propres techniciens", text: "Fabrication et pose sont assurées par l'équipe SCAL, formée à nos produits et qualifiée RGE Qualibat." },
+  { icon: ShieldCheck, title: "Un chantier respecté", text: "Protection de votre intérieur, évacuation des anciennes menuiseries et nettoyage en fin de pose." },
 ];
 
 export default function ProcessPage() {
@@ -27,11 +27,15 @@ export default function ProcessPage() {
     <>
       <JsonLd data={faqSchema(generalFaqs)} />
       <PageHero
-        eyebrow="Notre démarche"
-        title="Un projet serein, de bout en bout."
-        description="Cinq étapes claires, un seul interlocuteur et des engagements écrits. Voici comment nous transformons vos ouvertures."
-        breadcrumbs={[{ label: "Notre démarche", href: "/processus" }]}
-        visual={{ variant: "interior", tone: "sapphire", alt: "" }}
+        eyebrow="Notre méthode"
+        title={
+          <>
+            Un projet serein, <span className="accent text-brand-400">de bout en bout.</span>
+          </>
+        }
+        description="Cinq étapes claires et un seul interlocuteur. Voici comment nous transformons vos ouvertures."
+        breadcrumbs={[{ label: "Notre méthode", href: "/processus" }]}
+        visual={{ variant: "picture", tone: "ember", alt: "", src: "/images/porte-entree-rouge.jpg", position: "50% 40%" }}
       />
       <ProcessSection />
       <section aria-labelledby="commitments-title" className="section bg-cream-50">
@@ -40,7 +44,7 @@ export default function ProcessPage() {
           <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {commitments.map(({ icon: IconCmp, title, text }, i) => (
               <Reveal as="li" key={title} delay={i * 0.08} className="rounded-lg border border-charcoal-900/[0.06] bg-white/60 p-7 shadow-soft">
-                <IconCmp className="h-6 w-6 text-bronze-500" strokeWidth={1.4} aria-hidden />
+                <IconCmp className="h-6 w-6 text-brand-500" strokeWidth={1.4} aria-hidden />
                 <h3 className="mt-6 font-display text-lg font-semibold text-charcoal-900">{title}</h3>
                 <p className="mt-3 leading-relaxed text-slate-600">{text}</p>
               </Reveal>

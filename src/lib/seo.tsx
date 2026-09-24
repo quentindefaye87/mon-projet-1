@@ -47,16 +47,12 @@ export function organizationSchema() {
       addressCountry: site.address.country,
     },
     geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:30",
-        closes: "18:30",
-      },
-      { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "13:00" },
-    ],
-    aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "1200" },
+    foundingDate: String(site.foundedYear),
+    slogan: site.tagline,
+    logo: `${site.url}/images/logo-scal.png`,
+    image: `${site.url}/images/veranda-alu-anthracite.jpg`,
+    areaServed: { "@type": "AdministrativeArea", name: "Haute-Vienne" },
+    hasCredential: site.certifications.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.name })),
     sameAs: site.socials.map((s) => s.href),
   };
 }
@@ -69,7 +65,7 @@ export function productSchema(product: Product) {
     description: product.description,
     brand: { "@type": "Brand", name: site.name },
     url: `${site.url}/produits/${product.slug}`,
-    category: "Fenêtres et menuiseries",
+    category: "Menuiseries, vérandas et fermetures",
     additionalProperty: product.specs.map((s) => ({ "@type": "PropertyValue", name: s.label, value: s.value })),
     offers: {
       "@type": "Offer",

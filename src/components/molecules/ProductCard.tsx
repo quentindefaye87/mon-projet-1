@@ -21,7 +21,7 @@ export function ProductCard({ product }: { product: Product }) {
           </p>
         </div>
         <p className="mt-2 text-[0.9375rem] leading-relaxed text-slate-600">{product.tagline}</p>
-        {uw && <p className="mt-4 text-xs font-medium uppercase tracking-wider text-forest-600">Uw {uw}</p>}
+        {uw && <p className="mt-4 text-xs font-medium uppercase tracking-wider text-brand-600">Uw {uw}</p>}
         <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-medium text-charcoal-900">
           Découvrir le modèle
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />

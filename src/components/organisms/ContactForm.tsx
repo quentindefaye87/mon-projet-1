@@ -58,10 +58,10 @@ export function ContactForm() {
   if (done) {
     return (
       <div role="status" className="py-10 text-center">
-        <CheckCircle2 className="mx-auto h-12 w-12 text-forest-500" strokeWidth={1.3} aria-hidden />
+        <CheckCircle2 className="mx-auto h-12 w-12 text-brand-500" strokeWidth={1.3} aria-hidden />
         <h2 className="mt-6 font-display text-2xl font-semibold text-charcoal-900">Message envoyé.</h2>
         <p className="mx-auto mt-4 max-w-sm leading-relaxed text-slate-600">
-          Merci ! Notre équipe vous répond sous 24 heures ouvrées.
+          Merci ! Notre équipe vous répond rapidement.
         </p>
       </div>
     );
@@ -120,7 +120,7 @@ export function ContactForm() {
       </div>
       <div>
         <label className="flex items-start gap-3 text-sm leading-relaxed text-slate-600">
-          <input type="checkbox" className="mt-1 h-4 w-4 accent-forest-600" {...register("consent")} {...err("consent")} />
+          <input type="checkbox" className="mt-1 h-4 w-4 accent-brand-600" {...register("consent")} {...err("consent")} />
           <span>
             J&apos;accepte que mes données soient utilisées pour répondre à ma demande (
             <Link href="/confidentialite" className="text-charcoal-900 underline underline-offset-4">

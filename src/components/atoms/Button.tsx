@@ -10,7 +10,7 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-forest-600 text-cream-50 shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_8px_24px_-8px_rgba(47,77,65,0.6)] hover:bg-forest-500 hover:shadow-[0_1px_0_0_rgba(255,255,255,0.2)_inset,0_12px_32px_-8px_rgba(47,77,65,0.7)] hover:-translate-y-px",
+    "overflow-hidden bg-brand-600 text-cream-50 shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_8px_24px_-8px_rgba(165,46,50,0.6)] before:absolute before:inset-y-0 before:-left-1/2 before:w-1/3 before:-skew-x-12 before:bg-white/20 before:opacity-0 before:transition-all before:duration-700 before:ease-premium hover:bg-brand-500 hover:shadow-[0_1px_0_0_rgba(255,255,255,0.2)_inset,0_14px_36px_-8px_rgba(185,53,56,0.7)] hover:-translate-y-px hover:before:left-[120%] hover:before:opacity-100",
   dark: "bg-charcoal-900 text-cream-50 shadow-soft hover:bg-charcoal-700 hover:-translate-y-px",
   ghost: "border border-charcoal-900/15 bg-transparent text-charcoal-900 hover:border-charcoal-900/40 hover:bg-charcoal-900/[0.03]",
   "ghost-light": "border border-white/25 bg-transparent text-cream-50 hover:border-white/60 hover:bg-white/5",

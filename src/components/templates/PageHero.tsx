@@ -1,4 +1,5 @@
-import { WindowArt } from "@/components/atoms/WindowArt";
+import { VisualImage } from "@/components/atoms/VisualImage";
+import { FrameDraw } from "@/components/motion/FrameDraw";
 import { Eyebrow } from "@/components/atoms/Eyebrow";
 import { Breadcrumbs, type Crumb } from "@/components/molecules/Breadcrumbs";
 import type { Visual } from "@/types";
@@ -16,12 +17,13 @@ export function PageHero({ eyebrow, title, description, breadcrumbs, visual, chi
   return (
     <section className="grain relative overflow-hidden bg-charcoal-950">
       {visual && (
-        <div className="absolute inset-0 animate-fade-in opacity-70">
-          <WindowArt variant={visual.variant} tone={visual.tone} alt={visual.alt} decorative />
+        <div className="absolute inset-0 animate-fade-in opacity-60">
+          <VisualImage visual={visual} decorative priority sizes="100vw" />
         </div>
       )}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-charcoal-950/70 via-charcoal-950/70 to-charcoal-950" />
-      <div aria-hidden className="absolute left-1/4 top-0 h-[360px] w-[600px] rounded-full bg-sapphire-500/15 blur-[120px]" />
+      <div aria-hidden className="absolute left-1/4 top-0 h-[360px] w-[600px] rounded-full bg-brand-600/20 blur-[120px]" />
+      <FrameDraw light delay={0.4} className="absolute bottom-10 right-[6%] z-10 hidden w-28 opacity-80 lg:block xl:w-36" />
       <div className="container relative z-10 pb-20 pt-36 sm:pb-24 sm:pt-44">
         <Breadcrumbs items={breadcrumbs} light className="animate-fade-up opacity-0" />
         <div className="mt-10 max-w-3xl">

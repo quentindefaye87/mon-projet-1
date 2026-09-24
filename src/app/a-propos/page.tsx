@@ -1,80 +1,95 @@
+import Image from "next/image";
 import { PageHero } from "@/components/templates/PageHero";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
-import { ArtFrame } from "@/components/molecules/ArtFrame";
 import { Reveal } from "@/components/atoms/Reveal";
+import { CountUp } from "@/components/motion/CountUp";
+import { ImageReveal } from "@/components/motion/ImageReveal";
 import { FeaturesSection } from "@/components/organisms/FeaturesSection";
 import { CtaBanner } from "@/components/organisms/CtaBanner";
 import { stats } from "@/data/content";
+import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Notre maison",
-  description:
-    "Depuis 1994, notre atelier lyonnais conçoit et fabrique des menuiseries d'exception. Découvrez notre histoire, nos valeurs et nos équipes.",
+  title: "L'entreprise",
+  description: `Entreprise familiale installée à Aixe-sur-Vienne depuis ${site.foundedYear}, SCAL fabrique et pose menuiseries PVC et aluminium, vérandas et fermetures à Limoges et en Haute-Vienne.`,
   path: "/a-propos",
 });
 
 const values = [
   {
-    title: "La justesse du détail",
-    text: "Un profil affiné de 3 mm, une parclose biseautée, un joint invisible : c'est dans ces détails que se joue l'élégance d'une fenêtre.",
+    title: "La proximité",
+    text: "Installés à Aixe-sur-Vienne, nous connaissons le bâti limousin, ses granges en pierre comme ses pavillons récents. Et nous restons joignables, bien après la pose.",
   },
   {
-    title: "La durabilité comme principe",
-    text: "Nous concevons des menuiseries pour durer 40 ans et plus. Pièces détachées disponibles, matériaux réparables, conseils d'entretien.",
+    title: "Le travail bien fait",
+    text: "Une menuiserie ne vaut que par sa pose. Calfeutrement, équerrage, finitions : nos techniciens prennent le temps de bien faire.",
   },
   {
-    title: "La sincérité du conseil",
-    text: "Nous recommandons ce dont votre projet a besoin, pas davantage. Parfois, cela signifie rénover plutôt que remplacer.",
+    title: "Le conseil sincère",
+    text: "Nous recommandons ce dont votre maison a besoin, au juste prix. Chaque projet est étudié sur place, jamais sur catalogue.",
   },
 ];
 
 const timeline = [
-  { year: "1994", text: "Création de l'atelier par Bernard Lacombe, compagnon menuisier, à Lyon Gerland." },
-  { year: "2006", text: "Lancement de la gamme bois-aluminium et ouverture du bureau d'études." },
-  { year: "2015", text: "Nouveau site de production de 12 000 m², alimenté à 100 % en énergie renouvelable." },
-  { year: "2021", text: "Certification Passivhaus de la gamme Cité et ouverture du showroom parisien." },
-  { year: "2026", text: "140 collaborateurs, 14 000 menuiseries par an et une deuxième génération à la direction." },
+  { year: String(site.foundedYear), text: "Création de SCAL, entreprise familiale installée rue de Cognac à Aixe-sur-Vienne." },
+  { year: "Savoir-faire", text: "Menuiseries PVC et aluminium, vérandas, fermetures et protections solaires : une offre complète pour l'enveloppe de la maison." },
+  { year: "RGE", text: "Qualification RGE Qualibat, gage de compétence en rénovation énergétique." },
+  { year: "Aujourd'hui", text: "La même exigence : fabriquer et poser, avec nos propres équipes, des ouvertures à vos mesures." },
 ];
 
-const team = [
-  { name: "Camille Lacombe", role: "Directrice générale", visual: { variant: "interior" as const, tone: "bronze" as const } },
-  { name: "Hugo Brenner", role: "Directeur du bureau d'études", visual: { variant: "frame" as const, tone: "sapphire" as const } },
-  { name: "Élise Moreau", role: "Directrice artistique", visual: { variant: "arch" as const, tone: "forest" as const } },
-  { name: "Karim Aït-Saïd", role: "Responsable des chantiers", visual: { variant: "facade" as const, tone: "dusk" as const } },
+const gallery = [
+  { src: "/images/veranda-alu-anthracite.jpg", alt: "Véranda aluminium anthracite à toit pans", position: "50% 55%" },
+  { src: "/images/porte-fenetre-alu-grange.jpg", alt: "Porte-fenêtre aluminium dans une grange en pierre", position: "50% 40%" },
+  { src: "/images/porte-entree-rouge.jpg", alt: "Porte d'entrée rouge à hublots avec fixe latéral", position: "50% 45%" },
 ];
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="Notre maison"
-        title="Des menuisiers, avant tout."
-        description="Trente-deux ans après la création de l'atelier, nous restons fidèles à une conviction : une fenêtre bien dessinée transforme la manière dont on habite un lieu."
-        breadcrumbs={[{ label: "Notre maison", href: "/a-propos" }]}
-        visual={{ variant: "frame", tone: "bronze", alt: "" }}
+        eyebrow="L'entreprise"
+        title={
+          <>
+            Une famille d&apos;artisans, <span className="accent text-brand-400">depuis {site.foundedYear}.</span>
+          </>
+        }
+        description="Depuis sa création, SCAL reste fidèle à une conviction : une ouverture bien conçue et bien posée change la façon dont on habite sa maison."
+        breadcrumbs={[{ label: "L'entreprise", href: "/a-propos" }]}
+        visual={{ variant: "frame", tone: "stone", alt: "", src: "/images/porte-fenetre-alu-grange.jpg", position: "50% 30%" }}
       />
 
       <section aria-labelledby="mission-title" className="section bg-cream-50">
         <div className="container grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
-          <Reveal>
-            <ArtFrame visual={{ variant: "frame", tone: "dusk", alt: "Profil de fenêtre en cours d'assemblage dans l'atelier" }} className="aspect-[4/5] shadow-lift" />
-          </Reveal>
+          <ImageReveal className="aspect-[4/5] rounded-lg shadow-lift">
+            <Image
+              src="/images/veranda-alu-anthracite.jpg"
+              alt="Véranda aluminium réalisée par SCAL"
+              fill
+              sizes="(min-width: 1024px) 45vw, 90vw"
+              className="object-cover"
+              style={{ objectPosition: "50% 55%" }}
+            />
+          </ImageReveal>
           <div>
             <SectionHeading
               id="mission-title"
-              eyebrow="Notre mission"
-              title="Faire entrer la lumière, durablement."
-              description="Nous concevons, fabriquons et posons des menuiseries qui conjuguent la précision de l'artisanat et la rigueur de l'ingénierie. Chaque fenêtre sort de nos ateliers lyonnais, contrôlée une à une, avant d'être posée par nos propres équipes."
+              eyebrow="Notre métier"
+              title={
+                <>
+                  Fabriquer et poser, <span className="accent text-brand-600">avec la même équipe.</span>
+                </>
+              }
+              description="SCAL est spécialisée dans la menuiserie PVC et aluminium, les vérandas et tout type de fermetures et de protections solaires. Le savoir-faire de nos techniciens, tant à la fabrication qu'à la pose, nous permet de répondre à vos besoins dans tous les domaines de la fermeture de l'habitat."
             />
             <Reveal delay={0.1}>
               <dl className="mt-12 grid grid-cols-2 gap-8">
                 {stats.map((s) => (
-                  <div key={s.label} className="flex flex-col-reverse">
+                  <div key={s.label} className="flex flex-col-reverse border-l-2 border-brand-500/70 pl-5">
                     <dt className="mt-1 text-sm text-slate-600">{s.label}</dt>
                     <dd className="font-display text-3xl font-semibold text-charcoal-900">
-                      {s.value}
-                      <span className="text-bronze-500">{s.suffix}</span>
+                      <CountUp value={s.value} plain={"plain" in s} />
+                      <span className="text-brand-600">{s.suffix}</span>
                     </dd>
                   </div>
                 ))}
@@ -89,8 +104,13 @@ export default function AboutPage() {
           <SectionHeading id="values-title" align="center" eyebrow="Nos valeurs" title="Ce qui nous guide." />
           <ul className="mt-16 grid gap-6 md:grid-cols-3">
             {values.map((v, i) => (
-              <Reveal as="li" key={v.title} delay={i * 0.1} className="glass-light rounded-lg p-8">
-                <span className="font-display text-sm font-semibold text-bronze-500">0{i + 1}</span>
+              <Reveal
+                as="li"
+                key={v.title}
+                delay={i * 0.1}
+                className="glass-light group rounded-lg p-8 transition-all duration-500 ease-premium hover:-translate-y-1 hover:shadow-lift"
+              >
+                <span className="font-serif text-3xl italic text-brand-600">0{i + 1}</span>
                 <h3 className="mt-4 font-display text-xl font-semibold text-charcoal-900">{v.title}</h3>
                 <p className="mt-3 leading-relaxed text-slate-600">{v.text}</p>
               </Reveal>
@@ -102,12 +122,12 @@ export default function AboutPage() {
       <section aria-labelledby="history-title" className="section bg-cream-50">
         <div className="container grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <SectionHeading id="history-title" eyebrow="Histoire" title="Trois décennies d'atelier." />
+            <SectionHeading id="history-title" eyebrow="Repères" title="Plus de quarante ans d'ouvertures." />
           </div>
-          <ol className="relative space-y-10 border-l border-bronze-400/40 pl-8 lg:col-span-8">
+          <ol className="relative space-y-10 border-l-2 border-brand-500/30 pl-8 lg:col-span-8">
             {timeline.map((t, i) => (
               <Reveal as="li" key={t.year} delay={i * 0.06} className="relative">
-                <span aria-hidden className="absolute -left-[37px] top-1.5 h-2.5 w-2.5 rounded-full bg-bronze-400 ring-4 ring-cream-50" />
+                <span aria-hidden className="absolute -left-[39px] top-2 h-3 w-3 rounded-full bg-brand-500 ring-4 ring-cream-50" />
                 <p className="font-display text-2xl font-semibold text-charcoal-900">{t.year}</p>
                 <p className="mt-2 max-w-xl leading-relaxed text-slate-600">{t.text}</p>
               </Reveal>
@@ -116,23 +136,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="team-title" className="section bg-cream-100">
+      <section aria-labelledby="gallery-title" className="section bg-cream-100">
         <div className="container">
-          <SectionHeading id="team-title" eyebrow="L'équipe" title="Les visages de l'atelier." description="Ingénieurs, menuisiers, designers et poseurs : 140 passionnés au service de vos projets." />
-          <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {team.map((m, i) => (
-              <Reveal as="li" key={m.name} delay={i * 0.08}>
-                <ArtFrame visual={{ ...m.visual, alt: "" }} decorative className="aspect-[4/5] shadow-soft" />
-                <p className="mt-5 font-display text-lg font-semibold text-charcoal-900">{m.name}</p>
-                <p className="text-sm text-slate-500">{m.role}</p>
-              </Reveal>
+          <SectionHeading id="gallery-title" eyebrow="En images" title="Notre travail parle pour nous." />
+          <ul className="mt-14 grid gap-6 md:grid-cols-3">
+            {gallery.map((g, i) => (
+              <li key={g.src}>
+                <ImageReveal delay={i * 0.12} from={i === 1 ? "bottom" : "left"} className="aspect-[3/4] rounded-lg shadow-soft">
+                  <Image src={g.src} alt={g.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" style={{ objectPosition: g.position }} />
+                </ImageReveal>
+              </li>
             ))}
           </ul>
         </div>
       </section>
 
       <FeaturesSection />
-      <CtaBanner title="Venez nous rencontrer." description="Showrooms à Lyon et Paris, visite de l'atelier sur rendez-vous. Nous serons ravis de vous montrer comment naissent nos menuiseries." />
+      <CtaBanner
+        title="Venez nous rencontrer."
+        description={`Retrouvez-nous ${site.address.street.replace("Rue", "rue")} à ${site.address.city}, ou nous nous déplaçons chez vous pour étudier votre projet.`}
+      />
     </>
   );
 }

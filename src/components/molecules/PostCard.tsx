@@ -8,7 +8,7 @@ export function PostCard({ post }: { post: BlogPost }) {
     <article className="group relative flex h-full flex-col">
       <ArtFrame visual={post.cover} hoverZoom decorative className="aspect-[16/10] shadow-soft" />
       <div className="mt-6 flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-slate-500">
-        <span className="text-bronze-600">{post.category}</span>
+        <span className="text-brand-600">{post.category}</span>
         <span aria-hidden>·</span>
         <time dateTime={post.date}>{formatDate(post.date)}</time>
         <span aria-hidden>·</span>

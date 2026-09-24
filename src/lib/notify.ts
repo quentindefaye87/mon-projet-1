@@ -26,7 +26,7 @@ export async function sendNotification({ subject, html, replyTo }: { subject: st
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: process.env.NOTIFY_EMAIL_FROM ?? "Lumen & Cadre <site@lumen-cadre.fr>",
+      from: process.env.NOTIFY_EMAIL_FROM ?? "SCAL <site@scal87.fr>",
       to: [to],
       subject,
       html,

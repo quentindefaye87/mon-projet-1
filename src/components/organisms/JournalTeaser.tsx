@@ -12,13 +12,17 @@ export function JournalTeaser() {
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <SectionHeading
             id="journal-title"
-            eyebrow="Journal"
-            title="Conseils & inspirations."
-            description="Performance énergétique, entretien, tendances : l'expertise de nos équipes, partagée."
+            eyebrow="Conseils"
+            title={
+              <>
+                Bien choisir, <span className="accent text-brand-600">bien rénover.</span>
+              </>
+            }
+            description="PVC ou aluminium, véranda, volets, aides à la rénovation : l'expérience de nos équipes, partagée."
           />
           <Reveal>
             <ButtonLink href="/journal" variant="ghost" className="shrink-0">
-              Tous les articles
+              Tous nos conseils
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
             </ButtonLink>
           </Reveal>

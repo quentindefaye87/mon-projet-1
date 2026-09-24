@@ -9,6 +9,7 @@ export function ProjectCard({ project, className, tall }: { project: Project; cl
     <Link href={`/realisations/${project.slug}`} className={cn("group flex h-full flex-col", className)}>
       <ArtFrame
         visual={project.cover}
+        sizes="(min-width: 1024px) 45vw, (min-width: 768px) 50vw, 100vw"
         hoverZoom
         decorative
         className={cn(
@@ -20,7 +21,7 @@ export function ProjectCard({ project, className, tall }: { project: Project; cl
         <div className="absolute inset-x-5 bottom-5 z-10 translate-y-3 opacity-0 transition-all duration-500 ease-premium group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
           <p className="glass-dark rounded-md p-4 text-sm leading-relaxed text-cream-100">{project.summary}</p>
         </div>
-        <span className="glass absolute right-4 top-4 z-10 rounded-full px-3 py-1 text-xs font-medium text-cream-50">
+        <span className="glass-dark absolute right-4 top-4 z-10 rounded-full px-3 py-1 text-xs font-medium text-cream-50">
           {project.windowType}
         </span>
       </ArtFrame>
@@ -28,7 +29,7 @@ export function ProjectCard({ project, className, tall }: { project: Project; cl
         <div>
           <h3 className="font-display text-lg font-semibold text-charcoal-900">{project.title}</h3>
           <p className="mt-1 text-sm text-slate-500">
-            {project.location} · {project.propertyType} · {project.year}
+            {[project.location, project.propertyType, project.year].filter(Boolean).join(" · ")}
           </p>
         </div>
         <ArrowUpRight

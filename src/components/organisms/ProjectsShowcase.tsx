@@ -14,8 +14,12 @@ export function ProjectsShowcase() {
           <SectionHeading
             id="projects-title"
             eyebrow="Réalisations"
-            title="Des projets qui nous ressemblent."
-            description="Villas contemporaines, immeubles haussmanniens, sièges sociaux : une sélection de chantiers récents."
+            title={
+              <>
+                Nos chantiers <span className="accent text-brand-600">parlent pour nous.</span>
+              </>
+            }
+            description="Granges en pierre, maisons limousines, extensions : quelques réalisations de nos équipes en Haute-Vienne."
           />
           <Reveal>
             <ButtonLink href="/realisations" variant="ghost" className="shrink-0">
