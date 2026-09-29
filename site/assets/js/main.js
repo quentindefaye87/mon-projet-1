@@ -20,6 +20,52 @@
   onScrollHeader();
   window.addEventListener("scroll", onScrollHeader, { passive: true });
 
+  /* ---------- Intro vidéo pilotée par le scroll ---------- */
+  var scrollIntro = document.getElementById("scrollIntro");
+  var scrollIntroVideo = document.getElementById("scrollIntroVideo");
+
+  if (scrollIntro && scrollIntroVideo) {
+    var introDuration = 0;
+
+    scrollIntroVideo.addEventListener("loadedmetadata", function () {
+      introDuration = scrollIntroVideo.duration || 0;
+    });
+
+    var updateScrollIntro = function () {
+      if (!introDuration) return;
+
+      var scrollableHeight = scrollIntro.offsetHeight - window.innerHeight;
+      if (scrollableHeight <= 0) return;
+
+      var rect = scrollIntro.getBoundingClientRect();
+      var progress = -rect.top / scrollableHeight;
+      progress = Math.min(Math.max(progress, 0), 1);
+
+      var target = progress * introDuration;
+      if (Math.abs(scrollIntroVideo.currentTime - target) > 0.01) {
+        scrollIntroVideo.currentTime = target;
+      }
+    };
+
+    var introTicking = false;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!introTicking) {
+          window.requestAnimationFrame(function () {
+            updateScrollIntro();
+            introTicking = false;
+          });
+          introTicking = true;
+        }
+      },
+      { passive: true }
+    );
+
+    window.addEventListener("resize", updateScrollIntro);
+    updateScrollIntro();
+  }
+
   /* ---------- Menu mobile ---------- */
   var navToggle = document.getElementById("navToggle");
   var mobileNav = document.getElementById("mobileNav");
