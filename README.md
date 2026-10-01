@@ -10,6 +10,7 @@ Next.js 14 (App Router, SSG), TypeScript, Tailwind CSS, framer-motion, architect
 npm install
 npm run dev        # http://localhost:3000
 npm run build      # build de production
+npm run preview    # build + serveur de production : aperçu à montrer à l'entreprise (http://localhost:3000)
 npm run lint
 ```
 
