@@ -7,15 +7,13 @@ import { ProjectsShowcase } from "@/components/organisms/ProjectsShowcase";
 import { ProcessSection } from "@/components/organisms/ProcessSection";
 import { CommitmentsSection } from "@/components/organisms/CommitmentsSection";
 import { JournalTeaser } from "@/components/organisms/JournalTeaser";
-import { ScrollVideo } from "@/components/motion/ScrollVideo";
+import { ScrollLogo } from "@/components/motion/ScrollLogo";
 import { CtaBanner } from "@/components/organisms/CtaBanner";
 
 export default function HomePage() {
   return (
     <>
-      <ScrollVideo
-        src="/video/logo-scroll"
-        poster="/video/logo-scroll-poster.jpg"
+      <ScrollLogo
         eyebrow="SCAL · depuis 1978"
         title="Des ouvertures"
         accent="à vos mesures."
