@@ -26,6 +26,7 @@ export function ScrollVideo({ src, poster, eyebrow, title, accent, text }: Scrol
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
 
   const textOpacity = useTransform(scrollYProgress, [0, 0.12, 0.8, 0.95], [0, 1, 1, 0]);
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.12], [30, 0]);
 
   useEffect(() => {
@@ -73,7 +74,7 @@ export function ScrollVideo({ src, poster, eyebrow, title, accent, text }: Scrol
 
   return (
     <section ref={sectionRef} aria-label={title} className="relative h-[320vh] bg-[#f4f1ee]">
-      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden bg-[#fdfcfb]">
         <video
           ref={videoRef}
           poster={poster}
@@ -81,11 +82,19 @@ export function ScrollVideo({ src, poster, eyebrow, title, accent, text }: Scrol
           playsInline
           preload="auto"
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain md:object-cover"
         >
           <source src={`${src}.mp4`} type="video/mp4" />
           <source src={`${src}.webm`} type="video/webm" />
         </video>
+        <motion.div
+          style={{ opacity: hintOpacity }}
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-6 right-6 z-10 flex flex-col items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#4d4d4d]"
+        >
+          Faites défiler
+          <span className="block h-10 w-px animate-pulse bg-[#a52e32]" />
+        </motion.div>
         <motion.div
           style={{ opacity: textOpacity, y: textY }}
           className="relative z-10 mx-auto mt-auto w-full max-w-6xl px-4 pb-10 md:px-6 md:pb-16"

@@ -13,8 +13,6 @@ import { CtaBanner } from "@/components/organisms/CtaBanner";
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <ExpertiseBand />
       <ScrollVideo
         src="/video/logo-scroll"
         poster="/video/logo-scroll-poster.jpg"
@@ -23,6 +21,8 @@ export default function HomePage() {
         accent="à vos mesures."
         text="Fabrication et pose par nos propres équipes, à Aixe-sur-Vienne et dans toute la Haute-Vienne."
       />
+      <Hero />
+      <ExpertiseBand />
       <CollectionsSection />
       <AboutTeaser />
       <FeaturesSection />
