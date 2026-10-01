@@ -16,22 +16,18 @@ export const site = {
     country: "FR",
   },
   area: "Limoges et la Haute-Vienne",
-  geo: { lat: 45.7985, lng: 1.1372 },
-  // À confirmer avec l'entreprise : horaires indicatifs.
-  hours: [
-    { days: "Lundi – Vendredi", time: "8h00 – 12h00 · 14h00 – 18h00" },
-    { days: "Samedi", time: "Sur rendez-vous" },
-    { days: "Dimanche", time: "Fermé" },
-  ],
   certifications: [{ name: "RGE Qualibat", description: "Reconnu Garant de l'Environnement" }],
   socials: [{ name: "Facebook", href: "https://www.facebook.com/SCAL-348417098677628/" }],
+  /** Liens d'itinéraire vers des applications GPS (sans clé ni coordonnées : l'adresse suffit). */
+  maps: {
+    query: "Rue de Cognac, 87700 Aixe-sur-Vienne",
+  },
 } as const;
 
 export const mainNav = [
   { label: "Nos solutions", href: "/solutions" },
   { label: "Réalisations", href: "/realisations" },
-  { label: "Notre méthode", href: "/processus" },
   { label: "L'entreprise", href: "/a-propos" },
-  { label: "Conseils", href: "/journal" },
+  { label: "Actualités", href: "/actualites" },
   { label: "Contact", href: "/contact" },
 ] as const;

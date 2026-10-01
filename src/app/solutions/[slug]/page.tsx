@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/templates/PageHero";
-import { ProductCard } from "@/components/molecules/ProductCard";
 import { ProjectCard } from "@/components/molecules/ProjectCard";
 import { CategoryCard } from "@/components/molecules/CategoryCard";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
@@ -10,7 +9,6 @@ import { Reveal } from "@/components/atoms/Reveal";
 import { ButtonLink } from "@/components/atoms/Button";
 import { CtaBanner } from "@/components/organisms/CtaBanner";
 import { categories, getCategory } from "@/data/categories";
-import { getProductsByCategory } from "@/data/products";
 import { projects } from "@/data/projects";
 import { pageMetadata } from "@/lib/seo";
 
@@ -31,8 +29,7 @@ export function generateMetadata({ params }: Props): Metadata {
 export default function CategoryPage({ params }: Props) {
   const category = getCategory(params.slug);
   if (!category) notFound();
-  const items = getProductsByCategory(category.slug);
-  const related = projects.filter((p) => p.windowType === category.name).slice(0, 2);
+  const related = projects.filter((p) => p.windowType === category.name).slice(0, 3);
   const others = categories.filter((c) => c.slug !== category.slug).slice(0, 3);
 
   return (
@@ -47,47 +44,26 @@ export default function CategoryPage({ params }: Props) {
           { label: category.name, href: `/solutions/${category.slug}` },
         ]}
       >
-        <ul className="flex flex-wrap gap-2" aria-label="Idéal pour">
-          {category.bestFor.map((b) => (
-            <li key={b} className="glass rounded-full px-4 py-1.5 text-sm text-cream-100">
-              {b}
-            </li>
-          ))}
-        </ul>
+        <ButtonLink href={`/devis?solution=${category.slug}`} size="lg">
+          Demander un devis gratuit
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+        </ButtonLink>
       </PageHero>
 
-      <section aria-labelledby="models-title" className="section bg-cream-50">
-        <div className="container">
-          <SectionHeading
-            id="models-title"
-            eyebrow={`${items.length} modèle${items.length > 1 ? "s" : ""}`}
-            title="Choisissez votre modèle."
-            description="Chaque modèle se configure en ligne : matériau, teinte, options et dimensions, avec une première estimation."
-          />
-          <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((p, i) => (
-              <Reveal as="li" key={p.slug} delay={i * 0.08}>
-                <ProductCard product={p} />
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {related.length > 0 && (
-        <section aria-labelledby="related-projects" className="section bg-cream-100">
+        <section aria-labelledby="related-projects" className="section bg-cream-50">
           <div className="container">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <SectionHeading id="related-projects" eyebrow="En situation" title="Nos réalisations dans cette gamme." />
+              <SectionHeading id="related-projects" eyebrow="Réalisations" title="En situation." />
               <Reveal>
                 <ButtonLink href="/realisations" variant="ghost">
                   Toutes les réalisations <ArrowRight className="h-4 w-4" aria-hidden />
                 </ButtonLink>
               </Reveal>
             </div>
-            <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-8">
-              {related.map((p) => (
-                <Reveal key={p.slug}>
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
+              {related.map((p, i) => (
+                <Reveal key={p.slug} delay={i * 0.08}>
                   <ProjectCard project={p} />
                 </Reveal>
               ))}

@@ -42,10 +42,10 @@ export function AboutTeaser() {
                 Le savoir-faire d&apos;une famille, <span className="accent text-brand-600">au service de votre maison.</span>
               </>
             }
-            description="SCAL est une entreprise familiale spécialisée dans les menuiseries PVC et aluminium, les vérandas et toutes les fermetures de l'habitat. Nos techniciens maîtrisent la fabrication comme la pose : c'est ce qui nous permet de répondre précisément à vos besoins et à vos attentes."
+            description="Entreprise familiale spécialisée dans les menuiseries PVC et aluminium, les vérandas et les fermetures de l'habitat. Nos techniciens assurent la fabrication comme la pose."
           />
           <Reveal delay={0.1}>
-            <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10">
+            <dl className="mt-12 grid grid-cols-3 gap-x-6 gap-y-10">
               {stats.slice(1).map((s) => (
                 <div key={s.label} className="flex flex-col-reverse border-l-2 border-brand-500/70 pl-5">
                   <dt className="mt-2 text-sm leading-snug text-slate-600">{s.label}</dt>
@@ -56,7 +56,7 @@ export function AboutTeaser() {
                 </div>
               ))}
               <div className="flex flex-col-reverse border-l-2 border-brand-500/70 pl-5">
-                <dt className="mt-2 text-sm leading-snug text-slate-600">Qualification pour la rénovation énergétique</dt>
+                <dt className="mt-2 text-sm leading-snug text-slate-600">Qualibat, rénovation énergétique</dt>
                 <dd className="font-display text-3xl font-semibold tracking-tight text-charcoal-900 sm:text-4xl">RGE</dd>
               </div>
             </dl>

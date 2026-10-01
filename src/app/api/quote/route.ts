@@ -23,17 +23,11 @@ export async function POST(request: Request) {
       sendNotification({
         subject: `Nouvelle demande de devis — ${data.firstName} ${data.lastName} (${data.postalCode})`,
         html: toHtmlTable("Demande de devis", {
-          Profil: data.profile,
           Nom: `${data.firstName} ${data.lastName}`,
-          Société: data.company,
           "E-mail": data.email,
           Téléphone: data.phone,
           "Code postal": data.postalCode,
-          Projet: data.projectType,
-          Menuiserie: data.category,
-          Quantité: data.quantity,
-          Échéance: data.timeline,
-          Configurations: data.configuration,
+          Produit: data.category,
           Message: data.message,
         }),
         replyTo: data.email,

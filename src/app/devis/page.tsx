@@ -1,27 +1,17 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { BadgeCheck, Clock, Home, Phone } from "lucide-react";
+import { Phone, Ruler } from "lucide-react";
 import { PageHero } from "@/components/templates/PageHero";
 import { QuoteForm } from "@/components/organisms/QuoteForm";
-import { SectionHeading } from "@/components/molecules/SectionHeading";
-import { FaqAccordion } from "@/components/molecules/FaqAccordion";
 import { Reveal } from "@/components/atoms/Reveal";
-import { generalFaqs, priceFactors } from "@/data/content";
 import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Devis gratuit",
-  description:
-    "Demandez votre devis gratuit et sans engagement pour vos menuiseries, véranda, porte d'entrée, volets ou portail. Déplacement et prise de cotes offerts en Haute-Vienne.",
+  description: "Demandez votre devis gratuit pour vos menuiseries, véranda, porte d'entrée, volets ou portail à Limoges et en Haute-Vienne.",
   path: "/devis",
 });
-
-const reassurance = [
-  { icon: Home, text: "Déplacement et prise de cotes offerts" },
-  { icon: Clock, text: "Un technicien vous recontacte rapidement" },
-  { icon: BadgeCheck, text: "Devis détaillé, sans engagement" },
-];
 
 export default function QuotePage() {
   return (
@@ -30,10 +20,10 @@ export default function QuotePage() {
         eyebrow="Devis gratuit"
         title={
           <>
-            Votre projet, <span className="accent text-brand-400">chiffré avec précision.</span>
+            Parlez-nous de <span className="accent text-brand-400">votre projet.</span>
           </>
         }
-        description="Chaque ouverture est fabriquée sur mesure : nos prix le sont aussi. Décrivez votre projet, nous vous recontactons pour une visite technique gratuite."
+        description="Remplissez le formulaire : nous vous recontactons pour établir votre devis gratuit."
         breadcrumbs={[{ label: "Devis gratuit", href: "/devis" }]}
         visual={{ variant: "picture", tone: "ember", alt: "", src: "/images/porte-entree-rouge.jpg", position: "50% 40%" }}
       />
@@ -41,71 +31,34 @@ export default function QuotePage() {
       <section aria-label="Formulaire de demande de devis" className="section bg-cream-50">
         <div className="container grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <Suspense fallback={<div className="h-[900px] animate-pulse rounded-lg bg-charcoal-900/[0.04]" />}>
+            <Suspense fallback={<div className="h-[620px] animate-pulse rounded-lg bg-charcoal-900/[0.04]" />}>
               <QuoteForm />
             </Suspense>
           </div>
-          <aside className="space-y-6 lg:col-span-5">
-            <div className="lg:sticky lg:top-28 lg:space-y-6">
+          <aside className="lg:col-span-5">
+            <Reveal className="space-y-5 lg:sticky lg:top-28">
               <div className="bg-dark-section grain relative overflow-hidden rounded-lg p-8">
-                <ul className="relative z-10 space-y-4">
-                  {reassurance.map(({ icon: IconCmp, text }) => (
-                    <li key={text} className="flex items-center gap-4 text-cream-100">
-                      <IconCmp className="h-5 w-5 shrink-0 text-brand-300" strokeWidth={1.5} aria-hidden />
-                      {text}
-                    </li>
-                  ))}
-                </ul>
-                <div className="relative z-10 mt-8 border-t border-white/10 pt-6">
-                  <p className="text-sm text-slate-400">Vous préférez en parler ?</p>
-                  <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="mt-2 inline-flex items-center gap-2 font-display text-xl font-semibold text-cream-50 hover:text-brand-300">
-                    <Phone className="h-5 w-5" aria-hidden />
-                    {site.phoneDisplay}
-                  </a>
-                </div>
+                <p className="relative z-10 text-sm text-slate-400">Vous préférez en parler ?</p>
+                <a
+                  href={`tel:${site.phone.replace(/\s/g, "")}`}
+                  className="relative z-10 mt-2 inline-flex items-center gap-3 font-display text-2xl font-semibold text-cream-50 hover:text-brand-300"
+                >
+                  <Phone className="h-6 w-6" aria-hidden />
+                  {site.phoneDisplay}
+                </a>
               </div>
-              <div className="glass-light mt-6 rounded-lg p-8 lg:mt-0">
-                <h2 className="font-display text-lg font-semibold text-charcoal-900">Estimation instantanée</h2>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  Configurez un modèle pour obtenir une fourchette de prix, puis ajoutez-le à cette demande en un clic.
-                </p>
-                <Link href="/solutions" className="mt-4 inline-block text-sm font-medium text-brand-600 hover:underline">
-                  Ouvrir le configurateur →
-                </Link>
-              </div>
-            </div>
+              <Link
+                href="/guide-mesure"
+                className="glass-light group flex items-center gap-4 rounded-lg p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                <Ruler className="h-6 w-6 shrink-0 text-brand-600" strokeWidth={1.5} aria-hidden />
+                <span>
+                  <span className="block font-display font-semibold text-charcoal-900">Comment mesurer vos ouvertures ?</span>
+                  <span className="text-sm text-slate-600">Notre petit guide, pas à pas.</span>
+                </span>
+              </Link>
+            </Reveal>
           </aside>
-        </div>
-      </section>
-
-      <section aria-labelledby="pricing-title" className="section bg-light-section">
-        <div className="container">
-          <SectionHeading
-            id="pricing-title"
-            eyebrow="Tarification"
-            title="Ce qui détermine le prix de vos fenêtres."
-            description="Pas de grille tarifaire opaque : votre devis détaille chaque poste, pour que vous sachiez exactement ce que vous financez."
-          />
-          <ol className="mt-14 grid gap-px overflow-hidden rounded-lg border border-charcoal-900/10 bg-charcoal-900/10 sm:grid-cols-2 lg:grid-cols-5">
-            {priceFactors.map((f, i) => (
-              <Reveal as="li" key={f.title} delay={i * 0.06} className="bg-cream-50 p-7">
-                <span className="font-display text-sm font-semibold text-brand-500">0{i + 1}</span>
-                <h3 className="mt-4 font-display text-lg font-semibold text-charcoal-900">{f.title}</h3>
-                <p className="mt-2 text-[0.9375rem] leading-relaxed text-slate-600">{f.description}</p>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section aria-labelledby="quote-faq" className="section bg-cream-50">
-        <div className="container grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading id="quote-faq" eyebrow="FAQ" title="Questions fréquentes." />
-          </div>
-          <div className="lg:col-span-8">
-            <FaqAccordion items={generalFaqs} />
-          </div>
         </div>
       </section>
     </>

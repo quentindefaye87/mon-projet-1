@@ -3,6 +3,7 @@ import { Inter, Instrument_Serif, Manrope } from "next/font/google";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { StickyCall } from "@/components/motion/StickyCall";
 import { JsonLd, organizationSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <StickyCall />
       </body>
     </html>
   );

@@ -1,6 +1,5 @@
 import { PageHero } from "@/components/templates/PageHero";
 import { PortfolioGrid } from "@/components/organisms/PortfolioGrid";
-import { CommitmentsSection } from "@/components/organisms/CommitmentsSection";
 import { CtaBanner } from "@/components/organisms/CtaBanner";
 import { pageMetadata } from "@/lib/seo";
 
@@ -18,10 +17,10 @@ export default function RealisationsPage() {
         eyebrow="Réalisations"
         title={
           <>
-            Chaque chantier, <span className="accent text-brand-400">une signature.</span>
+            Nos <span className="accent text-brand-400">réalisations.</span>
           </>
         }
-        description="Granges en pierre, maisons en granit, extensions : quelques réalisations de nos équipes, en Haute-Vienne."
+        description="Quelques réalisations de nos équipes en Haute-Vienne."
         breadcrumbs={[{ label: "Réalisations", href: "/realisations" }]}
         visual={{ variant: "frame", tone: "stone", alt: "", src: "/images/porte-fenetre-alu-grange.jpg", position: "50% 35%" }}
       />
@@ -30,7 +29,6 @@ export default function RealisationsPage() {
           <PortfolioGrid />
         </div>
       </section>
-      <CommitmentsSection />
       <CtaBanner title="Votre projet sera le prochain." />
     </>
   );

@@ -13,7 +13,7 @@ export function ProcessSection({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
   return (
-    <section aria-labelledby="process-title" className="section bg-light-section">
+    <section id="methode" aria-labelledby="process-title" className="section scroll-mt-20 bg-light-section">
       <div className="container">
         <SectionHeading
           id="process-title"
@@ -25,7 +25,7 @@ export function ProcessSection({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }
               Du premier rendez&#8209;vous <span className="accent text-brand-600">au dernier réglage.</span>
             </>
           }
-          description="Un interlocuteur unique vous accompagne à chaque étape, de la prise de cotes à la pose par nos propres techniciens."
+          description="De la première demande à la pose, par nos propres équipes."
         />
         <ol ref={ref} className="relative mt-20 grid gap-12 lg:grid-cols-5 lg:gap-6">
           <span aria-hidden className="absolute left-[23px] top-2 h-[calc(100%-1rem)] w-px bg-charcoal-900/10 lg:left-0 lg:top-[23px] lg:h-px lg:w-full" />
@@ -45,8 +45,7 @@ export function ProcessSection({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }
                 {step.number}
               </span>
               <div className="lg:mt-8 lg:pr-4">
-                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{step.duration}</p>
-                <h3 className="mt-2 font-display text-xl font-semibold text-charcoal-900">{step.title}</h3>
+                <h3 className="font-display text-xl font-semibold text-charcoal-900">{step.title}</h3>
                 <p className="mt-3 leading-relaxed text-slate-600">{step.description}</p>
               </div>
             </Reveal>

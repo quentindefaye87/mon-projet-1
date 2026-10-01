@@ -29,17 +29,19 @@ Dans `src/components/motion/` : barre de progression de lecture, titre révélé
 
 | Route | Contenu |
 | --- | --- |
-| `/` | Hero, savoir-faire, solutions, entreprise, atouts, réalisations, méthode, engagements & RGE, conseils, CTA |
-| `/solutions`, `/solutions/[slug]` | 6 familles de produits et leurs modèles |
-| `/produits/[slug]` | Fiche produit : galerie, configurateur (options et dimensions propres à chaque produit) avec estimation, fiche technique, FAQ |
-| `/realisations` | Galerie de photos de chantiers filtrable par solution, avec visionneuse (sans texte, comme sur le site historique) |
-| `/processus`, `/a-propos`, `/journal`, `/devis`, `/contact`, `/guide-mesure` | Méthode, entreprise, conseils, devis, contact, guide |
+| `/` | Animation du logo au défilement, accueil, solutions, entreprise, réalisations, méthode, actualité, devis |
+| `/solutions`, `/solutions/[slug]` | 6 familles de produits, avec leurs photos de chantier |
+| `/realisations` | Galerie de photos (sans texte, comme sur le site historique), filtrable, avec visionneuse |
+| `/a-propos` | L'entreprise : métier, repères, RGE Qualibat |
+| `/actualites` | Publications de la page Facebook de SCAL (chargées après un clic) |
+| `/contact` | Plan d'accès, itinéraire (Google Maps, Waze, Plans), coordonnées, formulaire |
+| `/devis`, `/guide-mesure` | Demande de devis simplifiée, guide de mesure |
+| `/mentions-legales`, `/confidentialite` | Pages légales |
 
 ## À compléter / vérifier avec l'entreprise
 
-- Horaires d'ouverture (`src/lib/site.ts`, indicatifs).
+- Horaires d'ouverture (non affichés tant qu'ils ne sont pas confirmés).
 - Photos des réalisations (`src/data/projects.ts`) : issues de l'ancien site scal87.fr, réutilisation à valider avec SCAL ; avis clients réels.
-- Gammes réellement distribuées, caractéristiques techniques et prix « à partir de » (`src/data/products.ts`, valeurs indicatives).
 - Mentions légales : forme juridique, SIREN, directeur de publication, hébergeur.
 
 ## Formulaires & back-end

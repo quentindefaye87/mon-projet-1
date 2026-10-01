@@ -1,13 +1,11 @@
 import { Hero } from "@/components/organisms/Hero";
+import { ScrollLogo } from "@/components/motion/ScrollLogo";
 import { ExpertiseBand } from "@/components/organisms/ExpertiseBand";
 import { AboutTeaser } from "@/components/organisms/AboutTeaser";
 import { CollectionsSection } from "@/components/organisms/CollectionsSection";
-import { FeaturesSection } from "@/components/organisms/FeaturesSection";
 import { ProjectsShowcase } from "@/components/organisms/ProjectsShowcase";
 import { ProcessSection } from "@/components/organisms/ProcessSection";
-import { CommitmentsSection } from "@/components/organisms/CommitmentsSection";
-import { JournalTeaser } from "@/components/organisms/JournalTeaser";
-import { ScrollLogo } from "@/components/motion/ScrollLogo";
+import { NewsTeaser } from "@/components/organisms/NewsTeaser";
 import { CtaBanner } from "@/components/organisms/CtaBanner";
 
 export default function HomePage() {
@@ -23,11 +21,9 @@ export default function HomePage() {
       <ExpertiseBand />
       <CollectionsSection />
       <AboutTeaser />
-      <FeaturesSection />
       <ProjectsShowcase />
       <ProcessSection />
-      <CommitmentsSection />
-      <JournalTeaser />
+      <NewsTeaser />
       <CtaBanner />
     </>
   );

@@ -10,22 +10,19 @@ const columns = [
     links: categories.map((c) => ({ label: c.name, href: `/solutions/${c.slug}` })),
   },
   {
-    title: "L'entreprise",
+    title: "SCAL",
     links: [
-      { label: "Qui sommes-nous", href: "/a-propos" },
-      { label: "Notre méthode", href: "/processus" },
+      { label: "L'entreprise", href: "/a-propos" },
       { label: "Réalisations", href: "/realisations" },
-      { label: "Conseils", href: "/journal" },
+      { label: "Actualités", href: "/actualites" },
       { label: "Guide de mesure", href: "/guide-mesure" },
     ],
   },
   {
-    title: "Services",
+    title: "Nous contacter",
     links: [
       { label: "Demander un devis", href: "/devis" },
-      { label: "Prendre rendez-vous", href: "/contact?sujet=rendez-vous" },
-      { label: "Professionnels", href: "/devis?profil=professionnel" },
-      { label: "Service après-vente", href: "/contact?sujet=sav" },
+      { label: "Contact et accès", href: "/contact" },
     ],
   },
 ];

@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { FieldError, Input, Label, Select, Textarea } from "@/components/atoms/Field";
-import { getProduct } from "@/data/products";
 import { contactSchema, type ContactInput } from "@/lib/quote";
 
 const subjects = ["projet", "rendez-vous", "documentation", "sav", "autre"] as const;
@@ -19,14 +18,7 @@ export function ContactForm() {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const subjectParam = params.get("sujet");
-  const product = getProduct(params.get("produit") ?? "");
   const subject = subjects.find((s) => s === subjectParam) ?? "projet";
-  const prefill =
-    subject === "documentation" && product
-      ? `Bonjour, je souhaite recevoir la brochure technique du modèle ${product.name}.`
-      : subject === "rendez-vous" && product
-        ? `Bonjour, je souhaite une consultation au sujet du modèle ${product.name}.`
-        : "";
 
   const {
     register,
@@ -34,7 +26,7 @@ export function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { subject, message: prefill },
+    defaultValues: { subject },
   });
 
   const onSubmit = async (data: ContactInput) => {

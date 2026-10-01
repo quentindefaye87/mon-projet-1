@@ -1,4 +1,4 @@
-import { expertise, serviceArea } from "@/data/content";
+import { expertise } from "@/data/content";
 
 function Row({ items, reverse, big }: { items: string[]; reverse?: boolean; big?: boolean }) {
   const doubled = [...items, ...items];
@@ -35,15 +35,12 @@ function Row({ items, reverse, big }: { items: string[]; reverse?: boolean; big?
 
 export function ExpertiseBand() {
   return (
-    <section aria-label="Nos savoir-faire et notre secteur d'intervention" className="relative overflow-hidden bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 py-10">
+    <section aria-label="Nos savoir-faire" className="relative overflow-hidden bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 py-9">
       <h2 className="sr-only">Nos savoir-faire</h2>
       <Row items={expertise} big />
-      <div className="container mt-6 flex items-center gap-6">
-        <p className="shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-white">Nous intervenons à</p>
-        <div className="min-w-0 flex-1">
-          <Row items={serviceArea} reverse />
-        </div>
-      </div>
+      <p className="container mt-5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+        Limoges · Aixe-sur-Vienne · Haute-Vienne
+      </p>
     </section>
   );
 }

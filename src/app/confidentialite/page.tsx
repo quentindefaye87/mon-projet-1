@@ -31,8 +31,8 @@ export default function PrivacyPage() {
           body: `Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et de portabilité de vos données. Pour l'exercer, écrivez à ${site.email}. Vous pouvez également introduire une réclamation auprès de la CNIL.`,
         },
         {
-          heading: "Stockage local",
-          body: "Le configurateur enregistre votre sélection de menuiseries dans le stockage local de votre navigateur afin de la retrouver sur la page de devis. Ces informations ne quittent votre appareil que si vous envoyez le formulaire.",
+          heading: "Facebook et Google Maps",
+          body: "La page Actualités n'affiche les publications Facebook qu'après votre clic, et la page Contact intègre un plan Google Maps : ces services tiers peuvent déposer leurs propres cookies selon leurs politiques.",
         },
       ]}
     />

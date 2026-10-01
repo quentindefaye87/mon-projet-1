@@ -4,9 +4,9 @@ export const categories: WindowCategory[] = [
   {
     slug: "menuiseries-aluminium",
     name: "Menuiseries aluminium",
-    shortDescription: "Des profils fins, de grands clairs de vitrage, une élégance durable.",
+    shortDescription: "Fenêtres, portes-fenêtres et baies en aluminium.",
     description:
-      "Fenêtres, portes-fenêtres et baies coulissantes en aluminium à rupture de pont thermique. Des montants affinés pour faire entrer un maximum de lumière, des teintes texturées inaltérables et une rigidité qui autorise les très grandes dimensions, jusque dans les granges et longères en pierre.",
+      "Fenêtres, portes-fenêtres, baies et portes en aluminium, fabriquées à vos mesures et posées par nos équipes.",
     visual: {
       variant: "frame",
       tone: "stone",
@@ -14,14 +14,13 @@ export const categories: WindowCategory[] = [
       src: "/images/porte-fenetre-alu-grange.jpg",
       position: "50% 40%",
     },
-    bestFor: ["Grandes ouvertures", "Rénovation de granges", "Architecture contemporaine"],
   },
   {
     slug: "verandas",
     name: "Vérandas",
-    shortDescription: "Une pièce à vivre en plus, baignée de lumière toute l'année.",
+    shortDescription: "Une pièce de vie en plus, sur mesure.",
     description:
-      "Vérandas aluminium conçues sur mesure pour prolonger votre maison : salon, salle à manger ou jardin d'hiver. Structure aluminium à rupture de pont thermique, toiture isolante et menuiseries coulissantes, pour une pièce confortable en toute saison.",
+      "Des vérandas sur mesure : design, matériaux et agencement choisis pour s'accorder à votre habitation.",
     visual: {
       variant: "bay",
       tone: "stone",
@@ -29,14 +28,13 @@ export const categories: WindowCategory[] = [
       src: "/images/veranda-alu-anthracite.jpg",
       position: "50% 55%",
     },
-    bestFor: ["Extension de séjour", "Jardin d'hiver", "Salle à manger"],
   },
   {
     slug: "portes-entree",
     name: "Portes d'entrée",
-    shortDescription: "La première impression de votre maison, sûre et isolante.",
+    shortDescription: "Des portes d'entrée sur mesure.",
     description:
-      "Portes d'entrée aluminium et PVC, pleines ou vitrées, avec ou sans fixe latéral. Serrures multipoints, panneaux isolants et un large choix de teintes, du rouge signature à l'anthracite, pour une entrée qui vous ressemble.",
+      "Des portes d'entrée sur mesure, en PVC ou en aluminium, pleines ou vitrées.",
     visual: {
       variant: "picture",
       tone: "ember",
@@ -44,14 +42,13 @@ export const categories: WindowCategory[] = [
       src: "/images/porte-entree-rouge.jpg",
       position: "50% 45%",
     },
-    bestFor: ["Sécurité", "Isolation", "Façade"],
   },
   {
     slug: "menuiseries-pvc",
     name: "Menuiseries PVC",
-    shortDescription: "Isolation, facilité d'entretien et excellent rapport qualité-prix.",
+    shortDescription: "Fenêtres et portes en PVC.",
     description:
-      "Fenêtres et portes-fenêtres PVC multi-chambres, en blanc, en teinte ou en plaxé bois. Une isolation thermique et phonique de haut niveau, un entretien réduit au minimum et une pose adaptée à la rénovation comme au neuf.",
+      "Fenêtres, portes-fenêtres et portes en PVC, fabriquées à vos mesures et posées par nos équipes.",
     visual: {
       variant: "grid",
       tone: "stone",
@@ -59,14 +56,13 @@ export const categories: WindowCategory[] = [
       src: "/images/maison-pierre-volets-battants.jpg",
       position: "0% 40%",
     },
-    bestFor: ["Rénovation", "Maisons individuelles", "Budget maîtrisé"],
   },
   {
     slug: "volets-protections-solaires",
     name: "Volets & protections solaires",
-    shortDescription: "Volets roulants, battants, stores intérieurs et extérieurs : maîtrisez lumière et chaleur.",
+    shortDescription: "Volets roulants, volets battants et stores.",
     description:
-      "Volets roulants motorisés ou solaires, volets battants aluminium, stores intérieurs et extérieurs (stores bannes, stores de véranda) et protections solaires. Ils renforcent l'isolation, la sécurité et le confort d'été de votre maison, avec une commande manuelle, filaire ou connectée.",
+      "Volets roulants, volets battants, stores intérieurs et stores extérieurs : fabrication et pose par SCAL.",
     visual: {
       variant: "facade",
       tone: "dusk",
@@ -74,14 +70,13 @@ export const categories: WindowCategory[] = [
       src: "/images/maison-pierre-volets-battants.jpg",
       position: "100% 75%",
     },
-    bestFor: ["Confort d'été", "Stores sur mesure", "Motorisation"],
   },
   {
     slug: "portails-portes-garage",
     name: "Portails & portes de garage",
-    shortDescription: "Des accès assortis à vos menuiseries, motorisables.",
+    shortDescription: "Portails et portes de garage.",
     description:
-      "Portails battants ou coulissants, portillons, clôtures et portes de garage sectionnelles ou enroulables. Coordonnés à vos menuiseries et à votre porte d'entrée, ils se motorisent pour un confort d'usage au quotidien.",
+      "Portails et portes de garage sur mesure, posés par nos équipes.",
     visual: {
       variant: "slider",
       tone: "ember",
@@ -89,7 +84,6 @@ export const categories: WindowCategory[] = [
       src: "/images/portail-aluminium-battant.jpg",
       position: "50% 45%",
     },
-    bestFor: ["Motorisation", "Harmonie de façade", "Sécurité"],
   },
 ];
 

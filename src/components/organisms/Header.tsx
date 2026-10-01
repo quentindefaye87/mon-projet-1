@@ -45,7 +45,7 @@ export function Header() {
 
   const solid = scrolled && !open;
   // L'accueil et les fiches produit commencent sur un fond clair : textes sombres tant que l'en-tête est transparent.
-  const lightTop = pathname === "/" || pathname.startsWith("/produits/");
+  const lightTop = pathname === "/";
   const dark = solid || (lightTop && !open);
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 

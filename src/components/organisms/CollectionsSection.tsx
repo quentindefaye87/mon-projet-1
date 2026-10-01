@@ -21,7 +21,7 @@ export function CollectionsSection() {
                 Toute l&apos;enveloppe de votre maison, <span className="accent text-brand-600">sur mesure.</span>
               </>
             }
-            description="Fenêtres, baies, vérandas, portes, volets et portails : six familles de produits, en PVC ou en aluminium, dans la teinte de votre choix."
+            description="Six familles de produits, en PVC ou en aluminium, fabriquées à vos mesures."
           />
           <Reveal>
             <ButtonLink href="/solutions" variant="ghost" className="shrink-0">
