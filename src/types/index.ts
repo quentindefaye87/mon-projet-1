@@ -53,21 +53,11 @@ export interface Product {
   dimensions?: { width: [number, number, number]; height: [number, number, number]; labels?: [string, string] };
 }
 
+/** Réalisation : une photo de chantier rattachée à une famille de solutions (aucun texte, comme sur le site historique). */
 export interface Project {
   slug: string;
-  title: string;
-  location: string;
-  year?: string;
-  propertyType: string;
-  style: string;
   windowType: string;
   cover: Visual;
-  before?: Visual;
-  after?: Visual;
-  gallery: Visual[];
-  summary: string;
-  description: string[];
-  testimonial?: { quote: string; author: string };
 }
 
 export interface BlogPost {
