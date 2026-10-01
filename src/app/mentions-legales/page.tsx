@@ -12,9 +12,9 @@ export default function LegalNoticePage() {
       sections={[
         {
           heading: "Éditeur du site",
-          body: `${site.legalName}, [forme juridique à compléter], dont le siège social est situé ${site.address.street}, ${site.address.postalCode} ${site.address.city}. Téléphone : ${site.phoneDisplay}. E-mail : ${site.email}. [SIREN, capital social et numéro de TVA intracommunautaire à compléter.]`,
+          body: `Société de Constructions en Alliages Légers (${site.legalName}), société par actions simplifiée au capital de 215 000 €, dont le siège social est situé ${site.address.street}, ${site.address.postalCode} ${site.address.city}. SIRET / RCS : 521 196 329. N° de TVA intracommunautaire : FR21 521196329. Téléphone : ${site.phoneDisplay}. E-mail : ${site.email}. [Informations relevées sur le site actuel scal87.fr, à confirmer par l'entreprise avant publication.]`,
         },
-        { heading: "Directeur de la publication", body: "[Nom du directeur de la publication à compléter.]" },
+        { heading: "Directeur de la publication", body: "Le représentant légal de la société. [Nom à confirmer par l'entreprise.]" },
         { heading: "Hébergement", body: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis. [À adapter selon l'hébergeur retenu.]" },
         {
           heading: "Propriété intellectuelle",

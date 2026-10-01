@@ -115,7 +115,7 @@ export const products: Product[] = [
     description:
       "Horizon fait glisser de grands vantaux vitrés sur des rails à roulements, avec une manœuvre douce et silencieuse. Deux, trois ou quatre vantaux, en applique ou en galandage, pour effacer la limite entre séjour et terrasse.",
     visuals: [
-      { variant: "slider", tone: "ember", alt: "Grande baie coulissante aluminium ouverte sur un jardin au couchant" },
+      { variant: "slider", tone: "stone", alt: "Grande baie vitrée aluminium vue de l'intérieur sous une charpente apparente", src: "/images/baie-coulissante-interieur-2.jpg", position: "50% 50%" },
       { variant: "interior", tone: "stone", alt: "Séjour prolongé par une baie coulissante" },
       { variant: "frame", tone: "dusk", alt: "Détail du montant central d'une baie coulissante" },
     ],
@@ -213,7 +213,7 @@ export const products: Product[] = [
     description:
       "Avec son toit plat ceinturé d'un bandeau aluminium, la Véranda Contemporaine s'apparente à une véritable extension de la maison. Idéale pour agrandir une cuisine ou un séjour avec une architecture sobre et actuelle.",
     visuals: [
-      { variant: "picture", tone: "dusk", alt: "Extension vitrée à toit plat ouverte sur le jardin" },
+      { variant: "picture", tone: "dusk", alt: "Verrière aluminium anthracite à toit plat vitré", src: "/images/veranda-toit-plat-anthracite.jpg", position: "50% 50%" },
       { variant: "interior", tone: "stone", alt: "Cuisine prolongée par une véranda à toit plat" },
       { variant: "slider", tone: "stone", alt: "Façade coulissante d'une véranda contemporaine" },
     ],
@@ -428,7 +428,7 @@ export const products: Product[] = [
     description:
       "Nos volets roulants à lames aluminium s'installent en rénovation avec coffre extérieur ou en neuf avec coffre tunnel. Motorisation filaire, radio ou solaire sans travaux électriques : pilotez vos ouvertures d'un geste ou depuis votre smartphone.",
     visuals: [
-      { variant: "facade", tone: "dusk", alt: "Façade équipée de volets roulants au crépuscule" },
+      { variant: "facade", tone: "dusk", alt: "Fenêtre blanche équipée d'un volet roulant dans un mur en pierre", src: "/images/fenetre-pvc-volet-roulant-pierre.jpg", position: "50% 50%" },
       { variant: "grid", tone: "stone", alt: "Fenêtres avec volets roulants à mi-hauteur" },
     ],
     basePrice: 590,
@@ -502,6 +502,50 @@ export const products: Product[] = [
     benefits: ["Aspect traditionnel respecté", "Ni lasure ni peinture", "Motorisation possible", "Teintes au choix"],
   }),
 
+  make({
+    slug: "stores-interieurs-exterieurs",
+    categorySlug: "volets-protections-solaires",
+    name: "Stores intérieurs & extérieurs",
+    tagline: "Stores bannes, stores de véranda et stores intérieurs sur mesure.",
+    description:
+      "Stores bannes pour la terrasse, stores de toiture pour la véranda, stores intérieurs enrouleurs ou plissés : SCAL fabrique et pose des protections solaires adaptées à chaque ouverture. Elles filtrent la lumière, limitent la chaleur l'été et préservent l'intimité, en commande manuelle ou motorisée.",
+    visuals: [
+      { variant: "bay", tone: "stone", alt: "Véranda aluminium pouvant recevoir des stores de toiture", src: "/images/veranda-bordeaux.jpg", position: "50% 55%" },
+      { variant: "facade", tone: "dusk", alt: "Façade équipée de protections solaires" },
+    ],
+    basePrice: 390,
+    materials: [
+      { id: "banne", label: "Store banne (extérieur)", priceDelta: 0 },
+      { id: "veranda", label: "Store de toiture de véranda", priceDelta: 900 },
+      { id: "interieur", label: "Store intérieur (enrouleur, plissé)", priceDelta: -150 },
+    ],
+    finishes: colors.filter((c) => c.id !== "chene"),
+    glazing: [
+      { id: "occultant", label: "Toile occultante", priceDelta: 0 },
+      { id: "screen", label: "Toile screen filtrante", priceDelta: 60 },
+      { id: "acrylique", label: "Toile acrylique", priceDelta: 90 },
+    ],
+    hardware: [
+      { id: "manuel", label: "Manœuvre manuelle (manivelle)", priceDelta: 0 },
+      { id: "motorise", label: "Motorisation filaire ou radio", priceDelta: 180 },
+      { id: "capteur", label: "Capteur soleil et vent", priceDelta: 260 },
+    ],
+    optionLabels: { materials: "Type de store", finishes: "Teinte du coffre", glazing: "Toile", hardware: "Manœuvre" },
+    dimensions: { width: [800, 6000, 2400], height: [800, 3000, 1500], labels: ["Largeur", "Avancée / hauteur"] },
+    specs: [
+      { label: "Types", value: "Banne, toiture de véranda, intérieur" },
+      { label: "Toile", value: "Occultante, screen ou acrylique" },
+      { label: "Manœuvre", value: "Manuelle ou motorisée" },
+      { label: "Fabrication et pose", value: "Par les équipes SCAL" },
+    ],
+    benefits: [
+      "Confort d'été : moins de chaleur dans la maison",
+      "Fabriqués sur mesure, posés par nos techniciens",
+      "Motorisation et capteurs en option",
+      "Assortis à vos menuiseries et à votre véranda",
+    ],
+  }),
+
   // — Portails & portes de garage —
   make({
     slug: "portail-aluminium",
@@ -556,7 +600,7 @@ export const products: Product[] = [
     description:
       "La porte sectionnelle se replie au plafond pour libérer toute la largeur et la hauteur du garage. Ses panneaux isolants améliorent le confort des pièces attenantes, et sa motorisation la rend aussi pratique que sûre.",
     visuals: [
-      { variant: "grid", tone: "dusk", alt: "Porte de garage sectionnelle anthracite" },
+      { variant: "grid", tone: "dusk", alt: "Porte de garage sectionnelle blanche à hublots", src: "/images/porte-garage-blanche-hublots.jpg", position: "50% 50%" },
       { variant: "facade", tone: "stone", alt: "Maison avec porte de garage assortie aux menuiseries" },
     ],
     basePrice: 1890,

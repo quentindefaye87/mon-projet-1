@@ -64,9 +64,9 @@ export const categories: WindowCategory[] = [
   {
     slug: "volets-protections-solaires",
     name: "Volets & protections solaires",
-    shortDescription: "Volets roulants, battants, stores : maîtrisez lumière et chaleur.",
+    shortDescription: "Volets roulants, battants, stores intérieurs et extérieurs : maîtrisez lumière et chaleur.",
     description:
-      "Volets roulants motorisés ou solaires, volets battants aluminium, stores bannes et protections solaires. Ils renforcent l'isolation, la sécurité et le confort d'été de votre maison, avec une commande manuelle, filaire ou connectée.",
+      "Volets roulants motorisés ou solaires, volets battants aluminium, stores intérieurs et extérieurs (stores bannes, stores de véranda) et protections solaires. Ils renforcent l'isolation, la sécurité et le confort d'été de votre maison, avec une commande manuelle, filaire ou connectée.",
     visual: {
       variant: "facade",
       tone: "dusk",
@@ -74,7 +74,7 @@ export const categories: WindowCategory[] = [
       src: "/images/maison-pierre-volets-battants.jpg",
       position: "100% 75%",
     },
-    bestFor: ["Confort d'été", "Sécurité", "Motorisation"],
+    bestFor: ["Confort d'été", "Stores sur mesure", "Motorisation"],
   },
   {
     slug: "portails-portes-garage",
