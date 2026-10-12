@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "meillat-paysage",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/serve-meillat-paysage.mjs"],
+      "port": 4390
+    }
+  ]
+}
