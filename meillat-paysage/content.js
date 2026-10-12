@@ -28,7 +28,7 @@ window.SITE_CONTENT = {
     ]
   },
 
-  positioning: 'Taille, tonte, débroussaillage, élagage.',
+  positioning: 'Taille, tonte, débroussaillage, élagage, plantation.',
 
   manifesto: {
     text: 'Un jardin soigné, c’est un jardin qui respire. Nous remettons vos extérieurs au propre avec [[soin et régularité]], en intervention ponctuelle ou tout au long de l’année.'
