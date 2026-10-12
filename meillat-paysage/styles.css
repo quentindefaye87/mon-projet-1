@@ -867,3 +867,15 @@ body.static .footer-name .chi { transform: none; }
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ═══ LOGO MARQUE (feuilles) ═══ */
+.brand-logo { width: auto; border-radius: 0; flex: none; }
+.loader-logo { height: 84px; transition: opacity .32s var(--ease-out); }
+.loader.done .loader-logo, body.handoff .loader-logo { opacity: 0; }
+.dock-logo { height: 30px; margin-right: 2px; }
+.footer-logo { height: 72px; margin: 0 auto 18px; }
+@media (max-width: 640px) {
+  .loader-logo { height: 68px; }
+  .dock-logo { height: 24px; }
+  .footer-logo { height: 56px; }
+}
