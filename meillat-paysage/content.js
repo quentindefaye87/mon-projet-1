@@ -14,7 +14,7 @@ window.SITE_CONTENT = {
     ]
   },
 
-  nav: { proof: 'TRAVAUX', universes: 'MÉTHODE', cta: 'DEVIS' },
+  nav: { proof: 'TRAVAUX', universes: 'MÉTHODE', cta: 'CONTACT' },
 
   hook: {
     line1: 'Vos extérieurs,',
@@ -84,9 +84,9 @@ window.SITE_CONTENT = {
   },
 
   contact: {
-    kicker: 'UN PROJET EN TÊTE ?',
+    kicker: 'CONTACT — UN PROJET EN TÊTE ?',
     email: 'meillat.paysage@gmail.com',
-    reassurance: 'DEVIS GRATUIT — 06 23 91 84 16'
+    reassurance: 'DEVIS GRATUIT, SANS ENGAGEMENT'
   },
 
   trail: [
