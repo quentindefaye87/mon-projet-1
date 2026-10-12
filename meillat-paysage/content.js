@@ -74,13 +74,8 @@ window.SITE_CONTENT = {
     ]
   },
 
-  testimonial: {
-    kicker: 'REMISE EN ÉTAT, PARTICULIER',
-    figure: '1',
-    unit: 'jour',
-    quote: 'Le jardin était à l’abandon depuis des années. En une journée, tout était taillé, nettoyé et évacué : on ne le reconnaît plus.',
-    author: 'MARIE D. — PARTICULIER'
-  },
+  /* avis client retiré : la scène a été supprimée de index.html ; l'objet reste vide car l'injection le lit */
+  testimonial: { kicker: '', figure: '', unit: '', quote: '', author: '' },
 
   objections: {
     items: ['Pas de devis flou.', 'Pas de chantier laissé sale.', 'Pas de mauvaise surprise.'],
