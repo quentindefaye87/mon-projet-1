@@ -879,3 +879,5 @@ body.static .footer-name .chi { transform: none; }
   .dock-logo { height: 24px; }
   .footer-logo { height: 56px; }
 }
+/* adresse e-mail longue : reste sur une ligne sur petits écrans */
+@media (max-width: 640px) { .footer-mail { font-size: clamp(15px, 5vw, 32px); } }

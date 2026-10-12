@@ -8,7 +8,7 @@ window.SITE_CONTENT = {
     description: 'Meillat Paysage : tonte, taille, débroussaillage, élagage et plantation. Entretien ponctuel ou régulier de vos extérieurs. Devis gratuit.',
     kicker: 'MEILLAT PAYSAGE — ENTRETIEN & PAYSAGE',
     copyright: '© 2026 — MEILLAT PAYSAGE',
-    signature: 'TAILLE · TONTE · ÉLAGAGE · PLANTATION',
+    signature: 'TAILLE · TONTE · DÉBROUSSAILLAGE · ÉLAGAGE · PLANTATION',
     socials: [
       { label: '06 23 91 84 16 ↗', url: 'tel:+33623918416' }
     ]
@@ -28,7 +28,7 @@ window.SITE_CONTENT = {
     ]
   },
 
-  positioning: 'Entretien, plantation, élagage.',
+  positioning: 'Taille, tonte, débroussaillage, élagage.',
 
   manifesto: {
     text: 'Un jardin soigné, c’est un jardin qui respire. Nous remettons vos extérieurs au propre avec [[soin et régularité]], en intervention ponctuelle ou tout au long de l’année.'
