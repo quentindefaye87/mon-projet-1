@@ -38,7 +38,7 @@ export function ScrollFrames() {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const images = useRef<(HTMLImageElement | null)[]>([]);
+  const [ready, setReady] = useState(0);
   const [wall, setWall] = useState({ w: 0, h: 0, fw: 1, cw: 1 });
   const shown = useMotionValue(0);
   const target = useRef(0);
@@ -55,54 +55,93 @@ export function ScrollFrames() {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
+    // Images chargées (compressées) et, seulement autour de l'image affichée, versions décodées prêtes à dessiner.
+    const loaded: (HTMLImageElement | null)[] = new Array(FRAME_COUNT).fill(null);
+    const bitmaps = new Map<number, ImageBitmap>();
+    const pending = new Set<number>();
+    const WINDOW = 10;
+    let contiguous = 0; // nombre d'images consécutives déjà chargées depuis le début
     let raf = 0;
     let last = performance.now();
     let dirty = true;
-    let dpr = 1;
-    let cw = 0;
-    let ch = 0;
+    let cancelled = false;
+    let lastIdx = -1;
 
     const size = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cw = canvas.clientWidth;
-      ch = canvas.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const cw = canvas.clientWidth;
+      const ch = canvas.clientHeight;
+      if (!cw || !ch) return;
       canvas.width = Math.round(cw * dpr);
       canvas.height = Math.round(ch * dpr);
-      const scale = Math.max(cw / FRAME_RATIO, ch) ; // hauteur de l'image affichée
-      setWall({ w: cw, h: ch, fw: scale * FRAME_RATIO, cw });
+      setWall({ w: cw, h: ch, fw: Math.max(cw / FRAME_RATIO, ch) * FRAME_RATIO, cw });
       dirty = true;
+    };
+
+    const ensureBitmap = (i: number) => {
+      if (i < 0 || i >= FRAME_COUNT || bitmaps.has(i) || pending.has(i)) return;
+      const img = loaded[i];
+      if (!img) return;
+      pending.add(i);
+      createImageBitmap(img)
+        .then((bm) => {
+          pending.delete(i);
+          if (cancelled) return bm.close();
+          bitmaps.set(i, bm);
+          dirty = true;
+        })
+        .catch(() => pending.delete(i));
+    };
+
+    const prefetch = (center: number, dir: number) => {
+      const sign = dir >= 0 ? 1 : -1;
+      for (let d = 0; d <= WINDOW; d++) ensureBitmap(center + d * sign); // devant
+      for (let d = 1; d <= WINDOW / 2; d++) ensureBitmap(center - d * sign); // derrière
+      for (const k of [...bitmaps.keys()]) {
+        if (Math.abs(k - center) > WINDOW + 4) {
+          bitmaps.get(k)?.close();
+          bitmaps.delete(k);
+        }
+      }
     };
 
     const nearest = (i: number) => {
       for (let d = 0; d < FRAME_COUNT; d++) {
-        for (const k of [i - d, i + d]) {
-          const img = images.current[k];
-          if (img && img.complete && img.naturalWidth) return img;
-        }
+        const lo = bitmaps.get(i - d);
+        if (lo) return lo;
+        const hi = bitmaps.get(i + d);
+        if (hi) return hi;
       }
       return null;
     };
 
-    const drawImage = (img: HTMLImageElement, alpha: number) => {
-      const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
-      const w = img.naturalWidth * scale;
-      const h = img.naturalHeight * scale;
+    const drawBitmap = (bm: ImageBitmap, alpha: number) => {
+      const scale = Math.max(canvas.width / bm.width, canvas.height / bm.height);
+      const w = bm.width * scale;
+      const h = bm.height * scale;
       ctx.globalAlpha = alpha;
-      ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+      ctx.drawImage(bm, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
     };
 
     const render = (p: number) => {
-      const t = clamp((p - PLAY_FROM) / (PLAY_TO - PLAY_FROM)) * (FRAME_COUNT - 1);
+      // Ne jamais dépasser ce qui est déjà chargé : pas de saut d'image si la connexion est lente.
+      const maxT = Math.max(0, contiguous - 1);
+      const t = Math.min(clamp((p - PLAY_FROM) / (PLAY_TO - PLAY_FROM)) * (FRAME_COUNT - 1), maxT);
       const i0 = Math.floor(t);
       const frac = t - i0;
+      const dir = t >= lastIdx ? 1 : -1;
+      if (Math.round(t) !== lastIdx) {
+        lastIdx = Math.round(t);
+        prefetch(i0, dir);
+      }
       const a = nearest(i0);
       if (!a) return;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      drawImage(a, 1);
-      if (frac > 0.01 && i0 + 1 < FRAME_COUNT) {
-        const b = nearest(i0 + 1);
-        if (b && b !== a) drawImage(b, frac);
+      drawBitmap(a, 1);
+      if (frac > 0.02 && i0 + 1 < FRAME_COUNT) {
+        const b = bitmaps.get(i0 + 1);
+        if (b) drawBitmap(b, frac);
       }
       ctx.globalAlpha = 1;
     };
@@ -112,34 +151,43 @@ export function ScrollFrames() {
       last = now;
       const cur = shown.get();
       const diff = target.current - cur;
-      if (Math.abs(diff) > 0.0004) {
-        shown.set(cur + diff * (1 - Math.exp(-dt * 9)));
+      if (Math.abs(diff) > 0.0003) {
+        shown.set(cur + diff * (1 - Math.exp(-dt * 8)));
         dirty = true;
       }
       if (dirty) {
-        render(shown.get());
         dirty = false;
+        render(shown.get());
       }
       raf = requestAnimationFrame(tick);
     };
 
-    // Chargement : première image d'abord, puis le reste, quelques requêtes à la fois.
+    // Chargement : dans l'ordre, quelques requêtes à la fois.
     let next = 0;
-    let cancelled = false;
     const loadNext = () => {
       if (cancelled || next >= FRAME_COUNT) return;
       const i = next++;
       const img = new Image();
-      img.decoding = "async";
-      img.onload = img.onerror = () => {
+      img.onload = () => {
+        loaded[i] = img;
+        while (contiguous < FRAME_COUNT && loaded[contiguous]) contiguous++;
+        if (i < 3) ensureBitmap(i);
+        setReady(contiguous / FRAME_COUNT);
         dirty = true;
         loadNext();
       };
+      img.onerror = () => {
+        // Image manquante : on réutilise la précédente pour ne pas bloquer la lecture.
+        loaded[i] = loaded[i - 1] ?? null;
+        while (contiguous < FRAME_COUNT && loaded[contiguous]) contiguous++;
+        loadNext();
+      };
       img.src = frameSrc(i);
-      images.current[i] = img;
     };
     for (let k = 0; k < 6; k++) loadNext();
 
+    target.current = clamp(scrollYProgress.get());
+    shown.set(target.current);
     size();
     const ro = new ResizeObserver(size);
     ro.observe(canvas);
@@ -148,8 +196,10 @@ export function ScrollFrames() {
       cancelled = true;
       cancelAnimationFrame(raf);
       ro.disconnect();
+      bitmaps.forEach((bm) => bm.close());
+      bitmaps.clear();
     };
-  }, [reduce, shown]);
+  }, [reduce, shown, scrollYProgress]);
 
   // Position de la liste sur le mur : calée sur l'image affichée (grand écran), centrée sur mobile.
   const desktop = wall.cw >= 768;
@@ -182,6 +232,11 @@ export function ScrollFrames() {
             <WallItem key={l} label={l} index={i} progress={shown} />
           ))}
         </ul>
+        {ready < 1 && (
+          <div aria-hidden="true" className="absolute inset-x-0 top-[72px] z-10 h-0.5 bg-white/10">
+            <div className="h-full bg-white/70 transition-[width] duration-200" style={{ width: `${ready * 100}%` }} />
+          </div>
+        )}
         <motion.div
           style={{ opacity: hintOpacity }}
           aria-hidden="true"
