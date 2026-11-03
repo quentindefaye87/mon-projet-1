@@ -1,5 +1,5 @@
 import { Hero } from "@/components/organisms/Hero";
-import { ScrollVideo } from "@/components/motion/ScrollVideo";
+import { ScrollFrames } from "@/components/motion/ScrollFrames";
 import { ExpertiseBand } from "@/components/organisms/ExpertiseBand";
 import { AboutTeaser } from "@/components/organisms/AboutTeaser";
 import { CollectionsSection } from "@/components/organisms/CollectionsSection";
@@ -11,14 +11,7 @@ import { CtaBanner } from "@/components/organisms/CtaBanner";
 export default function HomePage() {
   return (
     <>
-      <ScrollVideo
-        src="/video/ouverture"
-        poster="/video/ouverture-poster.jpg"
-        eyebrow="SCAL · depuis 1978"
-        title="Des ouvertures"
-        accent="à vos mesures."
-        text="Fabrication et pose par nos propres équipes, à Aixe-sur-Vienne et dans toute la Haute-Vienne."
-      />
+      <ScrollFrames />
       <Hero />
       <ExpertiseBand />
       <CollectionsSection />
