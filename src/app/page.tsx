@@ -1,5 +1,5 @@
 import { Hero } from "@/components/organisms/Hero";
-import { ScrollLogo } from "@/components/motion/ScrollLogo";
+import { ScrollVideo } from "@/components/motion/ScrollVideo";
 import { ExpertiseBand } from "@/components/organisms/ExpertiseBand";
 import { AboutTeaser } from "@/components/organisms/AboutTeaser";
 import { CollectionsSection } from "@/components/organisms/CollectionsSection";
@@ -11,7 +11,9 @@ import { CtaBanner } from "@/components/organisms/CtaBanner";
 export default function HomePage() {
   return (
     <>
-      <ScrollLogo
+      <ScrollVideo
+        src="/video/ouverture"
+        poster="/video/ouverture-poster.jpg"
         eyebrow="SCAL · depuis 1978"
         title="Des ouvertures"
         accent="à vos mesures."
