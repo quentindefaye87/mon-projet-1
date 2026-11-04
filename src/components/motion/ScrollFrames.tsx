@@ -1,16 +1,40 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 
-/** Séquence d'images (extraites de la vidéo d'ouverture) : lecture image par image, sans à-coup. */
+/**
+ * Séquence d'images de l'animation d'ouverture (vidéo agrandie par IA, texte d'origine effacé).
+ * Trois jeux d'images selon l'écran :
+ *  - m  : recadrage vertical pour téléphones et tablettes en portrait ;
+ *  - d  : paysage pour la plupart des ordinateurs ;
+ *  - hd : paysage haute définition pour les grands écrans à forte densité.
+ */
 const FRAME_COUNT = 145;
-const FRAME_RATIO = 1600 / 918;
-const frameSrc = (i: number) => `/video/frames/f${String(i + 1).padStart(4, "0")}.webp`;
+const SETS = {
+  m: { width: 800, height: 1274 },
+  d: { width: 1920, height: 1101 },
+  hd: { width: 2560, height: 1468 },
+} as const;
+type SetName = keyof typeof SETS;
 
-/** Début / fin du défilement consacrés à la lecture (le reste : arrêt sur la première et la dernière image). */
+const frameSrc = (set: SetName, i: number) => `/video/${set}/f${String(i + 1).padStart(4, "0")}.webp`;
+const PORTRAIT_QUERY = "(max-aspect-ratio: 4/5)";
+
+/** Part du défilement consacrée à la lecture ; ensuite la caméra est arrêtée face au mur. */
 const PLAY_FROM = 0.02;
-const PLAY_TO = 0.82;
+const PLAY_TO = 0.8;
+/** La liste apparaît une fois la caméra arrêtée, ligne par ligne. */
+const LIST_FROM = 0.83;
+const LIST_STEP = 0.025;
 
 const WALL_LIST = [
   "Menuiseries Limoges",
@@ -22,128 +46,193 @@ const WALL_LIST = [
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(Math.max(v, a), b);
 
-function WallItem({ label, index, progress }: { label: string; index: number; progress: MotionValue<number>; }) {
-  const start = 0.78 + index * 0.03;
-  const opacity = useTransform(progress, [start, start + 0.05], [0, 1]);
-  const y = useTransform(progress, [start, start + 0.05], [10, 0]);
-  return <motion.li style={{ opacity, y }}>{label}</motion.li>;
+function pickSet(): SetName {
+  if (window.matchMedia(PORTRAIT_QUERY).matches) return "m";
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  return window.innerWidth * dpr > 2100 ? "hd" : "d";
+}
+
+function Bullet() {
+  return <span aria-hidden="true" className="inline-block h-[0.38em] w-[0.38em] shrink-0 rounded-full bg-[#a52e32]" />;
+}
+
+function WallItem({ label, index, progress }: { label: string; index: number; progress: MotionValue<number> }) {
+  const start = LIST_FROM + index * LIST_STEP;
+  const opacity = useTransform(progress, [start, start + 0.04], [0, 1]);
+  const x = useTransform(progress, [start, start + 0.04], [-12, 0]);
+  return (
+    <motion.li style={{ opacity, x }} className="flex items-center gap-[0.55em]">
+      <Bullet />
+      <span>{label}</span>
+    </motion.li>
+  );
+}
+
+/** Image affichée tout de suite (rendu serveur) sous le canevas : jamais d'écran noir. */
+function Poster({ frame }: { frame: number }) {
+  return (
+    <picture>
+      <source media={PORTRAIT_QUERY} srcSet={frameSrc("m", frame)} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={frameSrc("d", frame)}
+        alt=""
+        {...({ fetchpriority: "high" } as Record<string, string>)}
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+    </picture>
+  );
 }
 
 /**
- * Animation d'ouverture : la fenêtre s'ouvre et la caméra entre dans le salon jusqu'au mur,
- * où s'affiche la liste de ce que fait SCAL. La lecture avance avec le défilement.
- * Avec « réduire les animations », seule la dernière image est affichée.
+ * Animation d'ouverture : la fenêtre s'ouvre, la caméra entre dans le salon et s'arrête face au mur,
+ * où s'affiche la liste de ce que fait SCAL. La lecture suit le défilement, image par image.
+ * Avec « réduire les animations », seule la dernière image est affichée, avec la liste.
  */
 export function ScrollFrames() {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [ready, setReady] = useState(0);
-  const [wall, setWall] = useState({ w: 0, h: 0, fw: 1, cw: 1 });
+  const listRef = useRef<HTMLUListElement>(null);
+  const [set, setSet] = useState<SetName | null>(null);
+  const [canvasReady, setCanvasReady] = useState(false);
   const shown = useMotionValue(0);
   const target = useRef(0);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const hintOpacity = useTransform(shown, [0, 0.05], [1, 0]);
+  const hintOpacity = useTransform(shown, [0, 0.04], [1, 0]);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     target.current = clamp(v);
   });
 
+  // Choix du jeu d'images (et nouveau choix si l'écran change vraiment, par ex. rotation).
   useEffect(() => {
-    if (reduce) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx) return;
+    let timer = 0;
+    const update = () => setSet((prev) => {
+      const next = pickSet();
+      return prev === next ? prev : next;
+    });
+    const onResize = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(update, 200);
+    };
+    update();
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
-    // Images chargées (compressées) et, seulement autour de l'image affichée, versions décodées prêtes à dessiner.
+  useEffect(() => {
+    if (reduce || !set) return;
+    const canvas = canvasRef.current;
+    const section = sectionRef.current;
+    const ctx = canvas?.getContext("2d", { alpha: false });
+    if (!canvas || !section || !ctx) return;
+    const frameSet = set;
+    const { width: FW, height: FH } = SETS[frameSet];
+
     const loaded: (HTMLImageElement | null)[] = new Array(FRAME_COUNT).fill(null);
     const bitmaps = new Map<number, ImageBitmap>();
     const pending = new Set<number>();
-    const WINDOW = 10;
-    let contiguous = 0; // nombre d'images consécutives déjà chargées depuis le début
+    const AHEAD = 8;
+    const BEHIND = 4;
+    let drawnIdx = -1; // image réellement affichée
+    let lastIdx = 0; // image demandée par la position de défilement
     let raf = 0;
+    let running = false;
     let last = performance.now();
-    let dirty = true;
     let cancelled = false;
-    let lastIdx = -1;
+
+    const placeList = () => {
+      const ul = listRef.current;
+      const cw = canvas.clientWidth;
+      const ch = canvas.clientHeight;
+      if (!ul || !cw || !ch) return;
+      const ratio = FW / FH;
+      const fw = Math.max(cw, ch * ratio);
+      const fh = fw / ratio;
+      const portrait = frameSet === "m";
+      const fontSize = Math.round(portrait ? clamp(cw * 0.056, 18, 26) : clamp(fw * 0.0185, 18, 44));
+      ul.style.fontSize = `${fontSize}px`;
+      const cx = portrait ? cw / 2 : cw / 2 + 0.03 * fw;
+      const cy = ch / 2 + (portrait ? 0.06 : 0) * fh; // sur la partie éclairée du mur
+      // Positions entières : texte net, sans demi-pixel.
+      ul.style.left = `${Math.round(cx - ul.offsetWidth / 2)}px`;
+      ul.style.top = `${Math.round(cy - ul.offsetHeight / 2)}px`;
+      ul.style.visibility = "visible";
+    };
+
+    const paint = (source: CanvasImageSource) => {
+      const scale = Math.max(canvas.width / FW, canvas.height / FH);
+      const w = FW * scale;
+      const h = FH * scale;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(source, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+    };
+
+    const ensureBitmap = (i: number) => {
+      if (i < 0 || i >= FRAME_COUNT || bitmaps.has(i) || pending.has(i) || !loaded[i]) return;
+      pending.add(i);
+      createImageBitmap(loaded[i] as HTMLImageElement)
+        .then((bm) => {
+          pending.delete(i);
+          if (cancelled || Math.abs(i - lastIdx) > AHEAD + 2) return bm.close();
+          bitmaps.set(i, bm);
+        })
+        .catch(() => pending.delete(i));
+    };
+
+    const prefetch = (center: number, dir: number) => {
+      for (let d = 0; d <= AHEAD; d++) ensureBitmap(center + d * dir);
+      for (let d = 1; d <= BEHIND; d++) ensureBitmap(center - d * dir);
+      bitmaps.forEach((bm, k) => {
+        if (Math.abs(k - center) > AHEAD + 2) {
+          bm.close();
+          bitmaps.delete(k);
+        }
+      });
+    };
+
+    const frameAt = (p: number) => Math.round(clamp((p - PLAY_FROM) / (PLAY_TO - PLAY_FROM)) * (FRAME_COUNT - 1));
+
+    /** Image chargée la plus proche avant (sinon après) l'image demandée : jamais d'image vide. */
+    const available = (idx: number) => {
+      for (let j = idx; j >= 0; j--) if (loaded[j]) return j;
+      for (let j = idx + 1; j < FRAME_COUNT; j++) if (loaded[j]) return j;
+      return -1;
+    };
+
+    /** Dessine une seule image, l'exacte correspondant à la position (aucun mélange de deux images). */
+    const render = (force = false) => {
+      const idx = frameAt(shown.get());
+      if (idx !== lastIdx) {
+        prefetch(idx, idx > lastIdx ? 1 : -1);
+        lastIdx = idx;
+      }
+      const src = available(idx);
+      if (src < 0 || (src === drawnIdx && !force)) return;
+      paint(bitmaps.get(src) ?? (loaded[src] as HTMLImageElement));
+      if (drawnIdx === -1) setCanvasReady(true);
+      drawnIdx = src;
+    };
 
     const size = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const cw = canvas.clientWidth;
       const ch = canvas.clientHeight;
       if (!cw || !ch) return;
-      canvas.width = Math.round(cw * dpr);
-      canvas.height = Math.round(ch * dpr);
-      setWall({ w: cw, h: ch, fw: Math.max(cw / FRAME_RATIO, ch) * FRAME_RATIO, cw });
-      dirty = true;
-    };
-
-    const ensureBitmap = (i: number) => {
-      if (i < 0 || i >= FRAME_COUNT || bitmaps.has(i) || pending.has(i)) return;
-      const img = loaded[i];
-      if (!img) return;
-      pending.add(i);
-      createImageBitmap(img)
-        .then((bm) => {
-          pending.delete(i);
-          if (cancelled) return bm.close();
-          bitmaps.set(i, bm);
-          dirty = true;
-        })
-        .catch(() => pending.delete(i));
-    };
-
-    const prefetch = (center: number, dir: number) => {
-      const sign = dir >= 0 ? 1 : -1;
-      for (let d = 0; d <= WINDOW; d++) ensureBitmap(center + d * sign); // devant
-      for (let d = 1; d <= WINDOW / 2; d++) ensureBitmap(center - d * sign); // derrière
-      for (const k of [...bitmaps.keys()]) {
-        if (Math.abs(k - center) > WINDOW + 4) {
-          bitmaps.get(k)?.close();
-          bitmaps.delete(k);
-        }
+      const w = Math.round(cw * dpr);
+      const h = Math.round(ch * dpr);
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        render(true); // redessin immédiat : pas d'image vide après un redimensionnement
       }
-    };
-
-    const nearest = (i: number) => {
-      for (let d = 0; d < FRAME_COUNT; d++) {
-        const lo = bitmaps.get(i - d);
-        if (lo) return lo;
-        const hi = bitmaps.get(i + d);
-        if (hi) return hi;
-      }
-      return null;
-    };
-
-    const drawBitmap = (bm: ImageBitmap, alpha: number) => {
-      const scale = Math.max(canvas.width / bm.width, canvas.height / bm.height);
-      const w = bm.width * scale;
-      const h = bm.height * scale;
-      ctx.globalAlpha = alpha;
-      ctx.drawImage(bm, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
-    };
-
-    const render = (p: number) => {
-      // Ne jamais dépasser ce qui est déjà chargé : pas de saut d'image si la connexion est lente.
-      const maxT = Math.max(0, contiguous - 1);
-      const t = Math.min(clamp((p - PLAY_FROM) / (PLAY_TO - PLAY_FROM)) * (FRAME_COUNT - 1), maxT);
-      const i0 = Math.floor(t);
-      const frac = t - i0;
-      const dir = t >= lastIdx ? 1 : -1;
-      if (Math.round(t) !== lastIdx) {
-        lastIdx = Math.round(t);
-        prefetch(i0, dir);
-      }
-      const a = nearest(i0);
-      if (!a) return;
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      drawBitmap(a, 1);
-      if (frac > 0.02 && i0 + 1 < FRAME_COUNT) {
-        const b = bitmaps.get(i0 + 1);
-        if (b) drawBitmap(b, frac);
-      }
-      ctx.globalAlpha = 1;
+      placeList();
     };
 
     const tick = (now: number) => {
@@ -151,92 +240,114 @@ export function ScrollFrames() {
       last = now;
       const cur = shown.get();
       const diff = target.current - cur;
-      if (Math.abs(diff) > 0.0003) {
-        shown.set(cur + diff * (1 - Math.exp(-dt * 8)));
-        dirty = true;
-      }
-      if (dirty) {
-        dirty = false;
-        render(shown.get());
-      }
+      if (diff !== 0) shown.set(Math.abs(diff) < 0.0005 ? target.current : cur + diff * (1 - Math.exp(-dt * 10)));
+      render();
       raf = requestAnimationFrame(tick);
     };
-
-    // Chargement : dans l'ordre, quelques requêtes à la fois.
-    let next = 0;
-    const loadNext = () => {
-      if (cancelled || next >= FRAME_COUNT) return;
-      const i = next++;
-      const img = new Image();
-      img.onload = () => {
-        loaded[i] = img;
-        while (contiguous < FRAME_COUNT && loaded[contiguous]) contiguous++;
-        if (i < 3) ensureBitmap(i);
-        setReady(contiguous / FRAME_COUNT);
-        dirty = true;
-        loadNext();
-      };
-      img.onerror = () => {
-        // Image manquante : on réutilise la précédente pour ne pas bloquer la lecture.
-        loaded[i] = loaded[i - 1] ?? null;
-        while (contiguous < FRAME_COUNT && loaded[contiguous]) contiguous++;
-        loadNext();
-      };
-      img.src = frameSrc(i);
+    const start = () => {
+      if (running || cancelled) return;
+      running = true;
+      last = performance.now();
+      raf = requestAnimationFrame(tick);
     };
-    for (let k = 0; k < 6; k++) loadNext();
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
 
     target.current = clamp(scrollYProgress.get());
     shown.set(target.current);
+    lastIdx = frameAt(target.current);
+
+    // Ordre de chargement : l'image à l'écran et ses voisines d'abord (utile après un rechargement
+    // en milieu de page), puis toutes les autres dans l'ordre de lecture.
+    const order: number[] = [];
+    const queued = new Set<number>();
+    const push = (i: number) => {
+      if (i >= 0 && i < FRAME_COUNT && !queued.has(i)) {
+        queued.add(i);
+        order.push(i);
+      }
+    };
+    push(lastIdx);
+    for (let d = 1; d <= AHEAD; d++) {
+      push(lastIdx + d);
+      push(lastIdx - d);
+    }
+    for (let i = 0; i < FRAME_COUNT; i++) push(i);
+
+    let next = 0;
+    const loadNext = () => {
+      const i = order[next++];
+      if (cancelled || i === undefined) return;
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        if (cancelled) return;
+        loaded[i] = img;
+        if (Math.abs(i - lastIdx) <= AHEAD) ensureBitmap(i);
+        render(); // affiche l'image si elle est (ou se rapproche de) celle demandée
+        loadNext();
+      };
+      img.onerror = () => loadNext(); // image manquante : la plus proche reste affichée
+      img.src = frameSrc(frameSet, i);
+    };
+    for (let k = 0; k < 6; k++) loadNext();
     size();
+    document.fonts?.ready.then(() => !cancelled && placeList());
     const ro = new ResizeObserver(size);
     ro.observe(canvas);
-    raf = requestAnimationFrame(tick);
+    const io = new IntersectionObserver((entries) => (entries.some((e) => e.isIntersecting) ? start() : stop()));
+    io.observe(section);
+
     return () => {
       cancelled = true;
-      cancelAnimationFrame(raf);
+      stop();
       ro.disconnect();
+      io.disconnect();
       bitmaps.forEach((bm) => bm.close());
       bitmaps.clear();
+      setCanvasReady(false);
     };
-  }, [reduce, shown, scrollYProgress]);
-
-  // Position de la liste sur le mur : calée sur l'image affichée (grand écran), centrée sur mobile.
-  const desktop = wall.cw >= 768;
-  const listStyle = desktop
-    ? { left: wall.cw / 2 + wall.fw * 0.02, top: "48%", fontSize: wall.fw * 0.019 }
-    : { width: "86%", left: "7%", top: "46%", fontSize: Math.max(18, wall.cw * 0.055) };
-  const listClass =
-    "absolute z-10 -translate-y-1/2 flex flex-col gap-[0.35em] font-display font-semibold leading-tight tracking-tight text-[#4f3828] md:-translate-x-1/2";
+  }, [reduce, set, shown, scrollYProgress]);
 
   if (reduce) {
     return (
-      <section aria-label="Ce que fait SCAL" className="relative h-[70vh] min-h-[420px] overflow-hidden bg-charcoal-950">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={frameSrc(FRAME_COUNT - 1)} alt="" className="absolute inset-0 h-full w-full object-cover" />
-        <ul className="absolute inset-x-6 top-1/2 flex -translate-y-1/2 flex-col items-center gap-2 font-display text-xl font-semibold text-[#4a3526]">
-          {WALL_LIST.map((l) => (
-            <li key={l}>{l}</li>
-          ))}
-        </ul>
+      <section aria-label="Ce que fait SCAL" className="relative h-[75vh] min-h-[440px] overflow-hidden bg-cream-100">
+        <Poster frame={FRAME_COUNT - 1} />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-cream-50/90 to-transparent" />
+        <div className="absolute inset-0 flex items-center justify-center px-6 pt-16">
+          <ul className="flex flex-col gap-[0.5em] font-display text-[clamp(1.125rem,2.2vw,2rem)] font-semibold leading-tight tracking-tight text-[#2a1c13]">
+            {WALL_LIST.map((l) => (
+              <li key={l} className="flex items-center gap-[0.55em]">
+                <Bullet />
+                <span>{l}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     );
   }
 
   return (
-    <section ref={sectionRef} aria-label="Ce que fait SCAL" className="relative h-[430vh] bg-charcoal-950">
+    <section ref={sectionRef} aria-label="Ce que fait SCAL" className="relative h-[430vh] bg-cream-100">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
-        <ul className={listClass} style={listStyle}>
+        <Poster frame={0} />
+        <canvas
+          ref={canvasRef}
+          aria-hidden="true"
+          className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${canvasReady ? "opacity-100" : "opacity-0"}`}
+        />
+        <ul
+          ref={listRef}
+          style={{ visibility: "hidden" }}
+          className="absolute left-0 top-0 z-10 flex flex-col gap-[0.5em] whitespace-nowrap font-display font-semibold leading-tight tracking-tight text-[#2a1c13]"
+        >
           {WALL_LIST.map((l, i) => (
             <WallItem key={l} label={l} index={i} progress={shown} />
           ))}
         </ul>
-        {ready < 1 && (
-          <div aria-hidden="true" className="absolute inset-x-0 top-[72px] z-10 h-0.5 bg-white/10">
-            <div className="h-full bg-white/70 transition-[width] duration-200" style={{ width: `${ready * 100}%` }} />
-          </div>
-        )}
         <motion.div
           style={{ opacity: hintOpacity }}
           aria-hidden="true"

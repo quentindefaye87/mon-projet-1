@@ -23,13 +23,15 @@ npm run lint
 
 ## Animations
 
-Dans `src/components/motion/` : barre de progression de lecture, titre révélé mot par mot, motif du logo qui se dessine (`FrameDraw`), images révélées par un « volet » rouge (`ImageReveal`), parallaxe du hero, compteurs animés, halo qui suit la souris (`Spotlight`), boutons magnétiques, bandeaux défilants et transitions de page. Toutes respectent `prefers-reduced-motion`.
+Animation d'ouverture (`ScrollFrames`) : la vidéo fournie par l'entreprise est jouée image par image au défilement, de la fenêtre qui s'ouvre jusqu'au mur du salon où s'affiche la liste des savoir-faire. Les images de `public/video/` (jeux `m` pour les écrans en portrait, `d` et `hd` pour les écrans en paysage) ont été préparées à partir de la vidéo : texte d'origine effacé, agrandissement par IA ×4 (Real-ESRGAN), export WebP.
+
+Dans `src/components/motion/` également : barre de progression de lecture, titre révélé mot par mot, motif du logo qui se dessine (`FrameDraw`), images révélées par un « volet » rouge (`ImageReveal`), parallaxe du hero, compteurs animés, halo qui suit la souris (`Spotlight`), boutons magnétiques, bandeaux défilants et transitions de page. Toutes respectent `prefers-reduced-motion`.
 
 ## Pages
 
 | Route | Contenu |
 | --- | --- |
-| `/` | Animation du logo au défilement, accueil, solutions, entreprise, réalisations, méthode, actualité, devis |
+| `/` | Animation d'ouverture au défilement, accueil, solutions, entreprise, réalisations, méthode, actualité, devis |
 | `/solutions`, `/solutions/[slug]` | 6 familles de produits, avec leurs photos de chantier |
 | `/realisations` | Galerie de photos (sans texte, comme sur le site historique), filtrable, avec visionneuse |
 | `/a-propos` | L'entreprise : métier, repères, RGE Qualibat |
